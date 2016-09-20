@@ -1,0 +1,16 @@
+﻿// API Notes
+
+API Key = 12f2ea9c1c2ae5e0c782f4a732f16469
+
+Base 
+
+API Call:
+https://api.forecast.io/forecast/12f2ea9c1c2ae5e0c782f4a732f16469/-35.2809,149.1300?units=[si]
+
+
+
+Canberra Lat/Lon:
+
+35.2809° S, 149.1300° E
+
+-35.2809,149.1300

@@ -1,4 +1,7 @@
-/*reset*/
+/*--------------------------------*\
+  Sanitize.css 
+  cdnjs.com/libraries/sanitize.css/
+\*--------------------------------*/
 pre,textarea{overflow:auto}
 [hidden],audio:not([controls]),template{display:none}
 details,main,summary{display:block}
@@ -12,7 +15,7 @@ textarea{resize:vertical}
 *,::after,::before{box-sizing:inherit;border-style:solid;border-width:0}
 *{font-size:inherit;font-weight:400;line-height:inherit;margin:0;padding:0}
 ::after,::before{text-decoration:inherit;vertical-align:inherit}
-:root{-ms-overflow-style:-ms-autohiding-scrollbar;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%;box-sizing:border-box;cursor:default;text-rendering:optimizeLegibility}
+:root{-ms-overflow-style:-ms-autohiding-scrollbar;overflow-y:scroll;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;text-size-adjust:100%;box-sizing:border-box;cursor:default;font:16px/1.5 sans-serif;text-rendering:optimizeLegibility}
 a{text-decoration:none}
 audio,canvas,iframe,img,svg,video{vertical-align:middle}
 button,input,select,textarea{background-color:transparent;color:inherit;font-family:inherit;font-style:inherit;font-weight:inherit;min-height:1.5em}
@@ -27,213 +30,384 @@ table{border-collapse:collapse;border-spacing:0}
 @media screen{[hidden~=screen]{display:inherit}
 [hidden~=screen]:not(:active):not(:focus):not(:target){clip:rect(0 0 0 0)!important;position:absolute!important}
 }
+big {font-size: 1.3em;}
 
 
 
 
-
+/*--------------------------------*\
+  General
+\*--------------------------------*/
 html {
-	font-family: "oxygen", sans-serif;
-	font-size: 16px;
-    line-height: 1.5;
-	color: #b3c4c6;
-	background: #171e22;
+    background-color: #fff;
+    color: #3c3c3c;
+    box-sizing: border-box;
 }
 
+body {
+    font-family: 'Inconsolata', monospace;
+}
+
+section {
+    margin: 3em auto;
+    padding: 0 2em;
+    max-width: 62em;
+}
+
+.btn {
+    margin: .25rem;
+    background-color: #efefef;
+    height: 1.4em;
+    line-height: 1.4em;
+    border-radius: 5px;
+    box-shadow: 0 1px 1px #aaa;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+}
+.btn:hover {
+    cursor: pointer;
+    box-shadow: 0 1px 1px #777;
+    color: #000;
+}
+.down {
+    background-color: #3c3c3c;
+    color: #fff;
+}
+.down:hover {
+    cursor: pointer;
+    color: #eee;
+}
+
+
+
+
+
+/*--------------------------------*\
+
+
+              Screens
+
+
+\*--------------------------------*/
+.screen {
+    z-index: 1;
+    position: fixed;
+    display: inline-block;
+    top: 2rem;
+    right: 0;
+    height: calc(100vh - 2rem);
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.97);
+    overflow: auto;
+}
+
+#changeLocation form {
+    max-width: 30em;
+    margin: 2em auto 1em auto;
+    padding: 1em;
+    border-bottom: 1px solid #3c3c3c;
+}
+
+#changeLocation_input {
+    width: 100%;
+    padding: 0.2em 1em;
+    border: 1px solid #3c3c3c;
+    border-radius: 3px;
+    box-shadow: 0 0 1px #aaa;
+    background-color: #fafafa;
+}
+#changeLocation_submit {
+    width: 13em;
+    text-align: center;
+    margin: 1em auto;
+}
+
+#locationResults {
+    max-width: 30rem;
+    margin: 0 auto;
+    padding: 0 1em;
+}
+#locationResults p {
+    margin: 1.5em 0;
+    border-bottom: 1px solid #aaa;
+    padding: 0 1em;
+}
+#locationResults p:hover {
+    background-color: #3c3c3c;
+    color: #fff;
+    cursor: pointer;
+}
+#locationResults span + span {
+    font-size: .8em;
+}
+
+
+#loading p:first-child {
+    display: block;
+    width: 100%;
+    text-align: center;
+    margin-top: 10em;
+    animation-name: pulse;
+    animation-duration: 1.5s; 
+    animation-timing-function: ease-out; 
+    animation-delay: 0;
+    animation-direction: alternate;
+    animation-iteration-count: infinite;
+}
+@keyframes pulse {
+  0% {
+    color: #eee;
+  }
+  50% {
+    color: #3c3c3c;
+  }
+  100% {
+    color: #eee;
+  }
+}
+#loading p + p {
+    width: 25em;
+    text-align: center;
+    font-size: 0.8em;
+    color: blue;
+    position: fixed;
+    bottom: 2em;
+    left: calc(50% - 12.5em);
+    box-shadow: none;
+}
+
+
+
+
+
+/*--------------------------------*\
+  Header
+\*--------------------------------*/
 header {
-	height: 3rem;
-	width: 100%;
-	padding: 1rem;
-	
-	position: fixed;
-	
-	border-bottom-width: 2px;
-	border-color: #100a10;
+    z-index: 2;
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    background-color: hsla(0, 0%, 100%, 0.94);
+    box-shadow: 0 0 8px rgba(0, 0, 0, 0.46);
+    border-bottom: 1px solid #000;
+    height: 2em;
+    line-height: 2rem;
 }
 
-	#logo {
-		margin: 0 auto;
-		width: 12.7em;}
-	.logo {
-		height: 1em;
-		display: inline-block;}
-	#logo2 {width: 2em; background: #3C787E; margin: 0 0.5em;}
-	#logo1 {width: 3em; background: #D56F3E; margin: 0 0.5em;}
-	#logo3 {width: 4em; background: #EFEF34; margin: 0 0.5em;}
-
-
-
-/*------*\
-  output
-\*------*/
-
-#output {
-	width: 50%;
-	height: calc(100vh - 3rem);
-	
-	position: fixed;
-	top: 3rem;
-	left: 0;
-    overflow: hidden;
-    
-    padding: 0 1.5em;
+header p {
+    width: auto;
+    display: inline-block;
+    padding: 0 1em;
+    height: 100%;
+    line-height: 2em;
 }
 
-    #display {
-        height: 9.5em;
-    }
-    #display h3 {
-        font-size: 5rem;
-        text-align: center;
-        line-height: 7rem;
-    }
+header p:first-child {
+    float: left;
+    background-color: #3c3c3c;
+    color: #fff;
+}
 
-    #display ul {
-        list-style: none;
-        font-size: 0.9em;
-        margin-bottom: 1rem;
-    }
-    #display li {
-        display: inline-block;
-        text-align: center;
-    }
-	.display {
-		border-bottom-width: 4px;
-		border-color: #100a10;
-	}
-	#display-length {width:20%;}
-	#display-g-use {
-		width:35%;
-		margin-right: 0.5%;
-	}
-
-	.sort {
-		cursor: pointer;
-		height: 1.6rem;
-		line-height: 1.6rem;
-		width: 14%;
-		font-size: 0.7rem;
-		background-color: #100a10;
-		padding: 0 0.2em;
-	}
-    .sorted {
-        background-color: #2e5052;
-    }
-	.sort:hover {background-color: #2e5052;}
-
-    #graph {
-        height: calc(100% - 11rem);
-        overflow: auto;
-        padding: 1em;
-        background-color: #233038;
-        border: solid 2px #fff;
-        font-size: 0.7rem;
-    }
-
-    .cell {
-        height: 1.6em;
-        background-color: #EFEF34;
-        display: inline-block;
-        margin: 0;
-        font-size: 1em;
-        color: hsla(202, 19%, 11%, 0.5);
-        text-align: center;
-    }
-    .cell:hover {
-        color: #ffffff;
-        text-shadow: 1px 1px 1px #000;
-    }
-
-    .break {
-        height: 1em;
-    }
-
-
-
-/*-----*\
-  input
-\*-----*/
-
-#input {
-	width: 50%;
-	height: calc(100vh - 3rem);
-	
-	position: fixed;
-	top: 3rem;
-	right: 0;
-    padding: 0 1.5rem;
+#locationToggle {
+    float: left;
 }
 
 
-    #input-head {
-        height: 9.5em;
-        position: relative;
-    }
-
-    h2 {
-        font-size: 2rem;
-        line-height: 9rem;
-        float: left;
-    }
-
-    
-    #calc-btn {
-        width: 10em;
-        height: 2em;
-        position: fixed;
-        right: 0;
-        margin-top: 3.6em;
-        margin-right: 2.5em;
-        border-radius: 1em;
-        text-align: center;
-        line-height: 2em;
-        background-color: #233038;
-        border: solid 2px #fff;
-        float: right;
-    }
-    #calc-btn:hover {
-        transition: 0.2s;
-        cursor: pointer;
-        background-color: #254650;
-        border-color: #EFEF34;
-        color: #EFEF34
-    }
+header p + p + p {
+    float: right;
+    font-size: 0.8rem;
+    height: 100%;
+    line-height: 2rem;
+}
 
 
-    #input textarea {
+
+
+
+/*--------------------------------*\
+
+  Now Block              Now Block
+
+\*--------------------------------*/
+#nBlock {
+    margin-bottom: 0;
+}
+
+#nBlock > div {
+    float: left;
+    width: 50%;
+}
+
+
+h1 {
+    padding: 0 1rem;
+    font-size: 2em;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-align: center;
+}
+
+
+#nBlock_icon {
+    float: left;
+    width: 50%;
+    text-align: center;
+    height: 10rem;
+}
+#nBlock_icon img {
+    margin-top: -2em;
+    height: 140%;
+}
+#nBlock_temp {
+    width: 50%;
+    float: left;
+    text-align: left;
+    font-size: 7em;
+    line-height: 10rem;
+    text-align: center;
+}
+
+
+
+#nBlock_tables{
+    padding: 2.5em 0;
+}
+#nBlock table {
+    border-top:    1px solid #3c3c3c;
+    border-bottom: 1px solid #3c3c3c;
+    margin: 0 1em;
+    float: left;
+    width: calc(50% - 2em);
+    height: 7em;
+    font-size: 0.8em;
+}
+
+#nBlock_day {
+    width: 100%;
+    text-align: center;
+    color: #cecece;
+}
+
+
+
+
+
+/*--------------------------------*\
+  H     B
+  o     l
+  u     o
+  r     c
+  l     k
+  y
+\*--------------------------------*/
+
+#hBlock {
+    margin-top: 0;
+    border-top: 2px solid #eee;
+}
+
+
+/*graph*/
+#graphCont {
+    width: 15em;
+    height: 43em;
+    float: left;
+}
+
+#graphCont svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    font-size: 10px;
+}
+
+path {
+	stroke-width: 2px;
+	fill: none;
+}
+
+#graph_temps {
+    stroke: #ff4;
+}
+
+#graph_cloudCovers {
+    stroke: #e3e3e3;
+}
+
+#graph_rainChances {
+    stroke: #8fc0f2;
+}
+
+
+
+/*detials*/
+#hBlock_details {
+    height: 43em;
+    padding-left: 15em;
+}
+#hBlock_table {
+    height: 100%;
+    padding: 3em 0 3em 3em;
+}
+#hBlock_table > div {
+    height: 25%;
+}
+#hBlock_table > div > div {
+    margin-top: 2.5rem;
+    float: right;
+    font-size: 2.5rem;
+    width: 10rem;
+}
+#hBlock_table span {
+    display: inline-block;
+    height: 4rem;
+}
+#hBlock_table > div > span {
+    height: 9rem;
+    line-height: 9rem;
+    font-size: 1.4rem;
+}
+#hBlock_table img {
+    height: 4rem;
+}
+
+
+
+
+
+#credit {
+    width: 100%;
+    padding: 2em;
+    margin: 0 auto;
+}
+#credit p {
+    font-size: 0.8em;
+    text-align: center;
+}
+
+
+
+
+/*--------------------------------*\
+  Media Queries
+\*--------------------------------*/
+/*----------------*\
+  @Media
+\*----------------*/
+@media (min-width: 1300px){
+    body {font-size: 18px;}
+}
+@media (max-width: 875px){
+    #nBlock > div {
         width: 100%;
-        height: calc(100% - 11rem);
-        background-color: #233038;
-        border: solid 2px #fff;
-        padding: 1em;
     }
-
-
-
-
-
-@media (max-width: 1280px) {
-	html {font-size: 13px;}
-}
-
-@media (max-width: 1080px) {
-    #input {
-        width: 34%;
+    header p + p + p {
+        display: none;
     }
-    #output {
-        width: 66%;
+    h1 {
+        margin-bottom: 1em;
     }
-	html {font-size: 12px;}
-	h2 {
-		font-size: 1.5rem;
-		line-height: 3rem;
-		width: 100%;
-		text-align: center;
-    }
-	#calc-btn {
-		width: 27%;
-	}
-}
-@media (max-width: 700px) {
-	html {font-size: 8px;}
 }
