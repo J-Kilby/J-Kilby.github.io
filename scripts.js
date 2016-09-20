@@ -4,6 +4,12 @@ $("#clean").click( function() {
 });
 
 
+if (localStorage.getItem("saved") !== "true") {
+    localStorage.setItem("saved", "false")
+};
+
+
+
 /*--------------------*\
   Initialise  Varables
 \*--------------------*/
@@ -17,6 +23,12 @@ var timeMachine = new Date(timeNow.getTime() - 11520*60000)
 var timeFill;
 if (timeNow.getMinutes() < 10){timeFill = ":0"}else{timeFill = ":"};
 var time = timeNow.getHours() + timeFill + timeNow.getMinutes();
+
+//api calls
+var apiKey = "12f2ea9c1c2ae5e0c782f4a732f16469";
+var apiCallf;
+var apiCallt;
+var apiCalll;
 
 //arrays for date display
 var days = ["Sunday", 
@@ -40,35 +52,39 @@ var months = ["January",
               "November",	
               "December"];
 
+//location variables
+var localName;
+var latLon;
+
+
+
+
+
 //get location data from IP adress if it is not stored
-console.log(localStorage.getItem("latLon") + localStorage.getItem("localName"));
-console.log(localStorage.getItem("latLon") == undefined);
-if (localStorage.getItem("latLon") == undefined || localStorage.getItem("latLon") == null) {
+if (localStorage.getItem("saved") == "false") {
+
+    
     $.getJSON("http://ip-api.com/json", function(data) {
-        console.log(data.status == "success");
+        
         if (data.status == "success") {
             localStorage.setItem("latLon", data.lat + ", " + data.lon);
             localStorage.setItem("localName", data.city);
+            localStorage.setItem("saved", "true");
         } else {
             localStorage.setItem("latLon", "-35.2809, 149.1300");
             localStorage.setItem("localName", "canberra");
-        }       
+            localStorage.setItem("saved", "true");
+        }
+        
+        
+        callForcast();
     });
+} else {
+    
+    localStorage.setItem("saved", "true");
+    callForcast();
 }
 
-//location variables
-var localName = localStorage.getItem("localName");
-var latLon = localStorage.getItem("latLon");
-
-console.log(latLon);
-console.log(localStorage.getItem("latLon"));
-
-
-//api calls
-var apiKey = "12f2ea9c1c2ae5e0c782f4a732f16469";
-var apiCallf = "https://api.forecast.io/forecast/" + apiKey + "/" + latLon + "?units=si&callback=?";
-var apiCallt = "https://api.forecast.io/forecast/" + apiKey + "/" + latLon + "?units=si&callback=?";
-var apiCalll;
 
 
 
@@ -87,7 +103,7 @@ $("#locationToggle").click( function(){
 var results,
     query;
 
-$("#changeLocation_submit").click ( function() {
+function search() {
     
     $("#loading").fadeIn();
     $("#locationResults").empty();
@@ -105,31 +121,24 @@ $("#changeLocation_submit").click ( function() {
         }
         
         $(".locationResult").click( function(){
-            console.log(this);
-            console.log(this.dataset);
             localStorage.setItem("latLon", this.dataset.latlon);
-            console.log(this.dataset.latLon);
-            localStorage.getItem("latLon");
             localStorage.setItem("localName", this.dataset.local);
+            localStorage.setItem("saved", "true");
             
             window.location.reload();
         });
     });    
     
     $("#loading").fadeOut();
-});
+};
 
 
 
 
 
-
-
-
-
-
-
-
+/*--------------------*\
+       Functions
+\*--------------------*/
 
 
 
@@ -164,9 +173,16 @@ var forcast,
 
 
 //call API and store data in declared varables
+function callForcast() {
+    
+localName = localStorage.getItem("localName");
+latLon = localStorage.getItem("latLon");
+apiCallf = "https://api.forecast.io/forecast/" + apiKey + "/" + latLon + "?units=si&callback=?";
+apiCallt = "https://api.forecast.io/forecast/" + apiKey + "/" + latLon + "?units=si&callback=?";
+    
 $.getJSON(apiCallf, function(data) {
     forcast = data;
-    /*$.getJSON(apiCallt, function(data) {}*/
+    /*$.getJSON(apiCallt, function(data) {});*/
     
     //set varivbles for 'now' section
     icon = "<img src=\"icons/" + forcast.currently.icon + ".png" + "\" alt=\"" + forcast.currently.icon + "\" />";
@@ -204,16 +220,13 @@ $.getJSON(apiCallf, function(data) {
     
     
     placeData();
-});
-
-          
-          
+})};
 
 
-/*--------------------*\
-       Functions
-\*--------------------*/
-          
+
+
+
+
 //convert degress to cardinal deirections
 function degToCard(angle) {
     if (angle < 22) { return("N") } else 
@@ -226,6 +239,11 @@ function degToCard(angle) {
     if (angle < 337){ return("NW")} else 
                       return("N") ;
 };
+
+
+
+
+
 
 
 //search for input <spans> and add corresponding data,
@@ -276,17 +294,29 @@ function placeData(){
     var line = d3.line()
         .y(function(d) { return y(d.date); })
         .x(function(d) { return x(d.value); })
+    
+    var area = d3.area()
+        .y(function(d) { return y(d.date); })
+        .x0(x(minTemp-2))
+        .x1(function(d) { return x(d.value); })
 
     graph.append("svg:path")
-         .attr("d", line(cloudCovers)).attr("id", "graph_cloudCovers")
+         .attr("d", area(cloudCovers))
+         .attr("id", "graph_cloudCovers")
          .attr("transform", "translate(" + m + "," + m + ")");
     graph.append("svg:path")
-         .attr("d", line(rainChances)).attr("id", "graph_rainChances")
+         .attr("d", area(rainChances))
+         .attr("id", "graph_rainChances")
          .attr("transform", "translate(" + m + "," + m + ")");
 
     
     graph.append("svg:path")
-         .attr("d", line(temps)).attr("id", "graph_temps")
+         .attr("d", line(temps))
+         .attr("id", "graph_temps")
+         .attr("transform", "translate(" + m + "," + m + ")");
+    graph.append("svg:path")
+         .attr("d", line(temps))
+         .attr("id", "graph_temps__shadow")
          .attr("transform", "translate(" + m + "," + m + ")");
     
     graph.append("svg:g")
@@ -297,60 +327,8 @@ function placeData(){
          .call(yAxis)
          .attr("class", "yAxis")
          .attr("transform", "translate(" + m + ", " + m + ")");
-    
-/*
-
-Horizontal Graph
-
-    var m = 40,
-        h = 200-m,
-        w = 800-m;
-    
-    minTemp = Math.round(Math.min.apply(null, tempsRaw)),
-    maxTemp = Math.round(Math.max.apply(null, tempsRaw));
-    
-    var x = d3.scaleTime().domain([timeNow, time48]).range([0, w]);
-    var y = d3.scaleLinear().domain([minTemp-2, maxTemp+2]).range([h, 0]);
-    
-    for (i = 0; i < 49; i++) {
-        cloudCovers[i].value = (cloudCovers[i].value/100)*(maxTemp-minTemp+4) + minTemp;
-        rainChances[i].value = (rainChances[i].value/100)*(maxTemp-minTemp+4) + minTemp;
-    }
-    
-    var graph = d3.select("#graphCont").append("svg:svg")
-                  .attr("width", w + m + m)
-                  .attr("height", h + m + m)
-                  .attr("transform", "translate(" + m + "," + m + ")")
-                  .append("svg:g");
-      
-    var yAxis = d3.axisLeft(y).ticks((maxTemp-minTemp+4)/2);
-    var xAxis = d3.axisBottom(x).ticks(48/3);
-    
-    graph.append("svg:g")
-         .call(xAxis)
-         .attr("class", "xAxis")
-         .attr("transform", "translate(" + m + ", 200)");
-    graph.append("svg:g")
-         .call(yAxis)
-         .attr("class", "yAxis")
-         .attr("transform", "translate(" + m + ", " + m + ")");
-    
-    var line = d3.line()
-        .x(function(d) { return x(d.date); })
-        .y(function(d) { return y(d.value); })
-
-    graph.append("svg:path")
-         .attr("d", line(cloudCovers)).attr("id", "graph_cloudCovers")
-         .attr("transform", "translate(" + m + "," + m + ")");
-    graph.append("svg:path")
-         .attr("d", line(rainChances)).attr("id", "graph_rainChances")
-         .attr("transform", "translate(" + m + "," + m + ")");
 
     
-    graph.append("svg:path")
-         .attr("d", line(temps)).attr("id", "graph_temps")
-         .attr("transform", "translate(" + m + "," + m + ")");
-*/
     
     $("#loading").fadeOut();
 }
