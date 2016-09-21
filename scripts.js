@@ -21,7 +21,7 @@ var timeNow = new Date(Date.now()),
     gap = 172800000,
     timeMachine = [];
 
-for (i = 0; i < 3; i++) {
+for (i = 0; i < 8; i++) {
     timeMachine.push(parseInt(timeUnix, 10)-(gap*(i+1)));
 }
 
@@ -270,8 +270,8 @@ function assignVars() {
     
     
     for (i = 0; i < backcast.length; i++) {
-        backcastMaxTemps.push(backcast[1].daily.data[0].temperatureMax);
-        backcastMinTemps.push(backcast[1].daily.data[0].temperatureMin);
+        backcastMaxTemps.push(backcast[i].daily.data[0].temperatureMax);
+        backcastMinTemps.push(backcast[i].daily.data[0].temperatureMin);
     };
     
     for (i = 0; i < backcastMaxTemps.length; i++) {
