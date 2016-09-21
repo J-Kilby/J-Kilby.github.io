@@ -15,9 +15,15 @@ if (localStorage.getItem("saved") !== "true") {
 \*--------------------*/
 
 //time variables
-var timeNow = new Date(Date.now());
-var time48 = new Date(timeNow.getTime() + 2880*60000);
-var timeMachine = new Date(timeNow.getTime() - 11520*60000)
+var timeNow = new Date(Date.now()),
+    time48 = new Date(timeNow.getTime() + 2880*60000),
+    timeUnix = timeNow.getTime().toString(),
+    gap = 172800000,
+    timeMachine = [];
+
+for (i = 0; i < 3; i++) {
+    timeMachine.push(parseInt(timeUnix, 10)-(gap*(i+1)));
+}
 
 //format the time to ##:##
 var timeFill;
@@ -27,7 +33,7 @@ var time = timeNow.getHours() + timeFill + timeNow.getMinutes();
 //api calls
 var apiKey = "12f2ea9c1c2ae5e0c782f4a732f16469";
 var apiCallf;
-var apiCallt;
+var apiCallt = [];
 var apiCalll;
 
 //arrays for date display
@@ -164,63 +170,24 @@ var forcast,
     minTemp,
     maxTemp,
     
+    blank = [],
     temps = [],
     tempsRaw = [],
     cloudCovers = [],
     rainChances = [],
-    icons = [];
-
+    icons = [],
+    
+    backcast = [],
+    backcastMaxTemps = [],
+    backcastMinTemps = [],
+    avMax = 0,
+    avMin = 0;
 
 
 //call API and store data in declared varables
 function callForcast() {
-    
-localName = localStorage.getItem("localName");
-latLon = localStorage.getItem("latLon");
-apiCallf = "https://api.forecast.io/forecast/" + apiKey + "/" + latLon + "?units=si&callback=?";
-apiCallt = "https://api.forecast.io/forecast/" + apiKey + "/" + latLon + "?units=si&callback=?";
-    
-$.getJSON(apiCallf, function(data) {
-    forcast = data;
-    /*$.getJSON(apiCallt, function(data) {});*/
-    
-    //set varivbles for 'now' section
-    icon = "<img src=\"icons/" + forcast.currently.icon + ".png" + "\" alt=\"" + forcast.currently.icon + "\" />";
-    currentTemp = Math.round(forcast.currently.temperature) + "&deg;";
-    callTime = days[timeNow.getDay()] +", "+ months[timeNow.getMonth()]+" "+timeNow.getDate() +" &ndash; "+ time;
-    feelsLike = Math.round(forcast.currently.apparentTemperature*2)/2 + "&deg;";
-    cloudCover = Math.round(forcast.currently.cloudCover*100) + "%";
-    dewPoint = Math.round(forcast.currently.dewPoint) + "&deg;";
-    humidity = Math.round(forcast.currently.humidity*100) + "%";
-    rainIntensity = forcast.currently.precipIntensity + " mm/s";
-    rainChance = Math.round(forcast.currently.precipProbability*100) + "%";
-    rainType = forcast.currently.precipType;
-    windDirection = degToCard(forcast.currently.windBearing);
-    windSpeed = Math.round(forcast.currently.windSpeed * 3.6) + " km/h";
-    
-    //set variables for graph
-    for (i = 0; i < 49; i++) {
-        temps.push({date: new Date(timeNow.getTime() + (i*(60*60000))),
-                    value: Math.round(forcast.hourly.data[i].temperature*2)/2
-            });
-        
-        tempsRaw.push(Math.round(forcast.hourly.data[i].temperature*2)/2);
-        
-        cloudCovers.push({date: new Date(timeNow.getTime() + (i*(60*60000))),
-                          value: Math.round(forcast.hourly.data[i].cloudCover*100)
-            });
-        
-        rainChances.push({date: new Date(timeNow.getTime() + (i*(60*60000))),
-                          value: Math.round(forcast.hourly.data[i].precipProbability*100)
-            });
-        
-        icons.push(forcast.hourly.data[i].icon);
-    }
-    
-    
-    
-    placeData();
-})};
+    assignAPI();
+};
 
 
 
@@ -241,7 +208,80 @@ function degToCard(angle) {
 };
 
 
+//forcast API Calls
+function assignAPI() {
+    localName = localStorage.getItem("localName");
+    latLon = localStorage.getItem("latLon").replace(/\s/g, '');
+    apiCallf = "https://api.darksky.net/forecast/" + apiKey + "/" + latLon + "?units=si&callback=?";
 
+    for (i = 0; i < timeMachine.length; i++) {
+        apiCallt.push("https://api.darksky.net/forecast/" + apiKey + "/" + latLon + "," + timeMachine[i].toString().slice(0, -3) +"?units=si&exclude=[currently,hourly]&callback=?");
+    }
+    
+    for (i = 0; i < 7; i++) {
+        $.getJSON(apiCallt[i], function(data) {
+            backcast.push(data);});
+    }
+    
+    $.getJSON(apiCallf, function(data) {
+        
+        forcast = data;
+        assignVars();
+        placeData();
+    });
+}
+
+
+//set varivbles for 'now' section
+function assignVars() {
+    
+    icon = "<img src=\"icons/" + forcast.currently.icon + ".png" + "\" alt=\"" + forcast.currently.icon + "\" />";
+    currentTemp = Math.round(forcast.currently.temperature) + "&deg;";
+    callTime = days[timeNow.getDay()] +", "+ months[timeNow.getMonth()]+" "+timeNow.getDate() +" &ndash; "+ time;
+    feelsLike = Math.round(forcast.currently.apparentTemperature*2)/2 + "&deg;";
+    cloudCover = Math.round(forcast.currently.cloudCover*100) + "%";
+    dewPoint = Math.round(forcast.currently.dewPoint) + "&deg;";
+    humidity = Math.round(forcast.currently.humidity*100) + "%";
+    rainIntensity = forcast.currently.precipIntensity + " mm/h";
+    rainChance = Math.round(forcast.currently.precipProbability*100) + "%";
+    rainType = forcast.currently.precipType;
+    windDirection = degToCard(forcast.currently.windBearing);
+    windSpeed = Math.round(forcast.currently.windSpeed * 3.6) + " km/h";
+
+    
+    for (i = 0; i < 49; i+=48) {
+        blank.push({date: new Date(timeNow.getTime() + (i*(60*60000))),
+                    value: 0
+            });
+    }
+    for (i = 0; i < 49; i++) {
+        temps.push({date: new Date(timeNow.getTime() + (i*(60*60000))),
+                    value: Math.round(forcast.hourly.data[i].temperature*2)/2
+            });
+        tempsRaw.push(Math.round(forcast.hourly.data[i].temperature*2)/2);
+        cloudCovers.push({date: new Date(timeNow.getTime() + (i*(60*60000))),
+                          value: Math.round(forcast.hourly.data[i].cloudCover*100)
+            });
+        rainChances.push({date: new Date(timeNow.getTime() + (i*(60*60000))),
+                          value: Math.round(forcast.hourly.data[i].precipProbability*100)
+            });
+        icons.push(forcast.hourly.data[i].icon);
+    }
+    
+    
+    for (i = 0; i < backcast.length; i++) {
+        backcastMaxTemps.push(backcast[1].daily.data[0].temperatureMax);
+        backcastMinTemps.push(backcast[1].daily.data[0].temperatureMin);
+    };
+    
+    for (i = 0; i < backcastMaxTemps.length; i++) {
+        avMax = avMax + backcastMaxTemps[i];
+        avMin = avMin + backcastMinTemps[i];
+    }
+    avMax = avMax / backcastMaxTemps.length;
+    avMin = avMin / backcastMaxTemps.length;
+    
+}
 
 
 
@@ -270,14 +310,14 @@ function placeData(){
     maxTemp = Math.round(Math.max.apply(null, tempsRaw));
     
     var y = d3.scaleTime().domain([timeNow, time48]).range([0, h]);
-    var x = x = d3.scaleLinear().domain([minTemp-2, maxTemp+2]).range([0, w]);
+    var x = d3.scaleLinear().domain([minTemp-3, maxTemp+3]).range([0, w]);
     
     var tempCloudCovers = cloudCovers,
         tempRainChances = rainChances;
     
     for (i = 0; i < 49; i++) {
-        tempCloudCovers[i].value = (tempCloudCovers[i].value/100)*(maxTemp-minTemp+4) + minTemp-2;
-        tempRainChances[i].value = (tempRainChances[i].value/100)*(maxTemp-minTemp+4) + minTemp-2;
+        tempCloudCovers[i].value = (tempCloudCovers[i].value/100)*(maxTemp-minTemp+6) + minTemp-3;
+        tempRainChances[i].value = (tempRainChances[i].value/100)*(maxTemp-minTemp+6) + minTemp-3;
     }
     
     var graph = d3.select("#graphCont").append("svg:svg")              
@@ -288,18 +328,49 @@ function placeData(){
                   .attr("transform", "translate(" + m + "," + m + ")")
                   .append("svg:g");
       
-    var xAxis = d3.axisTop(x).ticks((maxTemp-minTemp+4)/2);
-    var yAxis = d3.axisLeft(y).ticks(48/3);
+    var xAxis = d3.axisTop(x)
+                  .ticks((maxTemp-minTemp+6)/2);
+    var yAxis = d3.axisLeft(y)
+                  .ticks(48/3);
+    var c;
     
     var line = d3.line()
         .y(function(d) { return y(d.date); })
-        .x(function(d) { return x(d.value); })
+        .x(function(d) { return x(d.value); });
+    
+    var guide = d3.line()
+        .y(function(d) { return y(d.date); })
+        .x(function(d) { return x(c); });
+    
+    var maxLine = d3.line()
+        .y(function(d) { return y(d.date); })
+        .x(function(d) { return x(avMax); });
+    var minLine = d3.line()
+        .y(function(d) { return y(d.date); })
+        .x(function(d) { return x(avMin); });
     
     var area = d3.area()
         .y(function(d) { return y(d.date); })
-        .x0(x(minTemp-2))
-        .x1(function(d) { return x(d.value); })
-
+        .x0(x(minTemp-3))
+        .x1(function(d) { return x(d.value); });
+    
+    
+    for (c = Math.round(((minTemp-2)/2)*2); c < maxTemp+3; c = c+2) {
+        graph.append("svg:path")
+             .attr("d", guide(blank))
+             .attr("class", "graphLines")
+             .attr("transform", "translate(" + m + "," + m + ")");
+    }
+    
+    graph.append("svg:path")
+             .attr("d", maxLine(blank))
+             .attr("id", "avMax")
+             .attr("transform", "translate(" + m + "," + m + ")");
+    graph.append("svg:path")
+             .attr("d", minLine(blank))
+             .attr("id", "avMin")
+             .attr("transform", "translate(" + m + "," + m + ")");
+    
     graph.append("svg:path")
          .attr("d", area(cloudCovers))
          .attr("id", "graph_cloudCovers")

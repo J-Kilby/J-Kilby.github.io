@@ -361,13 +361,19 @@ h1 {
 
 #graph_cloudCovers {
     stroke: none;
-    fill: rgba(224, 224, 224, 0.44);
+    fill: rgba(224, 224, 224, 0.39);
 }
 
 #graph_rainChances {
     stroke: none;
-    fill: rgba(74, 125, 239, 0.44);
+    fill: rgba(37, 104, 255, 0.32);
 }
+.graphLines {
+    stroke: #eee;
+    stroke-width: 1px;
+}
+#avMax{stroke-width: 2px; stroke: #e32929;}
+#avMin{stroke-width: 2px; stroke: #444fce;}
 
 
 
