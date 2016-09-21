@@ -142,7 +142,7 @@ section {
 }
 
 
-#loading p:first-child {
+#loading p {
     display: block;
     width: 100%;
     text-align: center;
@@ -164,16 +164,6 @@ section {
   100% {
     color: #eee;
   }
-}
-#loading p + p {
-    width: 25em;
-    text-align: center;
-    font-size: 0.8em;
-    color: blue;
-    position: fixed;
-    bottom: 2em;
-    left: calc(50% - 12.5em);
-    box-shadow: none;
 }
 
 
@@ -274,6 +264,7 @@ h1 {
 
 #nBlock_tables{
     padding: 2.5em 0;
+    text-transform: capitalize;
 }
 #nBlock table {
     border-top:    1px solid #3c3c3c;
@@ -312,15 +303,18 @@ h1 {
 
 /*graph*/
 #graphCont {
+    position: relative;
     width: 15em;
-    height: 43em;
+    height: 40em;
     float: left;
 }
 
-#graphCont > div {
+#legend1,
+#legend2 {
     padding-left: 3rem;
 }
-#graphCont > div p {
+#legend1 p,
+#legend2 p {
     width: 33%;
     float: left;
     font-size: 0.8rem;
@@ -330,14 +324,29 @@ h1 {
     margin-top: 1rem;
     margin-bottom: -1rem;
 }
-#graphCont > div p:first-child {
+#legend1 p:first-child {
     background-color: #ff4;
 }
-#graphCont > div p + p {
+#legend1 p + p {
     background-color: #e3e3e3;
 }
-#graphCont > div p + p + p {
+#legend1 p + p + p {
     background-color: #8fc0f2;
+}
+#legend2 {
+    position: absolute;
+    bottom: -2em;
+}
+#legend2 p {
+    width: 50%;
+    padding: 0 0.5em;
+    color: #fff;
+}
+#legend2 p:first-child {
+    background-color: #444fce;
+}
+#legend2 p + p {
+    background-color: #e32929;
 }
 
 
@@ -380,30 +389,41 @@ h1 {
 /*detials*/
 #hBlock_details {
     height: 43em;
-    padding-left: 15em;
+    padding-left: 14em;
+}
+#hBlock_details * {
+
 }
 #hBlock_table {
     height: 100%;
-    padding: 3em 0 3em 3em;
+    padding: 6em 0 3em 3em;
 }
 #hBlock_table > div {
-    height: 25%;
+    height: 9em;
 }
 #hBlock_table > div > div {
-    margin-top: 2.5rem;
+    height: 100%;
+}
+.hBlock_table_texts {
+    width: 70%;
+    float: left;
+    padding-right: 2em;
+}
+.hBlock_table_texts span {
+    display: block;
+}
+.hBlock_table_texts span:first-child {
+    font-size: 1.5em;
+    text-transform: capitalize;
+    border-bottom: 1px solid;
+}
+.hBlock_table_temps {
+    width: 30%;
     float: right;
-    font-size: 2.5rem;
-    width: 10rem;
+    clear: none;
+    font-size: 2em;
 }
-#hBlock_table span {
-    display: inline-block;
-    height: 4rem;
-}
-#hBlock_table > div > span {
-    height: 9rem;
-    line-height: 9rem;
-    font-size: 1.4rem;
-}
+
 #hBlock_table img {
     height: 4rem;
 }

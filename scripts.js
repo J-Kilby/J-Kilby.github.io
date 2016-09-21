@@ -1,9 +1,3 @@
-$("#clean").click( function() {
-    localStorage.clear()
-    window.location.reload();
-});
-
-
 if (localStorage.getItem("saved") !== "true") {
     localStorage.setItem("saved", "false")
 };
@@ -21,7 +15,7 @@ var timeNow = new Date(Date.now()),
     gap = 172800000,
     timeMachine = [];
 
-for (i = 0; i < 8; i++) {
+for (i = 0; i < 7; i++) {
     timeMachine.push(parseInt(timeUnix, 10)-(gap*(i+1)));
 }
 
@@ -57,6 +51,18 @@ var months = ["January",
               "October",	
               "November",	
               "December"];
+
+var terms = [" Siberian", 
+             " Frigid", 
+             " Cold", 
+             " Brisk", 
+             " Cool", 
+             " Mild", 
+             " Balmy", 
+             " Warm", 
+             " Hot", 
+             " Scorching", 
+             "n Ovenlike"];
 
 //location variables
 var localName;
@@ -181,7 +187,29 @@ var forcast,
     backcastMaxTemps = [],
     backcastMinTemps = [],
     avMax = 0,
-    avMin = 0;
+    avMin = 0,
+    
+    graphDataObj = [],
+    
+    graphMessage0,
+    graphText0,
+    graphIcon0,
+    graphMaxMin0,
+    
+    graphMessage1,
+    graphText1,
+    graphIcon1,
+    graphMaxMin1,
+    
+    graphMessage2,
+    graphText2,
+    graphIcon2,
+    graphMaxMin2,
+    
+    graphMessage3,
+    graphText3,
+    graphIcon3,
+    graphMaxMin3;
 
 
 //call API and store data in declared varables
@@ -281,6 +309,80 @@ function assignVars() {
     avMax = avMax / backcastMaxTemps.length;
     avMin = avMin / backcastMaxTemps.length;
     
+    var dayQuery = ["Today", "Tomorrow", "After That"];
+    var nightQuery = ["This Morning", "Tonight", "After That"];
+    
+    for (i = 0; i < 3; i++) {
+        graphDataObj.push({temp: forcast.daily.data[i].temperatureMin,
+                        minmax: "min",
+                        time: forcast.daily.data[i].temperatureMinTime,
+                        summary: forcast.daily.data[i].summary,
+                        message: generateMessage(nightQuery[i], forcast.daily.data[i].temperatureMin, "min"),
+                        icon: forcast.daily.data[i].icon.replace("day", "night")})
+    
+        graphDataObj.push({temp: forcast.daily.data[i].temperatureMax,
+                        minmax: "max",
+                        time: forcast.daily.data[i].temperatureMaxTime,
+                        summary: forcast.daily.data[i].summary,
+                        message: generateMessage(dayQuery[i], forcast.daily.data[i].temperatureMax, "max"),
+                        icon: forcast.daily.data[i].icon.replace("night", "day")})
+    }
+    
+    if (graphDataObj[0].time < timeUnix.slice(0, -3)) {
+        graphDataObj.shift();
+        
+        if (graphDataObj[0].time < timeUnix.slice(0, -3)) {
+            graphDataObj.shift();
+        }
+    }
+    
+    
+    graphMessage0 = graphDataObj[0].message;
+    graphText0 = graphDataObj[0].summary;
+    graphIcon0 = "<img src=\"icons/" + graphDataObj[0].icon + ".png" + "\" alt=\"" + graphDataObj[0].icon + "\" />";
+    graphMaxMin0 = Math.round(graphDataObj[0].temp) + "&deg;";
+    
+    graphMessage1 = graphDataObj[1].message;
+    graphText1 = graphDataObj[1].summary;
+    graphIcon1 = "<img src=\"icons/" + graphDataObj[1].icon + ".png" + "\" alt=\"" + graphDataObj[1].icon + "\" />";
+    graphMaxMin1 = Math.round(graphDataObj[1].temp) + "&deg;";
+    
+    graphMessage2 = graphDataObj[2].message;
+    graphText2 = graphDataObj[2].summary;
+    graphIcon2 = "<img src=\"icons/" + graphDataObj[2].icon + ".png" + "\" alt=\"" + graphDataObj[2].icon + "\" />";
+    graphMaxMin2 = Math.round(graphDataObj[2].temp) + "&deg;";
+    
+    graphMessage3 = graphDataObj[3].message;
+    graphText3 = graphDataObj[3].summary;
+    graphIcon3 = "<img src=\"icons/" + graphDataObj[3].icon + ".png" + "\" alt=\"" + graphDataObj[3].icon + "\" />";
+    graphMaxMin3 = Math.round(graphDataObj[3].temp) + "&deg;";
+}
+
+
+
+
+function generateMessage(day, tmp, m) {
+    var message = "A";
+    var midPoint;
+    var termInt;
+    
+    if (m == "min") {midPoint = ((3*avMin)+(2*20))/5;
+    } else {midPoint = ((3*avMax)+(2*20))/5;}
+    
+    termInt = Math.round((tmp-midPoint)/4)+5
+    if (termInt < 0){termInt = 0;} else if (termInt > 10){termInt = 10;};
+    
+    message += terms[termInt];
+    
+    if (m == "min"){
+        message += " night ";
+    } else {
+        message += " day ";
+    };
+    
+    message += day;
+    
+    return(message);
 }
 
 

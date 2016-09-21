@@ -19,7 +19,6 @@
         </div>
         <div class="screen" id="loading">
             <p>... Loading ...</p>
-            <p id="clean" class="btn">Clear Local Storage (may fix loading issues)</p>
         </div>
         
         <header>
@@ -81,36 +80,54 @@
         
         <section id="hBlock">
             <div id="graphCont">
-                <div><p>Temp</p><p>Cloud %</p><p>Rain %</p></div>
+                <div id="legend1">
+                    <p>Temp</p><p>Cloud %</p><p>Rain %</p>
+                </div>
+                <div id="legend2">
+                    <p>Average Min&deg;</p>
+                    <p>Average Max&deg;</p>
+                </div>
             </div>
             <div id="hBlock_details">
                 <div id="hBlock_table">
                     <div>
-                        <span class="var" data-id="graphText0">A Warm Day Today</span>
-                        <div>
-                            <span class="var" data-id="graphIcon0"><img src="icons/partly-cloudy-day.png"></span>
-                            <span class="var" data-id="graphMaxMin0">16&deg;</span>
+                        <div class="hBlock_table_texts">
+                            <span class="var" data-id="graphMessage0"></span>
+                            <span class="var" data-id="graphText0"></span>
+                        </div>
+                        <div class="hBlock_table_temps">
+                            <span class="var" data-id="graphIcon0"></span>
+                            <span class="var" data-id="graphMaxMin0"></span>
                         </div>
                     </div>
                     <div>
-                        <span class="var" data-id="graphText1">A Cool Night Tonight</span>
-                        <div>
-                            <span class="var" data-id="graphIcon1"><img src="icons/partly-cloudy-night.png"></span>
-                            <span class="var" data-id="graphMaxMin1">4&deg;</span>
+                        <div class="hBlock_table_texts">
+                            <span class="var" data-id="graphMessage1"></span>
+                            <span class="var" data-id="graphText1"></span>
+                        </div>
+                        <div class="hBlock_table_temps">
+                            <span class="var" data-id="graphIcon1"></span>
+                            <span class="var" data-id="graphMaxMin1"></span>
                         </div>
                     </div>
                     <div>
-                        <span class="var" data-id="graphText2">A Cold Day Tomorrow</span>
-                        <div>
-                            <span class="var" data-id="graphIcon2"><img src="icons/rain.png"></span>
-                            <span class="var" data-id="graphMaxMin2">11&deg;</span>
+                        <div class="hBlock_table_texts">
+                            <span class="var" data-id="graphMessage2"></span>
+                            <span class="var" data-id="graphText2"></span>
+                        </div>
+                        <div class="hBlock_table_temps">
+                            <span class="var" data-id="graphIcon2"></span>
+                            <span class="var" data-id="graphMaxMin2"></span>
                         </div>
                     </div>
                     <div>
-                        <span class="var" data-id="graphText3">A Warm Night Tomorrow</span>
-                        <div>
-                            <span class="var" data-id="graphIcon3"><img src="icons/partly-cloudy-night.png"></span>
-                            <span class="var" data-id="graphMaxMin3">6&deg;</span>
+                        <div class="hBlock_table_texts">
+                            <span class="var" data-id="graphMessage3"></span>
+                            <span class="var" data-id="graphText3"></span>
+                        </div>
+                        <div class="hBlock_table_temps">
+                            <span class="var" data-id="graphIcon3"></span>
+                            <span class="var" data-id="graphMaxMin3"></span>
                         </div>
                     </div>
                 </div>
