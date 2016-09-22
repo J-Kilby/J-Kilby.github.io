@@ -15,7 +15,7 @@ var timeNow = new Date(Date.now()),
     gap = 172800000,
     timeMachine = [];
 
-for (i = 0; i < 3; i++) {
+for (i = 0; i < 6; i++) {
     timeMachine.push(parseInt(timeUnix, 10)-(gap*(i+1)));
 }
 

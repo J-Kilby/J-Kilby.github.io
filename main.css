@@ -562,3 +562,6 @@ h1 {
         height: auto;
     }
 }
+@media (max-width: 480px){
+    body {font-size: 14px;}
+}
