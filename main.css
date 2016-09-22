@@ -118,7 +118,8 @@ section {
     background-color: #fafafa;
 }
 #changeLocation_submit {
-    width: 13em;
+    margin-top: 1em;
+    width: 14em;
     text-align: center;
     margin-left: 7.5rem;}
 
@@ -147,23 +148,32 @@ section {
     width: 100%;
     text-align: center;
     margin-top: 10em;
-    animation-name: pulse;
-    animation-duration: 1.5s; 
-    animation-timing-function: ease-out; 
-    animation-delay: 0;
-    animation-direction: alternate;
-    animation-iteration-count: infinite;
+    -webkit-animation: loading 1s infinite; /* Safari 4+ */
+    -moz-animation: loading 1s infinite; /* Fx 5+ */
+    -o-animation: loading 1s infinite; /* Opera 12+ */
+    animation: loading 1s infinite; /* IE 10+ */
+
 }
-@keyframes pulse {
-  0% {
-    color: #eee;
-  }
-  50% {
-    color: #3c3c3c;
-  }
-  100% {
-    color: #eee;
-  }
+
+@-webkit-keyframes loading {
+    0%   {color: #3c3c3c;}
+    50%  {color: #e51414;}
+    100% {color: #3c3c3c;}
+}
+@-moz-keyframes loading {
+    0%   {color: #3c3c3c;}
+    50%  {color: #e51414;}
+    100% {color: #3c3c3c;}
+}
+@-.-keyframes loading {
+    0%   {color: #3c3c3c;}
+    50%  {color: #e51414;}
+    100% {color: #3c3c3c;}
+}
+@keyframes loading {
+    0%   {color: #3c3c3c;}
+    50%  {color: #e51414;}
+    100% {color: #3c3c3c;}
 }
 
 
@@ -336,6 +346,7 @@ h1 {
 #legend2 {
     position: absolute;
     bottom: -2em;
+    width: 100%;
 }
 #legend2 p {
     width: 50%;
@@ -405,7 +416,7 @@ h1 {
     height: 100%;
 }
 .hBlock_table_texts {
-    width: 70%;
+    width: calc(100% - 8em);
     float: left;
     padding-right: 2em;
 }
@@ -418,7 +429,7 @@ h1 {
     border-bottom: 1px solid;
 }
 .hBlock_table_temps {
-    width: 30%;
+    width: 4em;
     float: right;
     clear: none;
     font-size: 2em;
@@ -427,6 +438,54 @@ h1 {
 #hBlock_table img {
     height: 4rem;
 }
+
+
+
+
+
+/*--------------------------------*\
+  Week Forcast
+\*--------------------------------*/
+#wBlock {
+    width: 100%;
+}
+#wBlock > div {
+    padding: 0.5em;
+    margin-bottom: 2em;
+    font-size: 1rem;
+    width: 25%;
+    height: 25em;
+    display: inline-block;
+    vertical-align: top;
+    border-top: 1px solid #3c3c3c;
+    border-bottom: 1px solid #3c3c3c;
+}
+#wBlock h2 {
+    font-size: 2em;
+}
+#wBlock h2 + div > span {
+    display: block;
+    height: 4.5em;
+}
+
+#wBlock img {
+    height: 6.5em;
+}
+#wBlock > div > div > div {
+    text-align: center;
+    font-size: 2em;
+    overflow: hidden;
+}
+#wBlock > div > div > div > span + span {
+    width: 100%;
+    float: left;
+}
+
+
+
+
+
+
 
 
 
@@ -451,10 +510,7 @@ h1 {
 /*----------------*\
   @Media
 \*----------------*/
-@media (min-width: 1366px){
-    body {font-size: 18px;}
-}
-@media (max-width: 875px){
+@media (max-width: 960px){
     #nBlock > div {
         width: 100%;
     }
@@ -463,5 +519,46 @@ h1 {
     }
     h1 {
         margin-bottom: 1em;
+    }
+    #wBlock > div {
+        width: 33%;
+    }
+}
+@media (max-width: 720px){
+    .hBlock_table_texts span:first-child {
+        font-size: 1rem;
+    }
+    .hBlock_table_texts span + span {
+        font-size: 0.8rem;
+    }
+    #wBlock > div {
+        width: 50%;
+    }
+}
+@media (max-width: 640px){ 
+    #graphCont {
+        margin-left: calc(50% - 7.5em);
+    }
+    #hBlock_details {
+        padding: 0;
+        margin-top: 47em;
+        height: 25em;
+    }
+    #hBlock_table {
+        padding: 0;
+    }
+    #hBlock_table > div {
+        height: 6em;
+    }
+}
+@media (max-width: 520px){
+    #nBlock_icon img {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+    #wBlock img {
+        width: 100%;
+        height: auto;
     }
 }

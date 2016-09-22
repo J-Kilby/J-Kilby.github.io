@@ -1,6 +1,6 @@
 if (localStorage.getItem("saved") !== "true") {
-    localStorage.setItem("saved", "false")
-};
+    localStorage.setItem("saved", "false");
+} ;
 
 
 
@@ -15,7 +15,7 @@ var timeNow = new Date(Date.now()),
     gap = 172800000,
     timeMachine = [];
 
-for (i = 0; i < 7; i++) {
+for (i = 0; i < 3; i++) {
     timeMachine.push(parseInt(timeUnix, 10)-(gap*(i+1)));
 }
 
@@ -209,7 +209,42 @@ var forcast,
     graphMessage3,
     graphText3,
     graphIcon3,
-    graphMaxMin3;
+    graphMaxMin3,
+    
+    weekday3,
+    weekday4,
+    weekday5,
+    weekday6,
+    weekday7,
+    weekday8,
+        
+    weekSummary1,
+    weekSummary2,
+    weekSummary3,
+    weekSummary4,
+    weekSummary5,
+    weekSummary6,
+    weekSummary7,
+    weekSummary8,
+    
+    weekIcon1,
+    weekIcon2,
+    weekIcon3,
+    weekIcon4,
+    weekIcon5,
+    weekIcon6,
+    weekIcon7,
+    weekIcon8,
+        
+    weekMinMax1,
+    weekMinMax2,
+    weekMinMax3,
+    weekMinMax4,
+    weekMinMax5,
+    weekMinMax6,
+    weekMinMax7,
+    weekMinMax8;
+        
 
 
 //call API and store data in declared varables
@@ -356,6 +391,49 @@ function assignVars() {
     graphText3 = graphDataObj[3].summary;
     graphIcon3 = "<img src=\"icons/" + graphDataObj[3].icon + ".png" + "\" alt=\"" + graphDataObj[3].icon + "\" />";
     graphMaxMin3 = Math.round(graphDataObj[3].temp) + "&deg;";
+    
+    
+    
+    weektime3 = new Date(timeNow.getTime() + 3*(1440*60000));
+    weektime4 = new Date(timeNow.getTime() + 4*(1440*60000));
+    weektime5 = new Date(timeNow.getTime() + 5*(1440*60000));
+    weektime6 = new Date(timeNow.getTime() + 6*(1440*60000));
+    weektime7 = new Date(timeNow.getTime() + 7*(1440*60000));
+    weektime8 = new Date(timeNow.getTime() + 8*(1440*60000));
+    
+    weekday3 = days[weektime3.getDay()];
+    weekday4 = days[weektime4.getDay()];
+    weekday5 = days[weektime5.getDay()];
+    weekday6 = days[weektime6.getDay()];
+    weekday7 = days[weektime7.getDay()];
+    weekday8 = days[weektime8.getDay()];
+    
+    weekSummary1 = forcast.daily.data[1-1].summary;
+    weekSummary2 = forcast.daily.data[2-1].summary;
+    weekSummary3 = forcast.daily.data[3-1].summary;
+    weekSummary4 = forcast.daily.data[4-1].summary;
+    weekSummary5 = forcast.daily.data[5-1].summary;
+    weekSummary6 = forcast.daily.data[6-1].summary;
+    weekSummary7 = forcast.daily.data[7-1].summary;
+    weekSummary8 = forcast.daily.data[8-1].summary;
+
+    weekIcon1 = "<img src=\"icons/" + forcast.daily.data[1-1].icon + ".png" + "\" alt=\"" + forcast.daily.data[1-1].icon + "\" />"
+    weekIcon2 = "<img src=\"icons/" + forcast.daily.data[2-1].icon + ".png" + "\" alt=\"" + forcast.daily.data[2-1].icon + "\" />"
+    weekIcon3 = "<img src=\"icons/" + forcast.daily.data[3-1].icon + ".png" + "\" alt=\"" + forcast.daily.data[3+1].icon + "\" />"
+    weekIcon4 = "<img src=\"icons/" + forcast.daily.data[4-1].icon + ".png" + "\" alt=\"" + forcast.daily.data[4-1].icon + "\" />"
+    weekIcon5 = "<img src=\"icons/" + forcast.daily.data[5-1].icon + ".png" + "\" alt=\"" + forcast.daily.data[5-1].icon + "\" />"
+    weekIcon6 = "<img src=\"icons/" + forcast.daily.data[6-1].icon + ".png" + "\" alt=\"" + forcast.daily.data[6-1].icon + "\" />"
+    weekIcon7 = "<img src=\"icons/" + forcast.daily.data[7-1].icon + ".png" + "\" alt=\"" + forcast.daily.data[7-1].icon + "\" />"
+    weekIcon8 = "<img src=\"icons/" + forcast.daily.data[8-1].icon + ".png" + "\" alt=\"" + forcast.daily.data[8-1].icon + "\" />"
+        
+    weekMinMax1 = Math.round(forcast.daily.data[1-1].temperatureMin) + "&deg; &ndash; " + Math.round(forcast.daily.data[1-1].temperatureMax) + "&deg;";
+    weekMinMax2 = Math.round(forcast.daily.data[2-1].temperatureMin) + "&deg; &ndash; " + Math.round(forcast.daily.data[2-1].temperatureMax) + "&deg;";
+    weekMinMax3 = Math.round(forcast.daily.data[3-1].temperatureMin) + "&deg; &ndash; " + Math.round(forcast.daily.data[3-1].temperatureMax) + "&deg;";
+    weekMinMax4 = Math.round(forcast.daily.data[4-1].temperatureMin) + "&deg; &ndash; " + Math.round(forcast.daily.data[4-1].temperatureMax) + "&deg;";
+    weekMinMax5 = Math.round(forcast.daily.data[5-1].temperatureMin) + "&deg; &ndash; " + Math.round(forcast.daily.data[5-1].temperatureMax) + "&deg;";
+    weekMinMax6 = Math.round(forcast.daily.data[6-1].temperatureMin) + "&deg; &ndash; " + Math.round(forcast.daily.data[6-1].temperatureMax) + "&deg;";
+    weekMinMax7 = Math.round(forcast.daily.data[7-1].temperatureMin) + "&deg; &ndash; " + Math.round(forcast.daily.data[7-1].temperatureMax) + "&deg;";
+    weekMinMax8 = Math.round(forcast.daily.data[8-1].temperatureMin) + "&deg; &ndash; " + Math.round(forcast.daily.data[8-1].temperatureMax) + "&deg;";
 }
 
 
@@ -434,6 +512,7 @@ function placeData(){
                   .ticks((maxTemp-minTemp+6)/2);
     var yAxis = d3.axisLeft(y)
                   .ticks(48/3);
+    
     var c;
     
     var line = d3.line()
