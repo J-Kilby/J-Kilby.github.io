@@ -564,4 +564,11 @@ h1 {
 }
 @media (max-width: 480px){
     body {font-size: 14px;}
-}
+    .hBlock_table_texts span:first-child {font-size: 1em;}
+    section {padding: 0 1em;}
+    #wBlock h2 {font-size: 1.5em;}
+    #wBlock > div > div > div {font-size: 1.5em;}
+    .hBlock_table_texts {padding-right: 1em;}
+    #hBlock_table img {height: 3rem;}
+    .hBlock_table_texts {width: calc(100% - 7.6em);}
+    .hBlock_table_temps {width: 3.8em;}

@@ -33,7 +33,7 @@ var apiCalll;
 //arrays for date display
 var days = ["Sunday", 
             "Monday", 
-            "Tueday", 
+            "Tuesday", 
             "Wednesday", 
             "Thursday", 
             "Friday", 
