@@ -370,7 +370,10 @@ function assignVars() {
             graphDataObj.shift();
         }
     }
-    
+    if (graphDataObj[1].time < timeUnix.slice(0, -3)) {
+        graphDataObj.shift();
+        graphDataObj.shift();        
+    }
     
     graphMessage0 = graphDataObj[0].message;
     graphText0 = graphDataObj[0].summary;
