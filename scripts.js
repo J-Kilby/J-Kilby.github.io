@@ -397,12 +397,12 @@ function assignVars() {
     
     
     
-    weektime3 = new Date(timeNow.getTime() + 3*(1440*60000));
-    weektime4 = new Date(timeNow.getTime() + 4*(1440*60000));
-    weektime5 = new Date(timeNow.getTime() + 5*(1440*60000));
-    weektime6 = new Date(timeNow.getTime() + 6*(1440*60000));
-    weektime7 = new Date(timeNow.getTime() + 7*(1440*60000));
-    weektime8 = new Date(timeNow.getTime() + 8*(1440*60000));
+    weektime3 = new Date(timeNow.getTime() + 2*(1440*60000));
+    weektime4 = new Date(timeNow.getTime() + 3*(1440*60000));
+    weektime5 = new Date(timeNow.getTime() + 4*(1440*60000));
+    weektime6 = new Date(timeNow.getTime() + 5*(1440*60000));
+    weektime7 = new Date(timeNow.getTime() + 6*(1440*60000));
+    weektime8 = new Date(timeNow.getTime() + 7*(1440*60000));
     
     weekday3 = days[weektime3.getDay()];
     weekday4 = days[weektime4.getDay()];
@@ -482,8 +482,7 @@ function placeData(){
 
     
     //graph
-    //http://bl.ocks.org/benjchristensen/2579599
-    /* implementation heavily influenced by http://bl.ocks.org/1166403 */
+    //based on http://bl.ocks.org/benjchristensen/2579599
 		
     var m = 50,
         w = 220-m,
