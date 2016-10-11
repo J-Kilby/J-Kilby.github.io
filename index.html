@@ -1,231 +1,56 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>s&auml;&auml;</title>
-        <link rel="shortcut icon" type="image/png" href="favicon64.png"/>
-        <link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
-        <link type="text/css" href="main.css" rel="stylesheet">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-    </head>
-    <body>
-        <!--screens-->
-        <div class="screen" style="display: none;" id="changeLocation">
-            <form method="post" onsubmit="search(); return false">
-                <input id="changeLocation_input" type="text" placeholder="e.g. Thredbo, New South Wales">
-                <input id="changeLocation_submit" type="submit" class="btn" value="Search for your Location">
-            </form>
-            
-            <div id="locationResults"></div>
-        </div>
-        <div class="screen" id="loading">
-            <p>... Loading ...</p>
-        </div>
-        
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Inconsolata|Almendra+SC" rel="stylesheet">
+    <link type="text/css" href="main.css" rel="stylesheet">
+    <title>Jack Kilby</title>
+</head>
+
+<body>
+    <div id="viewer">
+        <div>&#10006</div>
+    </div>
+    
+    <div id="page">
         <header>
-            <p>s&auml;&auml;</p>
-            <p id="locationToggle" class="btn">Change Your Location</p>
-            <p>Made By Jack Kilby &mdash; Powered by <a target="_blank" href="https://darksky.net/poweredby/">Dark Sky</a></p>
+            <h1>Jack Kilby</h1>
+            <p>Designer and Developer</p>
         </header>
         
-        <section id="nBlock">
-            <h1><span class="var" data-id="localName"></span></h1>
-            
-            <div>
-                <div id="nBlock_icon"><span class="var" data-id="icon"></span></div>
-                <p id="nBlock_temp"><span class="var" data-id="currentTemp"></span></p>
-            </div>
-            <div id="nBlock_tables">            
-                <table>
-                    <tr>
-                        <td>Feels Like</td>
-                        <td><span class="var" data-id="feelsLike"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Cloud Cover</td>
-                        <td><span class="var" data-id="cloudCover"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Dew Point</td>
-                        <td><span class="var" data-id="dewPoint"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Humidity</td>
-                        <td><span class="var" data-id="humidity"></span></td>
-                    </tr>
-                </table>
-                
-                <table>
-                    <tr>
-                        <td><span class="var" data-id="rainType">Rain</span> Fall</td>
-                        <td><span class="var" data-id="rainIntensity"></span></td>
-                    </tr>
-                    <tr>
-                        <td><span class="var" data-id="rainType">Rain</span> Chance</td>
-                        <td><span class="var" data-id="rainChance"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Wind From</td>
-                        <td><span class="var" data-id="windDirection"></span></td>
-                    </tr>
-                    <tr>
-                        <td>Wind Speed</td>
-                        <td><span class="var" data-id="windSpeed"></span></td>
-                    </tr>
-                </table>
-                
-            </div>
-            
-            <p id="nBlock_day"><span class="var" data-id="callTime"></span></p>
-        </section>
+        <h2>Projects:</h2>
+        <ul class="projects">
+            <li>
+                <img src="saa/icons/partly-cloudy-day.png">
+                <div>
+                    <h3><a href="/saa/">S&auml;&auml;</a></h3>
+                    <h4>A weather app, powered by <a href="https://darksky.net/poweredby/">Dark Sky</a>.</h4>
+                    <p>Designed and developed in Spring of 2016. It features average maximum and minimum temperatures for your area, and hyper-local forecasts from <a href="https://darksky.net/poweredby/">Dark Sky</a>. And a graph powered by <a href="https://d3js.org">D3.js</a></p>
+                </div>
+            </li>
+            <li>
+                <img src="proun/proun.png">
+                <div>
+                    <h3><a href="/proun/">Proun</a> <code> W.I.P. </code></h3>
+                    <h4>A random shape generator for creative inspiration.</h4>
+                    <p>Designed and developed in the Spring of 2016. It uses <a href="https://d3js.org">D3.js</a> and <a href="http://chancejs.com/">Chance.js</a> to generate random artworks of a similar style to <a href="https://en.wikipedia.org/wiki/El_Lissitzky">El Lissitzky's</a> Prouns.</p>
+                </div>
+            </li>
+        </ul>
         
-        <section id="hBlock">
-            <div id="graphCont">
-                <div id="legend1">
-                    <p>Temp</p><p>Cloud %</p><p>Rain %</p>
-                </div>
-                <div id="legend2">
-                    <p>Average Min&deg;</p>
-                    <p>Average Max&deg;</p>
-                </div>
-            </div>
-            <div id="hBlock_details">
-                <div id="hBlock_table">
-                    <div>
-                        <div class="hBlock_table_texts">
-                            <span class="var" data-id="graphMessage0"></span>
-                            <span class="var" data-id="graphText0"></span>
-                        </div>
-                        <div class="hBlock_table_temps">
-                            <span class="var" data-id="graphIcon0"></span>
-                            <span class="var" data-id="graphMaxMin0"></span>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="hBlock_table_texts">
-                            <span class="var" data-id="graphMessage1"></span>
-                            <span class="var" data-id="graphText1"></span>
-                        </div>
-                        <div class="hBlock_table_temps">
-                            <span class="var" data-id="graphIcon1"></span>
-                            <span class="var" data-id="graphMaxMin1"></span>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="hBlock_table_texts">
-                            <span class="var" data-id="graphMessage2"></span>
-                            <span class="var" data-id="graphText2"></span>
-                        </div>
-                        <div class="hBlock_table_temps">
-                            <span class="var" data-id="graphIcon2"></span>
-                            <span class="var" data-id="graphMaxMin2"></span>
-                        </div>
-                    </div>
-                    <div>
-                        <div class="hBlock_table_texts">
-                            <span class="var" data-id="graphMessage3"></span>
-                            <span class="var" data-id="graphText3"></span>
-                        </div>
-                        <div class="hBlock_table_temps">
-                            <span class="var" data-id="graphIcon3"></span>
-                            <span class="var" data-id="graphMaxMin3"></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        <section id="wBlock">
-            <div>
-                <h2>Today</h2>
-                <div>
-                    <span class="var" data-id="weekSummary1"></span>
-                    <div>
-                        <span class="var" data-id="weekIcon1"></span>
-                        <span class="var" data-id="weekMinMax1"></span>
-                    </div>
-                </div>
-            </div><div>
-                <h2>Tomorrow</h2>
-                <div>
-                    <span class="var" data-id="weekSummary2"></span>
-                    <div>
-                        <span class="var" data-id="weekIcon2"></span>
-                        <span class="var" data-id="weekMinMax2"></span>
-                    </div>
-                </div>
-            </div><div>
-                <h2 class="var" data-id="weekday3"></h2>
-                <div>
-                    <span class="var" data-id="weekSummary3"></span>
-                    <div>
-                        <span class="var" data-id="weekIcon3"></span>
-                        <span class="var" data-id="weekMinMax3"></span>
-                    </div>
-                </div>
-            </div><div>
-                <h2 class="var" data-id="weekday4"></h2>
-                <div>
-                    <span class="var" data-id="weekSummary4"></span>
-                    <div>
-                        <span class="var" data-id="weekIcon4"></span>
-                        <span class="var" data-id="weekMinMax4"></span>
-                    </div>
-                </div>
-            </div><div>
-                <h2 class="var" data-id="weekday5"></h2>
-                <div>
-                    <span class="var" data-id="weekSummary5"></span>
-                    <div>
-                        <span class="var" data-id="weekIcon5"></span>
-                        <span class="var" data-id="weekMinMax5"></span>
-                    </div>
-                </div>
-            </div><div>
-                <h2 class="var" data-id="weekday6"></h2>
-                <div>
-                    <span class="var" data-id="weekSummary6"></span>
-                    <div>
-                        <span class="var" data-id="weekIcon6"></span>
-                        <span class="var" data-id="weekMinMax6"></span>
-                    </div>
-                </div>
-            </div><div>
-                <h2 class="var" data-id="weekday7"></h2>
-                <div>
-                    <span class="var" data-id="weekSummary7"></span>
-                    <div>
-                        <span class="var" data-id="weekIcon7"></span>
-                        <span class="var" data-id="weekMinMax7"></span>
-                    </div>
-                </div>
-            </div><div>
-                <h2 class="var" data-id="weekday8"></h2>
-                <div>
-                    <span class="var" data-id="weekSummary8"></span>
-                    <div>
-                        <span class="var" data-id="weekIcon8"></span>
-                        <span class="var" data-id="weekMinMax8"></span>
-                    </div>
-                </div>
-            </div>
-        </section>
-        
-        
-        <div id="credit">
-            <p>Made by Jack Kilby</p>
-            <p>&mdash;</p>
-            <p>Powered by <a target="_blank" href="https://darksky.net/poweredby/">Dark Sky,</a></p>
-            <p><a target="_blank" href="http://www.geonames.org/">GeoNames</a>, and <a target="_blank" href="http://ip-api.com/">ip-api.</a></p>
-            <p>&mdash;</p>
-            <p><big>&copy;</big> 2016</p>
-        </div>
-        
-        
-        
-        <script src="https://code.jquery.com/jquery-2.2.4.min.js"
-                integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
-                crossorigin="anonymous"></script>
-        <script src="https://d3js.org/d3.v4.min.js"></script>      
-        <script src="scripts.js" type="text/javascript"></script>
-    </body>
+        <h2>Art:</h2>
+        <ul class="art">
+            <li class="images" data-image="caterpillar.png"><p>View</p></li>
+            <li class="images" data-image="paimio.png"><p>View</p></li>
+        </ul>
+    </div>
+    <footer>
+        <p>Made by Jack Kilby</p>
+        <p>&copy; 2016</p>
+        <p>KilbyJA<code>@</code>gmail.com</p>
+    </footer>
+</body>
+<script type="text/javascript" src="jquery-2.2.4.min.js"></script>
+<script type="text/javascript" src="grid.js"></script>
 </html>

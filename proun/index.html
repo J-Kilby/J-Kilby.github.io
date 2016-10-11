@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link href="https://fonts.googleapis.com/css?family=Muli:300,300i" rel="stylesheet">
+    <script src="chance.js" type="text/javascript"></script>
+    <script src="d3.js" type="text/javascript"></script>
+    
+    <title>Proun</title>
+    
+    <link type="text/css" rel="stylesheet" href="proun.css">
+</head>
+
+<body>
+    <div id="controlPannel">
+        <a href="https://en.wikipedia.org/wiki/El_Lissitzky#Proun" target="_blank"><img src="proun.png"></a>
+        <h1>Proun</h1>
+        <h2>Abstract Inspiration</h2>
+        
+        <form>
+            <p>Spread</p>
+            <input name="spread" id="spread" type="range" min="-10" max="10" steps="1" value="0">
+            <p>Denisty</p>
+            <input name="denisty" id="denisty" type="range" min="-10" max="10" steps="1" value="0">
+            <p>Fillings</p>
+            <input name="fillings" id="fillings" type="range" min="0" max="10" steps="1" value="5">
+            <p>Thickness</p>
+            <input name="thickness" id="thickness" type="range" min="1" max="11" steps="1" value="6">
+            
+            <br/>
+            <br/>
+            <br/>
+            
+            <p>Circles</p>
+            <input name="circles" id="circles" type="range" min="0" max="10" steps="1" value="5">
+            <p>Quads</p>
+            <input name="quads" id="quads" type="range" min="0" max="10" steps="1" value="5">
+            <p>Waves</p>
+            <input name="waves" id="waves" type="range" min="0" max="10" steps="1" value="5">
+            <p>Arcs</p>
+            <input name="arcs" id="arcs" type="range" min="0" max="10" steps="1" value="5">
+            <p>Lines</p>
+            <input name="Lines" id="Lines" type="range" min="0" max="10" steps="1" value="5">
+        </form>
+        
+        <div id="credit">
+            <p>Made by <a href="/">Jack Kilby</a></p>
+            <p>Powered by:</p>
+            <p><a href="https://d3js.org">D3.js</a> and <a href="http://chancejs.com/">Chance.js</a></p><p>&copy; 2016</p>
+        </div>
+    </div>
+    
+    <div id="page">
+    
+    </div>
+    
+    <script src="proun.js" type="text/javascript"></script>
+</body>
+</html>

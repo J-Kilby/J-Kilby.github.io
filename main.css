@@ -30,545 +30,186 @@ table{border-collapse:collapse;border-spacing:0}
 @media screen{[hidden~=screen]{display:inherit}
 [hidden~=screen]:not(:active):not(:focus):not(:target){clip:rect(0 0 0 0)!important;position:absolute!important}
 }
-big {font-size: 1.3em;}
 
 
-
-
-/*--------------------------------*\
-  General
-\*--------------------------------*/
-html {
-    background-color: #fff;
-    color: #3c3c3c;
-    box-sizing: border-box;
-}
 
 body {
-    font-family: 'Inconsolata', monospace;
+    font-family: 'inconsolata', monospace;
+    font-size: 16px;
 }
 
-section {
-    margin: 3em auto;
-    padding: 0 2em;
-    max-width: 62em;
-}
-
-.btn {
-    margin: .25rem;
-    background-color: #efefef;
-    height: 1.4em;
-    line-height: 1.4em;
-    border-radius: 5px;
-    box-shadow: 0 1px 1px #aaa;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    user-select: none;
-}
-.btn:hover {
-    cursor: pointer;
-    box-shadow: 0 1px 1px #777;
-    color: #000;
-}
-.down {
-    background-color: #3c3c3c;
-    color: #fff;
-}
-.down:hover {
-    cursor: pointer;
-    color: #eee;
-}
-
-
-
-
-
-/*--------------------------------*\
-
-
-              Screens
-
-
-\*--------------------------------*/
-.screen {
-    z-index: 1;
-    position: fixed;
-    display: inline-block;
-    top: 2rem;
-    right: 0;
-    height: calc(100vh - 2rem);
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.97);
-}
-
-#changeLocation {overflow-y: scroll;}
-#changeLocation form {
-    max-width: 30em;
-    margin: 2em auto 1em auto;
-    padding: 1em;
-    border-bottom: 1px solid #3c3c3c;
-}
-
-#changeLocation_input {
-    width: 100%;
-    padding: 0.2em 1em;
-    border: 1px solid #3c3c3c;
-    border-radius: 3px;
-    box-shadow: 0 0 1px #aaa;
-    background-color: #fafafa;
-}
-#changeLocation_submit {
-    margin-top: 1em;
-    width: 14em;
-    text-align: center;
-    margin-left: 7.5rem;}
-
-#locationResults {
-    max-width: 30rem;
+#page {
+    padding: 1em 2em;;
     margin: 0 auto;
-    padding: 0 1em;
+    max-width: 45em;
+    background-color: #fff;
+    min-height: 100vh;
 }
-#locationResults p {
-    margin: 1.5em 0;
-    border-bottom: 1px solid #aaa;
-    padding: 0 1em;
+
+header {
+    text-align: center;
 }
-#locationResults p:hover {
-    background-color: #3c3c3c;
-    color: #fff;
-    cursor: pointer;
+
+h1 {
+    font-family: 'Almendra SC', georgia, serif;
+    font-size: 2.8em;
+    margin-top: 1rem;
 }
-#locationResults span + span {
+h2 {
+    font-family: 'Almendra SC', georgia, serif;
+    font-size: 2.2em;
+    margin-top: 2.2rem;
+    border-bottom: 1px solid #000;
+}
+h3 {
+    font-family: 'Almendra SC', georgia, serif;
+    font-size: 1.9em;
+    margin-top: 1rem;
+}
+h4 {
+    margin-top: 1rem;
     font-size: .8em;
 }
 
-
-#loading p {
-    display: block;
-    width: 100%;
-    text-align: center;
-    margin-top: 10em;
-    -webkit-animation: loading 1s infinite; /* Safari 4+ */
-    -moz-animation: loading 1s infinite; /* Fx 5+ */
-    -o-animation: loading 1s infinite; /* Opera 12+ */
-    animation: loading 1s infinite; /* IE 10+ */
-
-}
-
-@-webkit-keyframes loading {
-    0%   {color: #3c3c3c;}
-    50%  {color: #e51414;}
-    100% {color: #3c3c3c;}
-}
-@-moz-keyframes loading {
-    0%   {color: #3c3c3c;}
-    50%  {color: #e51414;}
-    100% {color: #3c3c3c;}
-}
-@-.-keyframes loading {
-    0%   {color: #3c3c3c;}
-    50%  {color: #e51414;}
-    100% {color: #3c3c3c;}
-}
-@keyframes loading {
-    0%   {color: #3c3c3c;}
-    50%  {color: #e51414;}
-    100% {color: #3c3c3c;}
-}
-
-
-
-
-
-/*--------------------------------*\
-  Header
-\*--------------------------------*/
-header {
-    z-index: 2;
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 100%;
-    background-color: hsla(0, 0%, 100%, 0.94);
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.46);
-    border-bottom: 1px solid #000;
-    height: 2em;
-    line-height: 2rem;
-}
-
-header p {
-    width: auto;
-    display: inline-block;
-    padding: 0 1em;
-    height: 100%;
-    line-height: 2em;
-}
-
-header p:first-child {
-    float: left;
-    background-color: #3c3c3c;
-    color: #fff;
-}
-
-#locationToggle {
-    float: left;
-}
-
-
-header p + p + p {
-    float: right;
-    font-size: 0.8rem;
-    height: 100%;
-    line-height: 2rem;
-}
-
-
-
-
-
-/*--------------------------------*\
-
-  Now Block              Now Block
-
-\*--------------------------------*/
-#nBlock {
-    margin-bottom: 0;
-}
-
-#nBlock > div {
-    float: left;
-    width: 50%;
-}
-
-
-h1 {
-    margin-top: 2em;
-    padding: 0 1rem;
-    font-size: 2em;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-align: center;
-}
-
-
-#nBlock_icon {
-    float: left;
-    width: 50%;
-    text-align: center;
-    height: 10rem;
-}
-#nBlock_icon img {
-    margin-top: -2em;
-    height: 140%;
-}
-#nBlock_temp {
-    width: 50%;
-    float: left;
-    text-align: left;
-    font-size: 7em;
-    line-height: 10rem;
-    text-align: center;
-}
-
-
-
-#nBlock_tables{
-    padding: 2.5em 0;
-    text-transform: capitalize;
-}
-#nBlock table {
-    border-top:    1px solid #3c3c3c;
-    border-bottom: 1px solid #3c3c3c;
-    margin: 0 1em;
-    float: left;
-    width: calc(50% - 2em);
-    height: 7em;
-    font-size: 0.8em;
-}
-
-#nBlock_day {
-    width: 100%;
-    text-align: center;
-    color: #cecece;
-}
-
-
-
-
-
-/*--------------------------------*\
-  H     B
-  o     l
-  u     o
-  r     c
-  l     k
-  y
-\*--------------------------------*/
-
-#hBlock {
-    margin-top: 0;
-    border-top: 2px solid #eee;
-}
-
-
-/*graph*/
-#graphCont {
-    position: relative;
-    width: 15em;
-    height: 40em;
-    float: left;
-}
-
-#legend1,
-#legend2 {
-    padding-left: 3rem;
-}
-#legend1 p,
-#legend2 p {
-    width: 33%;
-    float: left;
-    font-size: 0.8rem;
-    line-height: 1rem;
-    height: 1rem;
-    text-align: center;
+p {
     margin-top: 1rem;
-    margin-bottom: -1rem;
-}
-#legend1 p:first-child {
-    background-color: #ff4;
-}
-#legend1 p + p {
-    background-color: #e3e3e3;
-}
-#legend1 p + p + p {
-    background-color: #8fc0f2;
-}
-#legend2 {
-    position: absolute;
-    bottom: -2em;
-    width: 100%;
-}
-#legend2 p {
-    width: 50%;
-    padding: 0 0.5em;
-    color: #fff;
-}
-#legend2 p:first-child {
-    background-color: #444fce;
-}
-#legend2 p + p {
-    background-color: #e32929;
+    font-size: .8em;
 }
 
+a {
+    border-bottom: .2em solid #a2e6ff;
+    transition: background-color .5s;
+    color: inherit;
+    padding: 0 .1em;
+    margin: 0 -0.1em;
+}
+a:hover {background-color: #a2e6ff}
 
-#graphCont svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-    font-size: 11px;
-}
-
-#graph_temps {
-    stroke-width: 5px;
-    fill: none;
-    stroke: #b0d8f5;
-}
-#graph_temps__shadow {
-    stroke-width: 3px;
-    fill: none;
-    stroke: #fafa12;
-}
-
-#graph_cloudCovers {
-    stroke: none;
-    fill: rgba(224, 224, 224, 0.39);
-}
-
-#graph_rainChances {
-    stroke: none;
-    fill: rgba(37, 104, 255, 0.32);
-}
-.graphLines {
-    stroke: #eee;
-    stroke-width: 1px;
-}
-#avMax{stroke-width: 2px; stroke: #e32929;}
-#avMin{stroke-width: 2px; stroke: #444fce;}
-
-
-
-/*detials*/
-#hBlock_details {
-    height: 43em;
-    padding-left: 14em;
-}
-#hBlock_details * {
-
-}
-#hBlock_table {
-    height: 100%;
-    padding: 6em 0 3em 3em;
-}
-#hBlock_table > div {
-    height: 9em;
-}
-#hBlock_table > div > div {
-    height: 100%;
-}
-.hBlock_table_texts {
-    width: calc(100% - 8em);
-    float: left;
-    padding-right: 2em;
-}
-.hBlock_table_texts span {
-    display: block;
-}
-.hBlock_table_texts span:first-child {
-    font-size: 1.5em;
-    text-transform: capitalize;
-    border-bottom: 1px solid;
-}
-.hBlock_table_temps {
-    width: 4em;
-    float: right;
-    clear: none;
-    font-size: 2em;
-}
-
-#hBlock_table img {
-    height: 4rem;
-}
-
-
-
-
-
-/*--------------------------------*\
-  Week Forcast
-\*--------------------------------*/
-#wBlock {
-    width: 100%;
-}
-#wBlock > div {
-    padding: 0.5em;
-    margin-bottom: 2em;
+.projects code {
+    padding: 0.1em 1em;
     font-size: 1rem;
-    width: 25%;
-    height: 25em;
-    display: inline-block;
-    vertical-align: top;
-    border-top: 1px solid #3c3c3c;
-    border-bottom: 1px solid #3c3c3c;
-}
-#wBlock h2 {
-    font-size: 2em;
-}
-#wBlock h2 + div > span {
-    display: block;
-    height: 4.5em;
+    margin: 1em;
+    background-color: #d2fc47;
+    border-radius: 1em;
 }
 
-#wBlock img {
-    height: 6.5em;
+
+
+.projects {
+    list-style: none;
+    margin-bottom: 4em;
 }
-#wBlock > div > div > div {
-    text-align: center;
-    font-size: 2em;
+.projects li {margin: 2em 0;}
+.projects img {
+    width: 10rem;
+    padding-right: 0.5em;
+    float: left;
+    border-right: 1px solid #d3d3d3;
+}
+.projects div {
+    margin-left: 11em;
+}
+
+.art {
+    list-style: none;
+    font-size: 0;
+    margin-top: 1rem;
+}
+.images {
+    font-size: 1rem;
+    display: inline-block;
+    width: 25%;
+    background-size: cover;
+    position: relative;
     overflow: hidden;
 }
-#wBlock > div > div > div > span + span {
-    width: 100%;
-    float: left;
+.images:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
 }
-
-
-
-
-
-
-
-
-
-
-
-#credit {
-    width: 100%;
-    padding: 2em;
-    margin: 0 auto;
-}
-#credit p {
-    font-size: 0.8em;
+.images p {
     text-align: center;
+    line-height: 2em;
+    font-size: 1.3em;
+    padding-top: calc(50% - 1em);
+    position: absolute;
+    top: -1rem;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0);
+    color: rgba(0, 0, 0, 0);
+    transition: background-color .4s, color .7s;
 }
 
-
-
-
-/*--------------------------------*\
-  Media Queries
-\*--------------------------------*/
-/*----------------*\
-  @Media
-\*----------------*/
-@media (max-width: 960px){
-    #nBlock > div {
-        width: 100%;
-    }
-    header p + p + p {
-        display: none;
-    }
-    h1 {
-        margin-bottom: 1em;
-    }
-    #wBlock > div {
-        width: 33%;
-    }
+.images p:hover {
+    background-color: rgba(0, 0, 0, 0.72);
+    color: #ffffff;
+    cursor: pointer;
 }
-@media (max-width: 720px){
-    .hBlock_table_texts span:first-child {
-        font-size: 1rem;
+
+#viewer {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: left;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.92);
+    z-index: 100;
+}
+
+#viewer img {
+    max-width: 100%;
+    max-height: 100%;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+#viewer div {
+    position: fixed;
+    right: 0;
+    top: -.8rem;
+    margin: 0;
+    font-size: 2em;
+    padding: 1em;
+    color: #fff;
+    transition: color .4s;
+    z-index: 200;
+}
+#viewer div:hover {
+    color: #de0f0f;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    margin: 2em auto;
+}
+footer p {margin: 0;}
+
+
+
+
+
+@media (max-width: 520px) {
+    .projects img {
+        float: none;
+        border: none;
+        margin: 1em auto -0.5em auto;
+        display: block;
     }
-    .hBlock_table_texts span + span {
-        font-size: 0.8rem;
+    .projects div {
+        margin: 0;
     }
-    #wBlock > div {
+    
+    .images {
         width: 50%;
     }
 }
-@media (max-width: 640px){ 
-    #graphCont {
-        margin-left: calc(50% - 7.5em);
-    }
-    #hBlock_details {
-        padding: 0;
-        margin-top: 47em;
-        height: 25em;
-    }
-    #hBlock_table {
-        padding: 0;
-    }
-    #hBlock_table > div {
-        height: 6em;
-    }
+@media (max-width: 360px) {
+    #page {padding: 1em;}
 }
-@media (max-width: 520px){
-    #nBlock_icon img {
-        width: 100%;
-        height: auto;
-        margin: 0;
-    }
-    #wBlock img {
-        width: 100%;
-        height: auto;
-    }
-}
-@media (max-width: 480px){
-    body {font-size: 14px;}
-    .hBlock_table_texts span:first-child {font-size: 1em;}
-    section {padding: 0 1em;}
-    #wBlock h2 {font-size: 1.5em;}
-    #wBlock > div > div > div {font-size: 1.5em;}
-    .hBlock_table_texts {padding-right: 1em;}
-    #hBlock_table img {height: 3rem;}
-    .hBlock_table_texts {width: calc(100% - 7.6em);}
-    .hBlock_table_temps {width: 3.8em;}
