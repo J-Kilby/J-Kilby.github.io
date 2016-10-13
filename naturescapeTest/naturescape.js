@@ -50,7 +50,7 @@ if (window.location.hash !== "") {
 
 
 function getPlaceName(){
-    $.getJSON("https://api.geonames.org/findNearbyJSON?lat=" +lat+ "&lng=" +lon+ "&username=kilby", function(data) {
+    $.getJSON("http://api.geonames.org/findNearbyJSON?lat=" +lat+ "&lng=" +lon+ "&username=kilby", function(data) {
         placeName = data.geonames[0].name;
         
         //display geographic name
