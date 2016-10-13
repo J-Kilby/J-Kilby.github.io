@@ -20,7 +20,7 @@ if (window.location.hash !== "") {
     searchALA();
 } else {
     //else use geolocation
-    if ("geolocation" in navigator) {
+    /*if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(function(position) {
             lat = position.coords.latitude; 
             lon = position.coords.longitude;
@@ -32,7 +32,7 @@ if (window.location.hash !== "") {
             getPlaceName();
             searchALA();
         });
-    } else {
+    } else {*/
         //else us ip-api
         $.getJSON("http://ip-api.com/json", function(data) {
             lat = data.lat;
