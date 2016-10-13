@@ -46,7 +46,7 @@ if (window.location.hash !== "") {
             searchALA();
         });
     };
-};
+
 
 
 function getPlaceName(){
