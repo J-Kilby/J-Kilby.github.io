@@ -50,7 +50,7 @@ if (window.location.hash !== "") {
 
 
 function getPlaceName(){
-    $.getJSON("http://api.geonames.org/findNearbyJSON?lat=" +lat+ "&lng=" +lon+ "&username=kilby", function(data) {
+    $.getJSON("https://api.geonames.org/findNearbyJSON?lat=" +lat+ "&lng=" +lon+ "&username=kilby", function(data) {
         placeName = data.geonames[0].name;
         
         //display geographic name
@@ -59,7 +59,7 @@ function getPlaceName(){
 }
 
 function searchALA(){
-    $.getJSON("http://biocache.ala.org.au/ws/occurrences/search?lat=" + lat + "&lon=" + lon + "&radius=1&facets=common_name", function(data) {
+    $.getJSON("https://biocache.ala.org.au/ws/occurrences/search?lat=" + lat + "&lon=" + lon + "&radius=1&facets=common_name", function(data) {
         alaResult = data;
         console.log(alaResult);
         
