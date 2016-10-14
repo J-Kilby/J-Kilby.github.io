@@ -22,7 +22,8 @@ if (window.location.hash !== "") {
     //else use geolocation
     console.log(navigator);
     console.log(navigator.platform);
-    console.log(navigator.geolocation.getCurrentPosition());
+    navigator.geolocation.getCurrentPosition(function(position) {console.log("poop")});
+    
     if ("geolocation" in navigator) {
         $("#latLon").html("geolocation available");
         navigator.geolocation.getCurrentPosition(function(position) {
