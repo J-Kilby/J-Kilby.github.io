@@ -51,7 +51,7 @@ if (window.location.hash !== "") {
 
 
 function getPlaceName(){
-    $.getJSON("http://locationiq.org/v1/reverse.php?format=json&key=d9468055045db628123d&lat="+lat+"&lon="+lon+"&zoom=16", function(data) {
+    $.getJSON("https://locationiq.org/v1/reverse.php?format=json&key=d9468055045db628123d&lat="+lat+"&lon="+lon+"&zoom=16", function(data) {
         placeName = data.display_name;
         
         //display geographic name
