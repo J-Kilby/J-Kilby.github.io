@@ -20,7 +20,7 @@ if (window.location.hash !== "") {
     searchALA();
 } else {
     //else use geolocation
-    if ("geolocation" in navigator) {
+    if ("geolocation" in navigator && navigator.geolocation.getCurrentPosition !== undefined) {
         $("#latLon").html("geolocation available");
         navigator.geolocation.getCurrentPosition(function(position) {
             $("#latLon").html("geolocation readable");
