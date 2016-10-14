@@ -21,7 +21,10 @@ if (window.location.hash !== "") {
 } else {
     //else use geolocation
     if ("geolocation" in navigator) {
+        $("#latLon").html("geolocation available");
         navigator.geolocation.getCurrentPosition(function(position) {
+            $("#latLon").html("geolocation readable");
+            
             lat = position.coords.latitude; 
             lon = position.coords.longitude;
             
@@ -52,6 +55,7 @@ if (window.location.hash !== "") {
 
 function getPlaceName(){
     $.getJSON("https://locationiq.org/v1/reverse.php?format=json&key=d9468055045db628123d&lat="+lat+"&lon="+lon+"&zoom=16", function(data) {
+        console.log(data);
         placeName = data.display_name;
         
         //display geographic name
