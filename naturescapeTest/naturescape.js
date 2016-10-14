@@ -20,7 +20,7 @@ if (window.location.hash !== "") {
     searchALA();
 } else {
     //else use geolocation
-    /*if ("geolocation" in navigator) {
+    if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(function(position) {
             lat = position.coords.latitude; 
             lon = position.coords.longitude;
@@ -32,7 +32,7 @@ if (window.location.hash !== "") {
             getPlaceName();
             searchALA();
         });
-    } else {*/
+    } else {
         //else us ip-api
         $.getJSON("http://ip-api.com/json", function(data) {
             lat = data.lat;
@@ -46,12 +46,13 @@ if (window.location.hash !== "") {
             searchALA();
         });
     };
+};
 
 
 
 function getPlaceName(){
-    $.getJSON("http://api.geonames.org/findNearbyJSON?lat=" +lat+ "&lng=" +lon+ "&username=kilby", function(data) {
-        placeName = data.geonames[0].name;
+    $.getJSON("http://locationiq.org/v1/reverse.php?format=json&key=d9468055045db628123d&lat="+lat+"&lon="+lon+"&zoom=16", function(data) {
+        placeName = data.display_name;
         
         //display geographic name
         $("#location").html(placeName);
