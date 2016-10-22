@@ -93,7 +93,63 @@ a:hover {color: #fcec33;}
 }
 
 
+#page {
+    margin-left: 17rem;
+    height: 100vh;
+    position: relative;
+}
+#genBtn {
+    opacity: 0.4;
+    transition: opacity 0.2s, bottom 0.2s;
+    width: 15em;
+    display: block;
+    position: absolute;
+    bottom: 1em;
+    left: calc(50% - 7.5em);
+    background-color: #233539;
+    border-radius: 1em;
+    text-align: center;
+    padding: .2em;
+    color: #fcec33;
+    
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#genBtn p + p {
+    font-size: 0.8em;
+    color: #fff;
+}
+#genBtn:hover {
+    opacity: 1;
+    cursor: pointer;
+    bottom: 1.1em;
+    box-shadow: 0 3px 5px #aaa;
+}
+#svgCont {
+    height: 100vh;
+    position: relative;
+    background-color: #eee;
+}
+#svgCont svg {
+    background-color: #fff;
+    max-width: 100vh;
+    max-height: 100vh;
+    display: block;
+    margin: 0 auto;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
 
+.fillture {
+    fill: #000;
+}
+.fillfalse {
+    fill: none;
+    stroke: #000;
+}
 
 
 
