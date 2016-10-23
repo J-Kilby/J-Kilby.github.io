@@ -1,3 +1,15 @@
+#svgCont {
+    background-color: #fff;
+}
+.filltrue {
+    fill: #233539;
+}
+.fillfalse {
+    fill: none;
+    stroke: #233539;
+}
+
+
 /*--------------------------------*\
   Sanitize.css 
   cdnjs.com/libraries/sanitize.css/
@@ -36,6 +48,11 @@ body {
     font-weight: 300;
 }
 
+
+
+/*-------------*\
+  ControlPannel    
+\*-------------*/
 #controlPannel {
     position: fixed;
     top: 0;
@@ -48,6 +65,7 @@ body {
     overflow-y: auto;
     border-right: 4px solid #fcec33;
     box-shadow: 2px 0 0 #233539;
+    z-index: 100;
 }
 #controlPannel img {
     width: 68%;
@@ -93,6 +111,102 @@ a:hover {color: #fcec33;}
 }
 
 
+
+/*Random*/
+#random {
+    text-align: center;
+    margin: 1em 0 2em 0;
+    padding: 1em 0;
+    border-bottom: 1px solid #aaa;
+    border-top: 1px solid #aaa;
+}
+#random p {
+    display: inline-block;
+}
+#rSlider {
+    display: inline-block;
+    width: 5em;
+    text-align: center;
+    position: relative;
+    background-color: #001920;
+    border-radius: 1em;
+    padding: 2px;
+    height: 1.3rem;
+    font-size: 0.8rem;
+    line-height: 1.4em;
+    transition: color 0.2s, background-color 0.4s;
+    
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+#rSlider:hover {
+    cursor: pointer;
+    background-color: #000000;
+    color: #bbc3c4;
+}
+#rSlider p {
+    width: 50%;
+}
+#rHandel {
+    height: 1.3em;
+    width: 45%;
+    border-radius: 1em;
+    background-color: #455a5f;
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: 0.2s;
+}
+#rHandel.handelOn {
+    left: 50%;
+    background-color: #fcec33;
+}
+
+
+
+/*Colours*/
+
+#colourSelect > div {
+    width: 30%;
+    height: 1.5em;
+    background-color: #001920;
+    margin: 2px;
+    padding: 2px;
+    border-radius: 1em;
+    display: inline-block;
+    transition: background-color 0.2s;
+}
+#colourSelect > div:hover {
+    background-color: #fcec33;
+    cursor: pointer;
+}
+#colourSelect p {
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 0.5em;
+}
+#colourSelect div + p {
+    font-size: 0.8em;
+    color: #aaa;
+    margin-top: 0.5rem;
+}
+.colBlock {
+    height: 100%;
+    width: 33.33%;
+    float: left;
+}
+.cB1 {border-radius: 1em 0 0 1em;}
+.cB3 {border-radius: 0 1em 1em 0;}
+
+
+
+/*----*\
+  Page    
+\*----*/
 #page {
     margin-left: 17rem;
     height: 100vh;
@@ -106,7 +220,7 @@ a:hover {color: #fcec33;}
     position: absolute;
     bottom: 1em;
     left: calc(50% - 7.5em);
-    background-color: #233539;
+    background-color: #001920;
     border-radius: 1em;
     text-align: center;
     padding: .2em;
@@ -125,15 +239,14 @@ a:hover {color: #fcec33;}
     opacity: 1;
     cursor: pointer;
     bottom: 1.1em;
-    box-shadow: 0 3px 5px #aaa;
+    box-shadow: 0 3px 5px rgba(0, 0, 0, 0.59);
 }
 #svgCont {
     height: 100vh;
     position: relative;
-    background-color: #eee;
 }
 #svgCont svg {
-    background-color: #fff;
+    overflow: visible;
     max-width: 100vh;
     max-height: 100vh;
     display: block;
@@ -141,14 +254,6 @@ a:hover {color: #fcec33;}
     position: relative;
     top: 50%;
     transform: translateY(-50%);
-}
-
-.fillture {
-    fill: #000;
-}
-.fillfalse {
-    fill: none;
-    stroke: #000;
 }
 
 
