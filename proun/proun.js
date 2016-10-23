@@ -1,4 +1,4 @@
-var hash, seed, colScheme = ["#fff", "#233539", "#233539"], random = false;
+var hash, seed, colScheme = ["fff", "233539", "233539"], random = false;
 
 seed = chance.word({syllables: 3});
 
@@ -18,9 +18,9 @@ if (window.location.hash !== "") {
     $("#arcs").val(hash[7]);
     $("#lines").val(hash[8]);
     
-    document.styleSheets[1].rules[0].style.backgroundColor = hash[9];
-    document.styleSheets[1].rules[1].style.fill = hash[10];
-    document.styleSheets[1].rules[2].style.stroke = hash[11];
+    document.styleSheets[1].rules[0].style.backgroundColor = "#" + hash[9];
+    document.styleSheets[1].rules[1].style.fill = "#" + hash[10];
+    document.styleSheets[1].rules[2].style.stroke = "#" + hash[11];
     
     colScheme = [hash[9], hash[10], hash[11]];
 };
@@ -107,9 +107,9 @@ $("#sliders > input").bind("input", function() {
 
 $("#colourSelect > div").click( function(){
     var scheme = this.dataset.colours.split(",");
-    document.styleSheets[1].rules[0].style.backgroundColor = scheme[0];
-    document.styleSheets[1].rules[1].style.fill = scheme[1];
-    document.styleSheets[1].rules[2].style.stroke = scheme[2];
+    document.styleSheets[1].rules[0].style.backgroundColor = "#" + scheme[0];
+    document.styleSheets[1].rules[1].style.fill = "#" + scheme[1];
+    document.styleSheets[1].rules[2].style.stroke = "#" + scheme[2];
     
     colScheme = [scheme[0], scheme[1], scheme[2]];
     
