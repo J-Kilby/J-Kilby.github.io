@@ -1,0 +1,402 @@
+@charset "UTF-8";
+/* CSS Document */
+
+body {background-color: #162c36;}
+
+/****************HEADER****************/
+.headerwrapper {
+    max-height: 343px;
+    overflow: hidden;
+    background-image:url(https://s14.postimg.org/4vdhl0k3l/main.jpg);
+    background-size: cover;
+    background-position: center;
+    border-bottom: 5px soild #fff;
+}
+
+
+
+.navicons > i { /*for the menu bar - not a link but is javascript*/
+    padding-top:8px;
+}
+
+#searchicon {
+    float: right;
+    padding-right: 1.5em;
+    cursor: pointer;
+    color: white;
+    margin-top: 0.9em; /*level with the menu*/
+}
+
+#homeicon {
+    text-align: center;
+}
+#homeicon a {
+    display: inline-block;
+    margin-left: 80px;
+}
+#homeicon img {
+    width: 80px;
+    padding-top: 1em;
+}
+
+#menuicon {
+    float: left;
+    padding-left: 1.5em;
+    margin-top: -2.3em;
+    color: #fff;
+    cursor: pointer;
+}
+
+#menuicon::before {transition: color 0.5s}
+.selectedIcon::before {
+    color: #79e1bc;
+}
+
+
+
+.nav > li {
+    display:none;
+}
+
+
+
+
+
+
+
+
+.hamburgermenu {
+	padding-top:4em;
+	background-color:#00a773; /*green*/
+	/*height:95vh;*/ 
+}
+
+.nav > li {
+	display:none;
+	clear:both;
+	width:100%;
+	text-align:center;
+	font-family: 'Lato', sans-serif;
+	font-weight:300;
+	text-transform:uppercase;
+	line-height:5em;
+}
+
+.nav > li a {
+	color:white;
+	text-decoration:none;
+}
+
+
+
+
+
+
+
+
+
+
+/****************INDEX PAGE****************/
+
+.location {
+    /*background-color:red;*/
+    height:2em;
+    width:100%;
+    text-align:center;
+    color:white;
+    font-family: 'Lato', sans-serif;
+    font-weight:300;
+    text-transform:uppercase;
+    padding-top:0.5em;
+}
+
+.distance {
+    border-radius: 10px;
+    background-color: white;
+    color:#5c808f; /*naturescape blue branding*/
+    padding: 20px; 
+    width: 150px;
+    text-align:center;
+    margin:0 auto;
+    font-family: 'Lato', sans-serif;
+    font-weight:300;
+    margin-top:0.3em;
+}
+
+.homewrapper {
+    /*background-color:pink;*/
+    height:7.5em;
+    width:100%;
+}
+
+.species {
+    background-color: orange;
+    height:auto;
+    width:100%;
+}
+
+.leftimg {
+    float: left;
+    /*margin-right: 50%;*/
+}
+
+.rightimg {
+    float: right;
+    /*margin-left: 50%;*/
+}
+
+.rightimg, .leftimg {
+    width: 50%;
+}
+
+.backtotop {
+    background-color:#8ca8b4; /*lighter naturescape blue*/
+    text-align:center;
+    clear: both;
+}
+
+#up-icon {
+    color:white;
+}
+
+
+
+
+
+
+
+
+
+
+/****************SPECIES****************/
+.specieswrapper > h1{
+	text-align:center;
+	font-family: 'Lato', sans-serif;
+	background-color:#5c808f; /*naturescape blue branding*/
+	height:2em;
+	color:white;
+	font-weight:300;
+	font-size:2em;
+	padding-top:1em;
+}
+
+#speciesimage {
+	width:100%;
+}
+
+.specieswrapper > h2 {
+	text-align:left;
+	font-family: 'Lato', sans-serif;
+	background-color:#5c808f; /*naturescape blue branding*/
+	height:2em;
+	color:white;
+	font-weight:300;
+	font-size:1.5em;
+	padding-top:1em;
+	padding-left:1.5em;
+	text-transform:uppercase;
+}
+
+#content {
+	background-color:#d1d6da; /*lightblue*/
+	text-align:left;
+	font-family: 'Lato', sans-serif;
+	color:#313131; /*off-black*/
+	font-weight:300;
+	font-size:1em;
+	padding:2em;
+	line-height:1.5em;
+}
+
+#map {
+	width:100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+/****************LANDING PAGE****************/
+
+#backgroundlanding {
+	background-image:url(https://s18.postimg.org/6iwa8aw6x/landing.jpg);
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+
+.landingpagewrapper {
+	/*background-color:red;*/
+	height:100vh;
+	width:70%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+#logo {
+	width:100%;
+}
+
+#icon {
+	width:20%;
+	margin-top:50%;
+	margin-bottom:1em;
+}
+
+.landingpagewrapper > p {
+	text-transform:  uppercase;
+	color: #fff;
+	font-family: 'Lato', sans-serif;
+	font-weight: 300;
+	text-align: center;
+	font-size: 0.9em;
+	padding-top: 3em;
+	padding-bottom: 0.5em;
+}
+
+#loading {
+	width:5%;
+}
+
+
+
+/****************ABOUT PAGE****************/
+
+
+.aboutwrapper {
+	background-color:#d1d6da; /*light blue*/
+}
+
+.aboutwrapper > h1 {
+	text-align:center;
+	font-family: 'Lato', sans-serif;
+	background-color:#5c808f; /*naturescape blue branding*/
+	height:2em;
+	color:white;
+	font-weight:300;
+	font-size:2em;
+	padding-top:1em;
+}
+
+
+.aboutwrapper > p {
+	padding: 2em;
+	line-height:1.5em;	
+	text-align:left;
+    font-family: 'Lato', sans-serif;
+	color:#313131; /*off-black*/
+	font-weight:300;
+}
+
+.aboutwrapper > img {
+	width:100vw;
+
+}
+
+
+
+
+
+
+
+
+/****************CONTACT PAGE****************/
+
+.contactwrapper > i {
+	color:#ffffff;
+    padding-top: 1em
+
+}
+
+.contactwrapper {
+	background-color:#d1d6da; /*light blue*/
+    text-align: center;
+}
+
+.contactwrapper > h1 {
+    text-align:center;
+	font-family: 'Lato', sans-serif;
+	background-color:#5c808f; /*naturescape blue branding*/
+	height:2em;
+	color:white;
+	font-weight:300;
+	font-size:2em;
+	padding-top:1em;
+}
+
+.contactheader {
+	padding-top: 0.25em;
+	line-height:1.5em;	
+	text-align: center;
+    font-family: 'Lato', sans-serif;
+	color:#313131; /*off-black*/
+	font-weight:300;
+}
+
+a {
+	color:white;
+	text-decoration:none;
+}
+
+.contactsub {
+    	padding-top: 0.25em;
+	line-height:1.5em;	
+	text-align: center;
+    font-family: 'Lato', sans-serif;
+	color:#313131; /*off-black*/
+	font-weight:300;
+}
+
+.space {
+	height:2.5em;
+}
+
+
+
+/****************FOOTER****************/
+
+#footer {
+	background-color:#5c808f; /*naturescape blue branding*/
+	width:100%;
+}
+
+.footertext {
+	width:85%;
+	height:auto;
+	margin:0 auto;
+	text-align:center;
+	font-family: 'Lato', sans-serif;
+	font-weight:300;
+	height:3em;
+}
+
+#creators {
+	color:white;
+	padding-top:3em;
+    padding-bottom: 0.75em;
+}
+
+#creativecommons {
+	color:#8ca8b4; /*lighter naturescape blue*/
+	margin-top:-1.5em;
+}
+
+a:visited { 
+    color:#8ca8b4; /*lighter naturescape blue*/
+	text-decoration:none;
+}
+
+a:hover, a:visited, a:link, a:active
+{
+    text-decoration: none;
+}

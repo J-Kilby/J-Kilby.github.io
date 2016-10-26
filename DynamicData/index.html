@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    
+    <title>NatureScape</title>
+    
+		<!--CSS-->
+    <link type="text/css" rel="stylesheet" href="css/reset.css" />  
+    <link type="text/css" rel="stylesheet" href="css/naturescape.css" /> 
+ 
+  	<!--FAVICON-->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    
+    <!--FONT AWESOME ICONS-->
+		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
+  
+    <!--GOOGLE FONTS-->    
+		<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+
+</head>
+	
+<body>
+<div class="headerwrapper">
+	<!--NAV BAR-->
+    <div class="navicons">   
+        <i id="searchicon" class="fa fa-search fa-2x" aria-hidden="true"></i> <!--search icon-->
+        <div id="homeicon">
+            <a href="index.html"><img src="images/homeicon.png"></a>
+        </div> 
+        <i id="menuicon" class="fa fa-bars fa-2x" aria-hidden="true"></i> <!--hamburger icon-->
+    </div>
+    
+    
+    
+    <div class="menuhide">
+				<div class="hamburger">
+						<ul class="nav">
+								<li><a href="about.html" >About</a></li>
+								<li><a href="favourites.html" >Favourites</a></li>
+								<li><a href="contact.html" >Contact Us</a></li>
+						</ul>
+				</div>
+    </div>
+    
+    <!-- CONTENT-->
+    <!-- LOADER -->
+    <div id="loaderwrapper">
+        <div class="loadersection"> </div>
+    </div>
+    
+    
+    <!-- PAGEWRAPPER -->
+    <div class="pagewrapper">
+    <!-- HOMEWRAPPER -->
+				<div class="homewrapper">
+
+				<!-- Location information (title) -->
+				<div class="location" >
+						<p class="locationaddress">University of Canberra, Bruce ACT 2617</p>
+				</div>
+
+				 <div class="distance">
+						<p>5km radius</p>
+				 </div>
+
+				</div> <!--closes homewrapper div-->  
+    </div> <!--closes pagewrapper-->
+</div> <!--closes headerwrapper-->
+    
+    
+    <div class="species" id="speciesphotos">
+        <!--<a class="linker">
+        <img class="leftimg" src="images/animal.jpg" alt="animal">
+        </a>-->
+    </div>
+    
+    
+    
+    <div class="backtotop">
+         <a class="smoothScroll" href="#speciesphotos"><i id="up-icon" class="fa fa-chevron-up fa-4x" aria-hidden="true"></i></a>   
+    </div> 
+    
+    
+    
+    
+    <div id="footer">  
+        <p class="footertext" id="creators">Creators: Jack Kilby, Taylor Peet 
+         and Madeleine Nazor</p>
+        
+        <p class="footertext" id="creativecommons"><a href="https://creativecommons.org/licenses/by/3.0/au/" target="_blank">Created under Atlas of Living Australia 
+           Creative Commons Attribution 3.0 License</a></p>
+        
+    </div>
+
+	<!--JAVASCRIPT-->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="js/HamburgerMenu.js"></script>
+    <script src="js/SmoothScrolling.js"></script>
+    <script src="js/naturescape.js"></script>
+
+</body>
+</html>

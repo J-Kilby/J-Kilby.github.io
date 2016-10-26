@@ -223,6 +223,9 @@ function linGen(graph, spr, den, fil, thk){
          .attr("stroke-width", thk + "px");
 }
 
+//drag funtion
+
+
 
 
 
