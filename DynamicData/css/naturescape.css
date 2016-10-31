@@ -134,23 +134,23 @@ body {
 }
 
 .species {
-    background-color: orange;
     height:auto;
     width:100%;
 }
 
-.leftimg {
-    float: left;
-    /*margin-right: 50%;*/
+.species img {
+    display: block;
+    width: 100%;
 }
 
-.rightimg {
-    float: right;
-    /*margin-left: 50%;*/
-}
+.c2 {width: 50%;}
+.c3 {width: 33.33%;}
+.c4 {width: 25%;}
 
-.rightimg, .leftimg {
-    width: 50%;
+.column {float: left;}
+
+.species a {
+    cursor: pointer;
 }
 
 .backtotop {
@@ -177,11 +177,17 @@ body {
   position: fixed;
   display: block;
   height: 100vh;
+  width: 100%;
   top: 0;
   overflow-y: scroll;
   z-index: 100;
 }
-
+.specieswrapper span {
+    max-width: 520px;
+    margin: 0 auto;
+    display: block;
+    box-sizing: border-box;
+}
 .specieswrapper > h1 {
 	text-align: center;
 	font-family: 'Lato', sans-serif;
@@ -194,21 +200,21 @@ body {
 	padding-top: 1em;
 }
 
-#speciesimage {
+.specieswrapper img {
 	margin: 0 auto;
+  max-width: 100%;
   display: block;
 }
 
 .specieswrapper > h2 {
-	text-align:left;
+	text-align: left;
 	font-family: 'Lato', sans-serif;
 	background-color:#5c808f; /*naturescape blue branding*/
-	height:2em;
-	color:white;
-	font-weight:300;
-	font-size:1.5em;
-	padding-top:1em;
-	padding-left:1.5em;
+	height: 2em;
+	color: white;
+	font-weight: 300;
+	font-size: 1.5em;
+	padding: 1em 2rem 0 2rem;
 	text-transform:uppercase;
 }
 
@@ -220,7 +226,7 @@ body {
 	font-weight: 300;
   text-shadow: 0.01em 0.01em 0 #313131;
 	font-size: 1em;
-	padding: 2em;
+	padding: 2rem;
 	line-height: 1.5em;
 }
 
@@ -234,6 +240,11 @@ body {
     line-height: 4em;
     height: 100%;
     z-index: 200;
+    cursor: pointer;
+}
+
+.closeBtnBottom {
+    background-color: #5c808f;
 }
 
 

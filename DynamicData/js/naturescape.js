@@ -91,9 +91,6 @@ function getPlaceName(){
         console.log("GOT IT FROM LOCAL STORAGE");
         $("#loadingMessage").html("Remembering Life Near You");
         animals = JSON.parse(localStorage.getItem('animals'));
-
-        //place ala data into page
-        placeImages();
     }
 
 //get nearby nature from the ALA
@@ -181,55 +178,75 @@ function addCap(string) {
 
 function placeImages(){
     var skippedAnimals = 0;
+    var columns;
+    
+    if ($(window).width() < 640){
+        columns = 2;
+        $("#speciesphotos").append("<div class=\"column c2 c21\"></div><div class=\"column c2 c22\"></div>");
+    } else if ($(window).width() < 1000){
+        columns = 3;
+        $("#speciesphotos").append("<div class=\"column c3 c31\"></div><div class=\"column c3 c32\"></div><div class=\"column c3 c33\"></div>");
+    } else {
+        columns = 4;
+        $("#speciesphotos").append("<div class=\"column c4 c41\"></div><div class=\"column c4 c42\"></div><div class=\"column c4 c43\"></div><div class=\"column c4 c44\"></div>");
+    };
+    
     for (i=0; i+1 < animals.images.length; i++) {
         
-        var factor = (i-skippedAnimals)%2,
-            side;
-        
-        if (factor == 0){side = "right"} else {side = "left"}
+        var factor = (i-skippedAnimals)%columns;
+        var side;
         
         if (animals[animals.animalList[i]].image != "no image" && animals[animals.animalList[i]].image != undefined){
-            $("#speciesphotos").append("<a class=\"linker\" data-animal=\"" +animals.animalList[i]+ "\"><img class=\"" + side + "img\" src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
+            $(".c" + columns + (factor+1)).append("<a class=\"linker\" data-animal=\"" +animals.animalList[i]+ "\"><img img\" src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
         } else {skippedAnimals += 1;}
     };
     
     localStorage.setItem('animals', JSON.stringify(animals));
     
-    $("#speciesphotos > *").click( function(){
+    $(".column > *").click( function(){
         openSpeciesPage(this.dataset.animal);
     })
 };
 
 function openSpeciesPage(animal){
+    
     var speciesImage = document.getElementById("speciesimage");
     speciesImage.alt = animal;
     speciesImage.src = animals[animal].image;
+    
+    var speciesMap = document.getElementById("map");
+    speciesMap.alt = animal;
+    speciesMap.src = "http://biocache.ala.org.au/ws/density/map?q=" + animal;
+    
     $("#name").html(animals[animal].commonName);
     var description;
     
+    $("#content span").html("Loading Desciption");
     $.ajax({
-            url: "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles="+animal,
-            type: 'GET',
-            crossDomain: true,
-            dataType: 'jsonp',
-            success: function(data) {
-                var pageID;
-                for (var key in data.query.pages) {
-                    pageID = key;
-                }
-                if (data.query == undefined){
-                    $("#content").html("Error loading Desciption");
-                    return
-                }
-                if (data.query.pages[pageID].extract != undefined) {
-                    $("#content").html(data.query.pages[pageID].extract);
-                } else {
-                    $("#description").html("Error loading Desciption");
-                }
-            },
-            error: function() {console.log("wikiExtract error!")}
-        });
+        url: "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles="+animal,
+        type: 'GET',
+        crossDomain: true,
+        dataType: 'jsonp',
+        success: function(data) {
+            var pageID;
+            for (var key in data.query.pages) {
+                pageID = key;
+            }
+            if (data.query == undefined){
+                $("#content span").html("Error loading Desciption");
+                return
+            }
+            if (data.query.pages[pageID].extract != undefined) {
+                $("#content span").html(data.query.pages[pageID].extract);
+            } else {
+                $("#content span").html("Error loading Desciption");
+            }
+        },
+        error: function() {console.log("wikiExtract error!")}
+    });
+
     $("#speciesPage").fadeIn();
+    $("#speciesPage").scrollTop(0);
 }
 
 $(".closeBtn").click(function(){
