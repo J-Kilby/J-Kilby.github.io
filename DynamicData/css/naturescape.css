@@ -1,7 +1,12 @@
 @charset "UTF-8";
 /* CSS Document */
 
-body {background-color: #162c36;}
+body {
+    background-color: #162c36;
+    font-family: 'lato', sans-serif;
+}
+.pagewrapper {background-color: #162c36;}
+.headerwrapper .pagewrapper {background: none;}
 
 /****************HEADER****************/
 .headerwrapper {
@@ -10,7 +15,6 @@ body {background-color: #162c36;}
     background-image:url(https://s14.postimg.org/4vdhl0k3l/main.jpg);
     background-size: cover;
     background-position: center;
-    border-bottom: 5px soild #fff;
 }
 
 
@@ -169,19 +173,30 @@ body {background-color: #162c36;}
 
 
 /****************SPECIES****************/
-.specieswrapper > h1{
-	text-align:center;
+#speciesPage {
+  position: fixed;
+  display: block;
+  height: 100vh;
+  top: 0;
+  overflow-y: scroll;
+  z-index: 100;
+}
+
+.specieswrapper > h1 {
+	text-align: center;
 	font-family: 'Lato', sans-serif;
-	background-color:#5c808f; /*naturescape blue branding*/
-	height:2em;
-	color:white;
-	font-weight:300;
-	font-size:2em;
-	padding-top:1em;
+	background-color: #5c808f; /*naturescape blue branding*/
+  text-transform: capitalize;
+	height: 2em;
+	color: #fff;
+	font-weight: 300;
+	font-size: 2em;
+	padding-top: 1em;
 }
 
 #speciesimage {
-	width:100%;
+	margin: 0 auto;
+  display: block;
 }
 
 .specieswrapper > h2 {
@@ -199,17 +214,26 @@ body {background-color: #162c36;}
 
 #content {
 	background-color:#d1d6da; /*lightblue*/
-	text-align:left;
+	text-align: left;
 	font-family: 'Lato', sans-serif;
-	color:#313131; /*off-black*/
-	font-weight:300;
-	font-size:1em;
-	padding:2em;
-	line-height:1.5em;
+	color: #313131; /*off-black*/
+	font-weight: 300;
+  text-shadow: 0.01em 0.01em 0 #313131;
+	font-size: 1em;
+	padding: 2em;
+	line-height: 1.5em;
 }
 
 #map {
 	width:100%;
+}
+
+.closeBtn {
+    text-align: center;
+    color: #fff;
+    line-height: 4em;
+    height: 100%;
+    z-index: 200;
 }
 
 
@@ -227,18 +251,24 @@ body {background-color: #162c36;}
 /****************LANDING PAGE****************/
 
 #backgroundlanding {
-	background-image:url(https://s18.postimg.org/6iwa8aw6x/landing.jpg);
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
+    position: fixed;
+    width: 100%;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background-color: #5c808f;
+    background-image:
+        url(https://s18.postimg.org/6iwa8aw6x/landing.jpg);
+    background-size: cover;
+    background-position: center;
 }
 
 
 .landingpagewrapper {
 	/*background-color:red;*/
 	height:100vh;
-	width:70%;
+	max-width: 300px;
+  padding: 10px;
 	margin: 0 auto;
 	text-align: center;
 }
@@ -265,7 +295,22 @@ body {background-color: #162c36;}
 }
 
 #loading {
-	width:5%;
+  width: 10%;
+  margin-top: 1em;
+  padding-bottom: 1em;
+  animation-name: rotate; 
+  animation-duration: 2s; 
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transform-origin: bottom;
+}
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to { 
+    transform: rotate(360deg);
+  }
 }
 
 
@@ -314,17 +359,17 @@ body {background-color: #162c36;}
 
 .contactwrapper > i {
 	color:#ffffff;
-    padding-top: 1em
+  padding-top: 1em;
 
 }
 
 .contactwrapper {
 	background-color:#d1d6da; /*light blue*/
-    text-align: center;
+  text-align: center;
 }
 
 .contactwrapper > h1 {
-    text-align:center;
+  text-align:center;
 	font-family: 'Lato', sans-serif;
 	background-color:#5c808f; /*naturescape blue branding*/
 	height:2em;
@@ -371,19 +416,19 @@ a {
 }
 
 .footertext {
-	width:85%;
-	height:auto;
-	margin:0 auto;
-	text-align:center;
+	width: 85%;
+	height: auto;
+	margin: 0 auto;
+	text-align: center;
 	font-family: 'Lato', sans-serif;
-	font-weight:300;
-	height:3em;
+	font-weight: 300;
+	height: 3em;
 }
 
 #creators {
-	color:white;
-	padding-top:3em;
-    padding-bottom: 0.75em;
+  color:white;
+  padding-top:3em;
+  padding-bottom: 0.75em;
 }
 
 #creativecommons {
@@ -392,7 +437,7 @@ a {
 }
 
 a:visited { 
-    color:#8ca8b4; /*lighter naturescape blue*/
+  color:#8ca8b4; /*lighter naturescape blue*/
 	text-decoration:none;
 }
 
