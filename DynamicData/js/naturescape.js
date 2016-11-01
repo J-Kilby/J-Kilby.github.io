@@ -311,7 +311,7 @@ function openSpeciesPage(animal){
     
     var speciesMap = document.getElementById("map");
     speciesMap.alt = animal;
-    speciesMap.src = "http://biocache.ala.org.au/ws/density/map?q=" + animal;
+    speciesMap.src = "https://biocache.ala.org.au/ws/density/map?q=" + animal;
     
     $("#name").html(animals[animal].commonName);
     var description;
