@@ -1,5 +1,7 @@
 add extra info to species page
 
+vertically center loading page
+
 fix geolocation on non-GPS ios
 
 ++++++++++++++++++++

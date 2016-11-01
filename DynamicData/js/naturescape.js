@@ -1,5 +1,5 @@
 //initialising global variables
-var lat, lon, placeName, alaResult, animals, blank;
+var lat, lon, placeName, alaResult, animals, marker;
 
 
 
@@ -311,6 +311,47 @@ function placeImages(){
     })
 };
 
+$("#searchicon").click(function(){
+    openMapPage();
+});
+$("#closeMap").click(function(){
+    openMapPage();
+});
+
+function openMapPage(){
+    if (marker == undefined) {
+        L.mapbox.accessToken = 'pk.eyJ1Ijoia2lsYnkiLCJhIjoiY2l1eW1pOTV6MDRrMzJ5bDF5dmpnYWUwbiJ9.RfbH9hH2rX1gSWeu4APF7w';
+
+        var map = L.mapbox.map('mapPopup', 'mapbox.outdoors')
+            .setView([lat, lon], 15);
+        marker = L.marker(new L.LatLng(lat, lon), {
+            icon: L.mapbox.marker.icon({
+                'marker-color': '8ca8b4'
+            }),
+            draggable: true
+        });
+        marker.addTo(map);
+    };
+    
+    if ( $("#mapPage").css("marginTop") === "-" + $(window).height() + "px"){
+        $("#mapPage").animate({marginTop: 0}, 500, function(){});
+    } else {
+        $("#mapPage").animate({marginTop: "-100vh"}, 500, function(){});
+    };
+    
+    $("#useMarker").fadeToggle(500);
+    $("#search").fadeToggle(500);
+}
+
+$("#useMarker").click( function(){
+    window.location.hash = "#" + marker.getLatLng().lat + "," + marker.getLatLng().lng
+    window.location.reload(false);
+});
+$("#search").click( function(){
+    window.location.hash = ""
+    window.location.reload(false);
+});
+
 function openSpeciesPage(animal){
     
     var speciesImage = document.getElementById("speciesimage");
@@ -399,6 +440,12 @@ function filterAnimals(){
             $(".linker").css("display", "none");
             $("a[data-class='chondrichthyes']").css("display", "block");
             $("a[data-class='actinopterygii']").css("display", "block");
+            break;
+        case "invertebrate":
+            $(".linker").css("display", "none");
+            $("a[data-class='insecta']").css("display", "block");
+            $("a[data-class='malacostraca']").css("display", "block");
+            $("a[data-class='gastropoda']").css("display", "block");
             break;
         default: 
             $(".linker").css("display", "block");

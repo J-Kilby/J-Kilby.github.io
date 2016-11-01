@@ -21,6 +21,10 @@
     <!--GOOGLE FONTS-->    
 		<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
     
+    <!--MAPBOX-->
+    <script src='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js'></script>
+    <link href='https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css' rel='stylesheet' />
+    
 </head>
 	
 <body>
@@ -34,6 +38,13 @@
         <p id="loadingMessage">Loading</p>
         <img id="loading" src="images/loading.png" alt="loading">
     </div>
+</div>
+    
+<div id="mapPage" class="pagewrapper" style="margin-top: -100vh;">
+    <div class="mapBtn" id="closeMap">Close Map</div>
+    <div class="mapBtn mapBtnBtm" id="useMarker" style="display: none;">Find Life Here</div>
+    <div class="mapBtn mapBtnBtm" id="search" style="display: none;">Use My Location</div>
+    <div id="mapPopup"></div>
 </div>
     
 <div class="headerwrapper">
@@ -85,6 +96,7 @@
                 <option value="reptiles">Reptiles</option>
                 <option value="amphibians">Amphibians</option>
                 <option value="fish">Fish</option>
+                <option value="invertebrate">Invertebrate</option>
             </select>
             <div class="distance">
                 <p>5km radius</p>
@@ -140,15 +152,11 @@
     </div> <!--closes specieswrapper div--> 
 </div> <!--closes pagewrapper div-->
     
-    
-    <div id="footer">  
-        <p class="footertext" id="creators">Creators: Jack Kilby, Taylor Peet 
-         and Madeleine Nazor</p>
+<div id="footer">  
+    <p class="footertext" id="creators">Creators: Jack Kilby, Taylor Peet and Madeleine Nazor</p>
         
-        <p class="footertext" id="creativecommons"><a href="https://creativecommons.org/licenses/by/3.0/au/" target="_blank">Created under Atlas of Living Australia 
-           Creative Commons Attribution 3.0 License</a></p>
-        
-    </div>
+    <p class="footertext" id="creativecommons"><a href="https://creativecommons.org/licenses/by/3.0/au/" target="_blank">Created under Atlas of Living Australia Creative Commons Attribution 3.0 License</a></p>
+</div>
 
 	<!--JAVASCRIPT-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>

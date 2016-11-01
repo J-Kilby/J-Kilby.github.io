@@ -255,7 +255,7 @@ body {
     color: #fff;
     line-height: 4em;
     height: 100%;
-    z-index: 200;
+    z-index: 110;
     cursor: pointer;
 }
 
@@ -269,9 +269,36 @@ body {
 
 
 
-
-
-
+/******************MAP PAGE******************/
+#mapPopup {
+    display: block;
+    height: 100vh;
+    position: relative;
+};
+#map {
+    height: calc(100vh - 99px);
+}
+.mapBtn {
+    position: absolute;
+    z-index: 200;
+    padding: 0.5em 1em;
+    margin: 0.6em;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #656464;
+    box-shadow: 1px 1px 5px #717171;
+    cursor: pointer;
+}
+#closeMap {
+    right: 0;
+}
+.mapBtnBtm {
+    bottom: 2.3em;
+    right: 0;
+}
+#useMarker {
+    right: 10em;
+}
 
 
 
