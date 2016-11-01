@@ -13,11 +13,10 @@ if (window.location.hash !== "") {
     var hash;
     
     //retrive lat lon from hash
-    hash = window.location.hash.substr(1).split(",")
+    hash = window.location.hash.substr(1).replace(/ /g,"").split(",")
     
     lat = hash[0];
     lon = hash[1];
-    
     //get data
     getPlaceName();
     
@@ -129,15 +128,28 @@ function processData(){
             sciName = record.scientificName.toLowerCase();
         } else {continue};
         
+        if (record.classs != undefined){
+            var className = record.classs.toLowerCase();
+        } else if (record.scientificName != undefined){
+            className = "unknown";
+        } else {continue};
+        
+        if (record.kingdom != undefined){
+            var kingdomName = record.kingdom.toLowerCase();
+        } else if (record.scientificName != undefined){
+            kingdomName = "unknown";
+        } else {continue};
+        
         if (animals[reName] == undefined) {
             animals[reName] = {
                 commonName: reName.replace(/_/g," "),
                 scientificName: sciName,
-                kingdom: record.kingdom,
-                class: record.classs,
+                kingdom: kingdomName,
+                class: className,
                 years: [record.year],
                 source: record.dataResourceName
             };
+            
             animals.animalList.push(reName);
             animals.animalListSci.push(sciName.replace(/ /g,"_"));
         } else {animals[reName].years.push(record.year)};
@@ -261,10 +273,6 @@ function getImages() {
     }, 1000);
 };
 
-/*function addCap(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-};*/
-
 
 
 /*-------------------------------------*\
@@ -291,7 +299,7 @@ function placeImages(){
         var side;
         
         if (animals[animals.animalList[i]].image != "no image" && animals[animals.animalList[i]].image != undefined){
-            $(".c" + columns + (factor+1)).append("<a class=\"linker\" data-class=\"" + animals[animals.animalList[i]].class + "\" data-animal=\"" +animals.animalList[i]+ "\"><img img\" src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
+            $(".c" + columns + (factor+1)).append("<a class=\"linker\" data-kingdom=\"" + animals[animals.animalList[i]].kingdom + "\" data-class=\"" + animals[animals.animalList[i]].class + "\" data-animal=\"" +animals.animalList[i]+ "\"><img img\" src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
         } else {skippedAnimals += 1;}
     };
     
@@ -346,7 +354,57 @@ function openSpeciesPage(animal){
 
 $(".closeBtn").click(function(){
     $("#speciesPage").fadeOut();
-})
+});
+
+$("#filterSelect").on("change", function() {
+    console.log("change");
+    filterAnimals();
+});
+
+function filterAnimals(){
+    var filter = $("#filterSelect").val();
+    switch (filter) {
+        case "all":
+            $(".linker").css("display", "block");
+            break;
+        case "animals":
+            $(".linker").css("display", "none");
+            $("a[data-kingdom='animalia']").css("display", "block");
+            break;
+        case "plants":
+            $(".linker").css("display", "none");
+            $("a[data-kingdom='plantae']").css("display", "block");
+            break;
+        case "birds":
+            $(".linker").css("display", "none");
+            $("a[data-class='aves']").css("display", "block");
+            break;
+        case "mammals":
+            $(".linker").css("display", "none");
+            $("a[data-class='mammalia']").css("display", "block");
+            break;
+        case "mammals":
+            $(".linker").css("display", "none");
+            $("a[data-class='mammalia']").css("display", "block");
+            break;
+        case "reptiles":
+            $(".linker").css("display", "none");
+            $("a[data-class='reptilia']").css("display", "block");
+            break;
+        case "amphibians":
+            $(".linker").css("display", "none");
+            $("a[data-class='amphibia']").css("display", "block");
+            break;
+        case "fish":
+            $(".linker").css("display", "none");
+            $("a[data-class='chondrichthyes']").css("display", "block");
+            $("a[data-class='actinopterygii']").css("display", "block");
+            break;
+        default: 
+            $(".linker").css("display", "block");
+            break;
+    };
+};
 
 
 

@@ -125,6 +125,22 @@ body {
     font-family: 'Lato', sans-serif;
     font-weight:300;
     margin-top:0.3em;
+    display: none;
+}
+
+#filterSelect {
+    border-radius: 3px;
+    background-color: white;
+    color: #2b2f31; /*naturescape blue branding*/
+    padding: 0 20px; 
+    width: 150px;
+    display: block;
+    margin: 0 auto;
+    font-family: 'Lato', sans-serif;
+    font-weight:300;
+    font-size: 1em;
+    height: 3rem;
+    margin-top:0.5rem;
 }
 
 .homewrapper {

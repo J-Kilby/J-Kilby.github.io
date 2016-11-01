@@ -10,17 +10,17 @@
 		<!--CSS-->
     <link type="text/css" rel="stylesheet" href="css/reset.css" />  
     <link type="text/css" rel="stylesheet" href="css/naturescape.css" /> 
- 
+    
   	<!--FAVICON-->
     <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
     
     <!--FONT AWESOME ICONS-->
 		<link rel="stylesheet" href="font-awesome/css/font-awesome.min.css">
-  
+    
     <!--GOOGLE FONTS-->    
 		<link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
-
+    
 </head>
 	
 <body>
@@ -70,14 +70,25 @@
     <!-- HOMEWRAPPER -->
 				<div class="homewrapper">
 
-				<!-- Location information (title) -->
-				<div class="location" >
-						<p class="locationaddress">University of Canberra, Bruce ACT 2617</p>
-				</div>
+            <!-- Location information (title) -->
+            <div class="location" >
+                <p class="locationaddress">University of Canberra, Bruce ACT 2617</p>
+            </div>
 
-				 <div class="distance">
-						<p>5km radius</p>
-				 </div>
+            <select id="filterSelect" name="filterSelect">
+                <option value="all"><span>All</span></option>
+                <option value="animals"><span>Animals</span></option>
+                <option value="plants"><span>Plants</span></option>
+                
+                <option value="birds">Birds</option>
+                <option value="mammals">Mammals</option>
+                <option value="reptiles">Reptiles</option>
+                <option value="amphibians">Amphibians</option>
+                <option value="fish">Fish</option>
+            </select>
+            <div class="distance">
+                <p>5km radius</p>
+            </div>
 
 				</div> <!--closes homewrapper div-->  
     </div> <!--closes pagewrapper-->
