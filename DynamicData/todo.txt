@@ -1,9 +1,27 @@
-add filtering
-do something with radius and sample size
 add extra info to species page
+
+fix geolocation on non-GPS ios
+
+++++++++++++++++++++
 
 favourites?
 
-!!!!!!!!!!!!!!!!!
-!CHANGE LOCATION!
-!!!!!!!!!!!!!!!!!
+++++++++++++++++++++
+
+add filtering
+
+do something with radius and sample size
+
+CHANGE LOCATION
+
+Write Report
+
+Change Search Icon to A change location Icon
+
+Create placeholder images for various types of animal
+- bird
+- mammal
+- plant
+- reptile
+- amphibion
+Others?

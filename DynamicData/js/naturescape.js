@@ -96,7 +96,7 @@ function getPlaceName(){
 //get nearby nature from the ALA
 function searchALA(){
     $("#loadingMessage").html("Searching for Life Near You");
-    $.getJSON("https://biocache.ala.org.au/ws/occurrences/search?lat=" + lat + "&lon=" + lon + "&radius=1&facet=off&pageSize=200", function(data) {
+    $.getJSON("https://biocache.ala.org.au/ws/occurrences/search?lat=" + lat + "&lon=" + lon + "&radius=7&facet=off&pageSize=2000", function(data) {
         localStorage.setItem('lastALAlocation', lat.substring(0,6) + ":" + lon.substring(0,6));
         alaResult = data;
         
@@ -111,8 +111,10 @@ function processData(){
     console.log("PROCESSING DATA");
     animals = new Object();
     animals.animalList = [];
+    animals.animalListSci = [];
     
     for (i=0; i<alaResult.occurrences.length; i++){
+        
         var record = alaResult.occurrences[i];
         
         if (record.raw_vernacularName != undefined){
@@ -121,16 +123,23 @@ function processData(){
             reName = record.vernacularName.toLowerCase().replace(/ /g,"_");
         } else {continue};
         
+        if (record.raw_scientificNameName != undefined){
+            var sciName = record.raw_scientificNameName.toLowerCase();
+        } else if (record.scientificName != undefined){
+            sciName = record.scientificName.toLowerCase();
+        } else {continue};
+        
         if (animals[reName] == undefined) {
             animals[reName] = {
                 commonName: reName.replace(/_/g," "),
-                scientificName: record.raw_scientificName,
+                scientificName: sciName,
                 kingdom: record.kingdom,
                 class: record.classs,
                 years: [record.year],
                 source: record.dataResourceName
             };
             animals.animalList.push(reName);
+            animals.animalListSci.push(sciName.replace(/ /g,"_"));
         } else {animals[reName].years.push(record.year)};
     };
 }
@@ -138,10 +147,11 @@ function processData(){
 //find images for Animals from Wikipedia
 function getImages() {
     $("#loadingMessage").html("Finding Cute Animal Pictures");
-    var images = [];
+    var images = 0, imagesTwo = 0, imagesThree = 0;
+    
     for (i=0; i<animals.animalList.length; i++){
         $.ajax({
-            url: "https://en.wikipedia.org/w/api.php?action=query&titles="+ addCap(animals.animalList[i]) +"&prop=pageimages&format=json&pithumbsize=300",
+            url: "https://en.wikipedia.org/w/api.php?action=query&titles="+ animals.animalList[i] +"&prop=pageimages&format=json&pithumbsize=300",
             type: 'GET',
             crossDomain: true,
             dataType: 'jsonp',
@@ -152,23 +162,108 @@ function getImages() {
                 }
                 if (data.query == undefined){return}
                 if (data.query.pages[pageID].thumbnail != undefined) {
-                    images.push(data.query.pages[pageID].thumbnail.source);
-                    animals[data.query.normalized[0].from.toLowerCase()].image = data.query.pages[pageID].thumbnail.source;
+                    images += 1;
+                    animals[data.query.normalized[0].from].image = data.query.pages[pageID].thumbnail.source;
+                    animals[data.query.normalized[0].from].wikiName = data.query.normalized[0].from;
                 } else {
-                    images.push("no image");
-                    animals[data.query.normalized[0].from.toLowerCase()].image = "no image";
+                    images += 1;
+                    animals[data.query.normalized[0].from].image = "no image";
                 }
             },
             error: function() {console.log("wikiImg error!")}
         });
-    }
+    };
     
-    animals.images = images;
+    var x = setInterval(function () {
+        if (images == animals.animalList.length) {
+            clearInterval(x);
+            images = 0;
+            for (i=0; i<animals.animalList.length; i++){
+                if (animals[animals.animalList[i]].image == "no image") {
+                    $.ajax({
+                        url: "https://en.wikipedia.org/w/api.php?action=query&titles="+ animals.animalListSci[i] +"&prop=pageimages&format=json&pithumbsize=300",
+                        type: 'GET',
+                        crossDomain: true,
+                        dataType: 'jsonp',
+                        success: function(data) {
+                            var pageID;
+                            for (var key in data.query.pages) {
+                                pageID = key;
+                            }
+                            if (data.query == undefined){return}
+
+                            function sciName(element){
+                                return element == data.query.normalized[0].from;
+                            }
+
+                            if (data.query.pages[pageID].thumbnail != undefined) {
+                                imagesTwo += 1;
+                                animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].image = data.query.pages[pageID].thumbnail.source;
+                                animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].wikiName = data.query.normalized[0].from;
+                            } else {
+                                imagesTwo += 1;
+                                animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].image = "no image";
+                                animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].wikiName = "no wiki";
+                            }
+                        },
+                        error: function() {console.log("wikiImg error!")}
+                    });
+                } else {imagesTwo += 1;}
+            }
+        }
+    }, 1000);
+    
+    var y = setInterval(function () {
+        if (imagesTwo == animals.animalList.length) {
+            clearInterval(y);
+            images = 0;
+            for (i=0; i<animals.animalList.length; i++){
+                if (animals[animals.animalList[i]].image == "no image") {
+                    $.ajax({
+                        url: "https://en.wikipedia.org/w/api.php?action=query&titles="+ animals.animalListSci[i].split('_')[0] +"&prop=pageimages&format=json&pithumbsize=300",
+                        type: 'GET',
+                        crossDomain: true,
+                        dataType: 'jsonp',
+                        success: function(data) {
+                            var pageID;
+                            for (var key in data.query.pages) {
+                                pageID = key;
+                            }
+                            if (data.query == undefined){return}
+
+                            function sciName(element){
+                                return element.split('_')[0] == data.query.normalized[0].from;
+                            }
+
+                            if (data.query.pages[pageID].thumbnail != undefined) {
+                                imagesThree += 1;
+                                animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].image = data.query.pages[pageID].thumbnail.source;
+                                animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].wikiName = data.query.normalized[0].from;
+                            } else {
+                                imagesThree += 1;
+                                animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].image = "no image";
+                                animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].wikiName = "no wiki";
+                            }
+                        },
+                        error: function() {console.log("wikiImg error!")}
+                    });
+                } else {imagesThree += 1;}
+            }
+        }
+    }, 1000);
+    
+    var z = setInterval(function () {
+        if (imagesThree == animals.animalList.length) {
+            clearInterval(z);
+            console.log("FINISHED IMAGES");
+            animals.imagesLoaded = true;
+        }
+    }, 1000);
 };
 
-function addCap(string) {
+/*function addCap(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
-};
+};*/
 
 
 
@@ -190,18 +285,18 @@ function placeImages(){
         columns = 4;
         $("#speciesphotos").append("<div class=\"column c4 c41\"></div><div class=\"column c4 c42\"></div><div class=\"column c4 c43\"></div><div class=\"column c4 c44\"></div>");
     };
-    
-    for (i=0; i+1 < animals.images.length; i++) {
+    for (i=0; i < animals.animalList.length; i++) {
         
         var factor = (i-skippedAnimals)%columns;
         var side;
         
         if (animals[animals.animalList[i]].image != "no image" && animals[animals.animalList[i]].image != undefined){
-            $(".c" + columns + (factor+1)).append("<a class=\"linker\" data-animal=\"" +animals.animalList[i]+ "\"><img img\" src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
+            $(".c" + columns + (factor+1)).append("<a class=\"linker\" data-class=\"" + animals[animals.animalList[i]].class + "\" data-animal=\"" +animals.animalList[i]+ "\"><img img\" src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
         } else {skippedAnimals += 1;}
     };
     
     localStorage.setItem('animals', JSON.stringify(animals));
+    console.log(Math.round((skippedAnimals/animals.animalList.length)*100) + "% of life not shown");
     
     $(".column > *").click( function(){
         openSpeciesPage(this.dataset.animal);
@@ -223,7 +318,7 @@ function openSpeciesPage(animal){
     
     $("#content span").html("Loading Desciption");
     $.ajax({
-        url: "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles="+animal,
+        url: "https://en.wikipedia.org/w/api.php?format=json&action=query&prop=extracts&exintro=&explaintext=&titles="+animals[animal].wikiName,
         type: 'GET',
         crossDomain: true,
         dataType: 'jsonp',
@@ -263,12 +358,10 @@ $(window).load(function ()
 {
     var i = setInterval(function () {
         console.log("loading...");
-        if (animals.images != undefined) {
-            if (animals.images[animals.animalList.length-1] != undefined) {
-                clearInterval(i);
-                placeImages();
-                $("#backgroundlanding").fadeOut();
-            }
+        if (animals.imagesLoaded == true) {
+            clearInterval(i);
+            placeImages();
+             $("#backgroundlanding").fadeOut();
         }
     }, 1000);
 });
