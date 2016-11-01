@@ -96,7 +96,7 @@ function getPlaceName(){
 //get nearby nature from the ALA
 function searchALA(){
     $("#loadingMessage").html("Searching for Life Near You");
-    $.getJSON("https://biocache.ala.org.au/ws/occurrences/search?lat=" + lat + "&lon=" + lon + "&radius=7&facet=off&pageSize=2000", function(data) {
+    $.getJSON("https://biocache.ala.org.au/ws/occurrences/search?lat=" + lat + "&lon=" + lon + "&radius=1&facet=off&pageSize=2000", function(data) {
         localStorage.setItem('lastALAlocation', lat.substring(0,6) + ":" + lon.substring(0,6));
         alaResult = data;
         
