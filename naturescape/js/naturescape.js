@@ -159,7 +159,7 @@ function processData(){
 //find images for Animals from Wikipedia
 function getImages() {
     $("#loadingMessage").html("Finding Cute Animal Pictures");
-    var images = 0, imagesTwo = 0, imagesThree = 0;
+    var images = 0, imagesTwo = 0, imagesThree = 0, imagesFour = 0;
     
     for (i=0; i<animals.animalList.length; i++){
         $.ajax({
@@ -189,7 +189,7 @@ function getImages() {
     var x = setInterval(function () {
         if (images == animals.animalList.length) {
             clearInterval(x);
-            images = 0;
+            console.log("x");
             for (i=0; i<animals.animalList.length; i++){
                 if (animals[animals.animalList[i]].image == "no image") {
                     $.ajax({
@@ -228,7 +228,7 @@ function getImages() {
     var y = setInterval(function () {
         if (imagesTwo == animals.animalList.length) {
             clearInterval(y);
-            images = 0;
+            console.log("y");
             for (i=0; i<animals.animalList.length; i++){
                 if (animals[animals.animalList[i]].image == "no image") {
                     $.ajax({
@@ -264,8 +264,56 @@ function getImages() {
         }
     }, 1000);
     
-    var z = setInterval(function () {
+    var w = setInterval(function () {
         if (imagesThree == animals.animalList.length) {
+            clearInterval(w);
+            console.log("w");
+            for (i=0; i<animals.animalList.length; i++){
+                if (animals[animals.animalList[i]].image == "no image") {
+                    if (animals[animals.animalList[i]].kingdom == "plantae") {
+                        animals[animals.animalList[i]].image = "images/plant.jpg";
+                    } else {
+                        switch (animals[animals.animalList[i]].class) {
+                            case "aves":
+                                animals[animals.animalList[i]].image = "images/bird.jpg";
+                                break;
+                            case "mammalia":
+                                animals[animals.animalList[i]].image = "images/mammal.jpg";
+                                break;
+                            case "reptilia":
+                                animals[animals.animalList[i]].image = "images/reptile.jpg";
+                                break;
+                            case "amphibia":
+                                animals[animals.animalList[i]].image = "images/amphibian.jpg";
+                                break;
+                            case "chondrichthyes":
+                                animals[animals.animalList[i]].image = "images/fish.jpg";
+                                break;
+                            case "actinopterygii":
+                                animals[animals.animalList[i]].image = "images/fish.jpg";
+                                break;
+                            case "insecta":
+                                animals[animals.animalList[i]].image = "images/insect.jpg";
+                                break;
+                            case "malacostraca":
+                                animals[animals.animalList[i]].image = "images/insect.jpg";
+                                break;
+                            case "gastropoda":
+                                animals[animals.animalList[i]].image = "images/insect.jpg";
+                                break;
+                            default: 
+                                animals[animals.animalList[i]].image = "images/generic.jpg";
+                                break;
+                        };
+                    };
+                    imagesFour += 1;
+                } else {imagesFour += 1}
+            }
+        }
+    }, 1000);
+    
+    var z = setInterval(function () {
+        if (imagesFour == animals.animalList.length) {
             clearInterval(z);
             console.log("FINISHED IMAGES");
             animals.imagesLoaded = true;
@@ -293,12 +341,25 @@ function placeImages(){
         columns = 4;
         $("#speciesphotos").append("<div class=\"column c4 c41\"></div><div class=\"column c4 c42\"></div><div class=\"column c4 c43\"></div><div class=\"column c4 c44\"></div>");
     };
+    
     for (i=0; i < animals.animalList.length; i++) {
         
         var factor = (i-skippedAnimals)%columns;
         var side;
         
-        if (animals[animals.animalList[i]].image != "no image" && animals[animals.animalList[i]].image != undefined){
+        if (animals[animals.animalList[i]].image.charAt(0) == "h" && animals[animals.animalList[i]].image != undefined){
+            $(".c" + columns + (factor+1)).append("<a class=\"linker\" data-kingdom=\"" + animals[animals.animalList[i]].kingdom + "\" data-class=\"" + animals[animals.animalList[i]].class + "\" data-animal=\"" +animals.animalList[i]+ "\"><img img\" src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
+        } else {skippedAnimals += 1;}
+    };
+    
+    skippedAnimals = 0;
+    
+    for (i=0; i < animals.animalList.length; i++) {
+        
+        var factor = (i-skippedAnimals)%columns;
+        var side;
+        
+        if (animals[animals.animalList[i]].image.charAt(0) == "i" && animals[animals.animalList[i]].image != undefined){
             $(".c" + columns + (factor+1)).append("<a class=\"linker\" data-kingdom=\"" + animals[animals.animalList[i]].kingdom + "\" data-class=\"" + animals[animals.animalList[i]].class + "\" data-animal=\"" +animals.animalList[i]+ "\"><img img\" src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
         } else {skippedAnimals += 1;}
     };
@@ -419,10 +480,6 @@ function filterAnimals(){
         case "birds":
             $(".linker").css("display", "none");
             $("a[data-class='aves']").css("display", "block");
-            break;
-        case "mammals":
-            $(".linker").css("display", "none");
-            $("a[data-class='mammalia']").css("display", "block");
             break;
         case "mammals":
             $(".linker").css("display", "none");

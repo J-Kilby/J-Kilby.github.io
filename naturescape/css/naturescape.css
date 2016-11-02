@@ -21,14 +21,15 @@ body {
 
 .navicons > i { /*for the menu bar - not a link but is javascript*/
     padding-top:8px;
+    font-size: 2em;
 }
 
 #searchicon {
     float: right;
     padding-right: 1.5em;
-    cursor: pointer;
     color: white;
-    margin-top: 0.9em; /*level with the menu*/
+    margin-top: 0.9em;
+    cursor: pointer;
 }
 
 #homeicon {
