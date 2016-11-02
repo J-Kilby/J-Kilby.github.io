@@ -41,18 +41,21 @@ if (window.location.hash !== "") {
             searchALA();
         }
     }, function(error) {
-        $.getJSON("https://freegeoip.net/json/github.com", function(position) {
-            lat = position.latitude.toString(); 
-            lon = position.longitude.toString();
+        $.getJSON("https://api.ipify.org?format=json", function(ip){
+            var ip = data.ip;
+            $.getJSON("https://freegeoip.net/json/" + ip, function(position) {
+                lat = position.latitude.toString(); 
+                lon = position.longitude.toString();
 
-            //get data
-            getPlaceName();
+                //get data
+                getPlaceName();
 
-            if (lat.substring(0,6) + ":" + lon.substring(0,6) == localStorage.getItem('lastALAlocation')) {
-                bypassAPIs();
-            } else {
-                searchALA();
-            }
+                if (lat.substring(0,6) + ":" + lon.substring(0,6) == localStorage.getItem('lastALAlocation')) {
+                    bypassAPIs();
+                } else {
+                    searchALA();
+                }
+            });
         });
     });
 };       
