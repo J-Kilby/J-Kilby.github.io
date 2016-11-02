@@ -61,9 +61,7 @@ if (window.location.hash !== "") {
 };       
 
 function getPlaceName(){
-    console.log(lat +":"+ lon +" - "+ "https://locationiq.org/v1/reverse.php?format=json&key=d9468055045db628123d&lat="+lat+"&lon="+lon+"&zoom=16");
     $.getJSON("https://locationiq.org/v1/reverse.php?format=json&key=d9468055045db628123d&lat="+lat+"&lon="+lon+"&zoom=16", function(data) { 
-        console.log(data);
         placeName = data.display_name.split(',')[0]
         if (data.address.suburb != undefined) {
             placeName +=  ", " + data.address.suburb
@@ -367,10 +365,15 @@ function placeImages(){
     })
 };
 
+
+
+//open map page
 $("#searchicon").click(function(){
+    $("#mapPage").addClass("open");
     openMapPage();
 });
 $("#closeMap").click(function(){
+    $("#mapPage").removeClass("open");
     openMapPage();
 });
 
@@ -389,7 +392,7 @@ function openMapPage(){
         marker.addTo(map);
     };
     
-    if ( $("#mapPage").css("marginTop") === "-" + $(window).height() + "px"){
+    if ( $("#mapPage").hasClass("open") ){
         $("#mapPage").animate({marginTop: 0}, 500, function(){});
     } else {
         $("#mapPage").animate({marginTop: "-100vh"}, 500, function(){});
@@ -407,6 +410,9 @@ $("#search").click( function(){
     window.location.hash = ""
     window.location.reload(false);
 });
+
+
+
 
 function openSpeciesPage(animal){
     

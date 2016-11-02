@@ -2,28 +2,14 @@ add extra info to species page
 
 vertically center loading page
 
-fix geolocation on non-GPS ios
-
 ++++++++++++++++++++
 
 favourites?
 
 ++++++++++++++++++++
 
-add filtering
-
 do something with radius and sample size
 
-CHANGE LOCATION
+CHANGE LOCATION fix map drop-down on safari?
 
 Write Report
-
-Change Search Icon to A change location Icon
-
-Create placeholder images for various types of animal
-- bird
-- mammal
-- plant
-- reptile
-- amphibion
-Others?
