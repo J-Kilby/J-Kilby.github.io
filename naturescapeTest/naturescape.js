@@ -4,3 +4,7 @@ if (navigator.geolocation != undefined){$("#2").html("navigator.geolocation is d
 else {$("#2").html("navigator.geolocation is undefined")};
 if (navigator.geolocation.getCurrentPosition != undefined){$("#3").html("navigator.geolocation.getCurrentPosition is defined");}
 else {$("#3").html("navigator.geolocation.getCurrentPosition is undefined")};
+if (navigator.geolocation.getCurrentPosition != undefined){$("#4").html("navigator.geolocation.getCurrentPosition is defined");}
+else {$("#4").html("navigator.geolocation.getCurrentPosition is undefined")};
+if (navigator.geolocation.getCurrentPosition() != undefined){$("#4").html("navigator.geolocation.getCurrentPosition is defined");}
+else {$("#4").html("navigator.geolocation.getCurrentPosition is undefined")};
