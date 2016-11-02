@@ -32,9 +32,6 @@ if (window.location.hash !== "") {
         lat = position.coords.latitude.toString(); 
         lon = position.coords.longitude.toString();
         
-        //display lat lon on page
-        /*$("#latLon").html("#" + lat + ", " + lon);*/
-        
         //get data
         getPlaceName();
         
@@ -44,7 +41,19 @@ if (window.location.hash !== "") {
             searchALA();
         }
     }, function(error) {
-        openMapPage();
+        $.getJSON("https://freegeoip.net/json/github.com", function(position) {
+            lat = position.latitude.toString(); 
+            lon = position.longitude.toString();
+
+            //get data
+            getPlaceName();
+
+            if (lat.substring(0,6) + ":" + lon.substring(0,6) == localStorage.getItem('lastALAlocation')) {
+                bypassAPIs();
+            } else {
+                searchALA();
+            }
+        }
     });
 };       
 
@@ -77,6 +86,7 @@ function getPlaceName(){
 
 //get nearby nature from the ALA
 function searchALA(){
+    console.log("SEARCHING ALA");
     $("#loadingMessage").html("Searching for Life Near You");
     $.getJSON("https://biocache.ala.org.au/ws/occurrences/search?lat=" + lat + "&lon=" + lon + "&radius=1&facet=off&pageSize=2000", function(data) {
         localStorage.setItem('lastALAlocation', lat.substring(0,6) + ":" + lon.substring(0,6));
@@ -141,6 +151,7 @@ function processData(){
 
 //find images for Animals from Wikipedia
 function getImages() {
+    console.log("FINDING IMAGES");
     $("#loadingMessage").html("Finding Cute Animal Pictures");
     var images = 0, imagesTwo = 0, imagesThree = 0, imagesFour = 0;
     
@@ -172,7 +183,6 @@ function getImages() {
     var x = setInterval(function () {
         if (images == animals.animalList.length) {
             clearInterval(x);
-            console.log("x");
             for (i=0; i<animals.animalList.length; i++){
                 if (animals[animals.animalList[i]].image == "no image") {
                     $.ajax({
@@ -211,7 +221,6 @@ function getImages() {
     var y = setInterval(function () {
         if (imagesTwo == animals.animalList.length) {
             clearInterval(y);
-            console.log("y");
             for (i=0; i<animals.animalList.length; i++){
                 if (animals[animals.animalList[i]].image == "no image") {
                     $.ajax({
@@ -250,7 +259,6 @@ function getImages() {
     var w = setInterval(function () {
         if (imagesThree == animals.animalList.length) {
             clearInterval(w);
-            console.log("w");
             for (i=0; i<animals.animalList.length; i++){
                 if (animals[animals.animalList[i]].image == "no image") {
                     if (animals[animals.animalList[i]].kingdom == "plantae") {
@@ -348,7 +356,6 @@ function placeImages(){
     };
     
     localStorage.setItem('animals', JSON.stringify(animals));
-    console.log(Math.round((skippedAnimals/animals.animalList.length)*100) + "% of life not shown");
     
     $(".column > *").click( function(){
         openSpeciesPage(this.dataset.animal);
@@ -442,7 +449,6 @@ $(".closeBtn").click(function(){
 });
 
 $("#filterSelect").on("change", function() {
-    console.log("change");
     filterAnimals();
 });
 
@@ -503,10 +509,12 @@ $(window).load(function ()
 {
     var i = setInterval(function () {
         console.log("loading...");
-        if (animals.imagesLoaded == true) {
-            clearInterval(i);
-            placeImages();
-             $("#backgroundlanding").fadeOut();
+        if (animals != undefined) {
+            if (animals.imagesLoaded == true) {
+                clearInterval(i);
+                placeImages();
+                 $("#backgroundlanding").fadeOut();
+            }
         }
     }, 1000);
 });
