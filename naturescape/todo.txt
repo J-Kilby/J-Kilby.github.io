@@ -1,15 +1,8 @@
 add extra info to species page
 
-vertically center loading page
-
-++++++++++++++++++++
-
-favourites?
-
-++++++++++++++++++++
-
 do something with radius and sample size
 
-CHANGE LOCATION fix map drop-down on safari?
-
 Write Report
+
+
+favourites?

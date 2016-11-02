@@ -10,7 +10,7 @@ body {
 
 /****************HEADER****************/
 .headerwrapper {
-    max-height: 343px;
+    height: 16.5em;
     overflow: hidden;
     background-image:url(https://s14.postimg.org/4vdhl0k3l/main.jpg);
     background-size: cover;
@@ -129,7 +129,7 @@ body {
     display: none;
 }
 
-#filterSelect {
+#filterSelect, #radiusSelect {
     border-radius: 3px;
     background-color: white;
     color: #2b2f31; /*naturescape blue branding*/
@@ -285,9 +285,9 @@ body {
     padding: 0.5em 1em;
     margin: 0.6em;
     background: #fff;
-    border-radius: 10px;
-    border: 1px solid #656464;
-    box-shadow: 1px 1px 5px #717171;
+    color: #000;
+    border-radius: 5px;
+    border: 1px solid #b4b4b4;
     cursor: pointer;
 }
 #closeMap {
@@ -312,20 +312,21 @@ body {
     top: 0;
     left: 0;
     background-color: #5c808f;
-    background-image:
-        url(https://s18.postimg.org/6iwa8aw6x/landing.jpg);
+    background-image: url(https://s18.postimg.org/6iwa8aw6x/landing.jpg);
     background-size: cover;
     background-position: center;
 }
 
 
 .landingpagewrapper {
-	/*background-color:red;*/
-	height:100vh;
 	max-width: 300px;
   padding: 10px;
 	margin: 0 auto;
 	text-align: center;
+  padding-bottom: 5em;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 #logo {
@@ -334,7 +335,7 @@ body {
 
 #icon {
 	width:20%;
-	margin-top:50%;
+
 	margin-bottom:1em;
 }
 

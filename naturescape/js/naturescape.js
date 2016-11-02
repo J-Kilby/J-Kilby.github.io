@@ -1,7 +1,17 @@
 //initialising global variables
-var lat, lon, placeName, alaResult, animals, marker;
+var lat, lon, placeName, alaResult, animals, marker, radius = 1;
 
+if (localStorage.getItem("radius") > 0 ) {
+    console.log("problem?");
+    radius = localStorage.getItem("radius");
+    $("#radiusSelect").val(radius);
+}
 
+$.ajaxSetup({
+  error: function(xhr, status, error) {
+    alert("An AJAX error occured: " + status + "\nError: " + error);
+  }
+});
 
 /*---------------------*\
   Finding Your Location
@@ -91,7 +101,7 @@ function getPlaceName(){
 function searchALA(){
     console.log("SEARCHING ALA");
     $("#loadingMessage").html("Searching for Life Near You");
-    $.getJSON("https://biocache.ala.org.au/ws/occurrences/search?lat=" + lat + "&lon=" + lon + "&radius=1&facet=off&pageSize=2000", function(data) {
+    $.getJSON("https://biocache.ala.org.au/ws/occurrences/search?lat=" + lat + "&lon=" + lon + "&radius="+radius+"&facet=off&pageSize=2000", function(data) {
         localStorage.setItem('lastALAlocation', lat.substring(0,6) + ":" + lon.substring(0,6));
         alaResult = data;
         
@@ -459,6 +469,9 @@ $(".closeBtn").click(function(){
     $("#speciesPage").fadeOut();
 });
 
+
+
+
 $("#filterSelect").on("change", function() {
     filterAnimals();
 });
@@ -510,6 +523,12 @@ function filterAnimals(){
     };
 };
 
+$("#radiusSelect").on("change", function() {
+    localStorage.setItem('radius', $("#radiusSelect").val());
+    localStorage.setItem('lastALAlocation', undefined);
+    window.location.reload(false);
+});
+
 
 
 /*--------------*\
@@ -524,7 +543,7 @@ $(window).load(function ()
             if (animals.imagesLoaded == true) {
                 clearInterval(i);
                 placeImages();
-                 $("#backgroundlanding").fadeOut();
+                $("#backgroundlanding").fadeOut();
             }
         }
     }, 1000);
