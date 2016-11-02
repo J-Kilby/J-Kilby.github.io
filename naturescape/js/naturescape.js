@@ -53,7 +53,7 @@ if (window.location.hash !== "") {
             } else {
                 searchALA();
             }
-        }
+        });
     });
 };       
 
