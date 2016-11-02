@@ -42,7 +42,7 @@ if (window.location.hash !== "") {
         }
     }, function(error) {
         $.getJSON("https://api.ipify.org?format=json", function(ip){
-            var ip = data.ip;
+            var ip = ip.ip;
             $.getJSON("https://freegeoip.net/json/" + ip, function(position) {
                 lat = position.latitude.toString(); 
                 lon = position.longitude.toString();
