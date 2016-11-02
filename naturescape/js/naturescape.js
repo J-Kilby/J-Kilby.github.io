@@ -27,28 +27,24 @@ if (window.location.hash !== "") {
     }
 } else {
     //else use geolocation
-    if ("geolocation" in navigator) {
-        $("#latLon").html("geolocation available");
-        navigator.geolocation.getCurrentPosition(function(position) {
-            $("#latLon").html("geolocation readable");
-            
-            lat = position.coords.latitude.toString(); 
-            lon = position.coords.longitude.toString();
-            
-            //display lat lon on page
-            /*$("#latLon").html("#" + lat + ", " + lon);*/
-            
-            //get data
-            getPlaceName();
-            
-            if (lat.substring(0,6) + ":" + lon.substring(0,6) == localStorage.getItem('lastALAlocation')) {
-                bypassAPIs();
-            } else {
-                searchALA();
-            }
-        });
-    } else {
-        //else us ip-api
+    navigator.geolocation.getCurrentPosition(function(position) {
+    
+        lat = position.coords.latitude.toString(); 
+        lon = position.coords.longitude.toString();
+        
+        //display lat lon on page
+        /*$("#latLon").html("#" + lat + ", " + lon);*/
+        
+        //get data
+        getPlaceName();
+        
+        if (lat.substring(0,6) + ":" + lon.substring(0,6) == localStorage.getItem('lastALAlocation')) {
+            bypassAPIs();
+        } else {
+            searchALA();
+        }
+    }, function(error) {
+        console.log("error?");
         $.getJSON("http://ip-api.com/json", function(data) {
             lat = data.lat;
             lon = data.lon;
@@ -62,8 +58,8 @@ if (window.location.hash !== "") {
                 searchALA();
             }
         });
-    };
-};
+    });
+};       
 
 function getPlaceName(){
     $.getJSON("https://locationiq.org/v1/reverse.php?format=json&key=d9468055045db628123d&lat="+lat+"&lon="+lon+"&zoom=16", function(data) {        
