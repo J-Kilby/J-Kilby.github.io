@@ -58,7 +58,9 @@ if (window.location.hash !== "") {
 };       
 
 function getPlaceName(){
-    $.getJSON("https://locationiq.org/v1/reverse.php?format=json&key=d9468055045db628123d&lat="+lat+"&lon="+lon+"&zoom=16", function(data) {        
+    console.log(lat +":"+ lon +" - "+ "https://locationiq.org/v1/reverse.php?format=json&key=d9468055045db628123d&lat="+lat+"&lon="+lon+"&zoom=16");
+    $.getJSON("https://locationiq.org/v1/reverse.php?format=json&key=d9468055045db628123d&lat="+lat+"&lon="+lon+"&zoom=16", function(data) { 
+        console.log(data);
         placeName = data.display_name.split(',')[0]
         if (data.address.suburb != undefined) {
             placeName +=  ", " + data.address.suburb
