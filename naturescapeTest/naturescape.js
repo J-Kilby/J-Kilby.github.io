@@ -6,5 +6,8 @@ if (navigator.geolocation.getCurrentPosition != undefined){$("#3").html("navigat
 else {$("#3").html("navigator.geolocation.getCurrentPosition is undefined")};
 if (navigator.geolocation.getCurrentPosition != undefined){$("#4").html("navigator.geolocation.getCurrentPosition is defined");}
 else {$("#4").html("navigator.geolocation.getCurrentPosition is undefined")};
-if (navigator.geolocation.getCurrentPosition() != undefined){$("#4").html("navigator.geolocation.getCurrentPosition is defined");}
-else {$("#4").html("navigator.geolocation.getCurrentPosition is undefined")};
+
+navigator.geolocation.getCurrentPosition(function(position) {
+    $("#4").html("fire!");
+    $("#5").html(position.coords.latitude.toString()); 
+});
