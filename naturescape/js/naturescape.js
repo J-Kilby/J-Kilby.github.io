@@ -44,20 +44,7 @@ if (window.location.hash !== "") {
             searchALA();
         }
     }, function(error) {
-        console.log("error?");
-        $.getJSON("http://ip-api.com/json", function(data) {
-            lat = data.lat;
-            lon = data.lon;
-            
-            //get data
-            getPlaceName();
-            
-            if (lat.substring(0,6) + ":" + lon.substring(0,6) == localStorage.getItem('lastALAlocation')) {
-                bypassAPIs();
-            } else {
-                searchALA();
-            }
-        });
+        openMapPage();
     });
 };       
 
