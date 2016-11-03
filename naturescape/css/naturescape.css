@@ -233,7 +233,8 @@ h3 {
   overflow-y: scroll;
   z-index: 100;
 }
-.specieswrapper span {
+.specieswrapper span,
+.aboutwrapper span {
     max-width: 520px;
     margin: 0 auto;
     display: block;
@@ -363,6 +364,7 @@ h3 {
     background-image: url("main.jpg");
     background-size: cover;
     background-position: center;
+    z-index: 500;
 }
 
 
@@ -383,7 +385,6 @@ h3 {
 
 #icon {
 	width:20%;
-
 	margin-bottom:1em;
 }
 
@@ -394,8 +395,11 @@ h3 {
 	font-weight: 300;
 	text-align: center;
 	font-size: 0.9em;
-	padding-top: 3em;
-	padding-bottom: 0.5em;
+	padding-top: 1em;
+  margin-top: 1em;
+	padding-bottom: 1em;
+  background-color: rgba(10, 31, 31, 0.73);
+    border-radius: 1em;
 }
 
 #loading {
