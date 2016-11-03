@@ -1,8 +1,5 @@
 add extra info to species page
 
-do something with radius and sample size
-
 Write Report
-
 
 favourites?

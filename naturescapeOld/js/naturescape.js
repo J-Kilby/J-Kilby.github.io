@@ -136,32 +136,14 @@ function processData(){
         
         if (record.classs != undefined){
             var className = record.classs.toLowerCase();
-        } else if (record.classs != undefined){
+        } else if (record.scientificName != undefined){
             className = "unknown";
         } else {continue};
         
         if (record.kingdom != undefined){
             var kingdomName = record.kingdom.toLowerCase();
-        } else if (record.kingdom != undefined){
+        } else if (record.scientificName != undefined){
             kingdomName = "unknown";
-        } else {continue};
-        
-        if (record.phylum != undefined){
-            var phylumName = record.phylum.toLowerCase();
-        } else if (record.phylum != undefined){
-            phylumName = "unknown";
-        } else {continue};
-        
-        if (record.order != undefined){
-            var orderName = record.order.toLowerCase();
-        } else if (record.order != undefined){
-            orderName = "unknown";
-        } else {continue};
-        
-        if (record.family != undefined){
-            var familyName = record.family.toLowerCase();
-        } else if (record.family != undefined){
-            familyName = "unknown";
         } else {continue};
         
         if (animals[reName] == undefined) {
@@ -169,10 +151,7 @@ function processData(){
                 commonName: reName.replace(/_/g," "),
                 scientificName: sciName,
                 kingdom: kingdomName,
-                phylum: phylumName,
                 class: className,
-                order: orderName,
-                family: familyName,
                 years: [record.year],
                 source: record.dataResourceName
             };
@@ -187,7 +166,7 @@ function processData(){
 function getImages() {
     console.log("FINDING IMAGES");
     $("#loadingMessage").html("Finding Cute Animal Pictures");
-    var images = 0, imagesTwo = 0, imagesThree = 0, imagesFour = 0, progress = 0;
+    var images = 0, imagesTwo = 0, imagesThree = 0, imagesFour = 0;
     
     for (i=0; i<animals.animalList.length; i++){
         $.ajax({
@@ -205,8 +184,6 @@ function getImages() {
                     images += 1;
                     animals[data.query.normalized[0].from].image = data.query.pages[pageID].thumbnail.source;
                     animals[data.query.normalized[0].from].wikiName = data.query.normalized[0].from;
-                    progress += 1;
-                    $("#loadingMessage").html("Finding Cute Animal Pictures - " + Math.round((progress/animals.animalList.length)*100) + "%");
                 } else {
                     images += 1;
                     animals[data.query.normalized[0].from].image = "no image";
@@ -241,8 +218,6 @@ function getImages() {
                                 imagesTwo += 1;
                                 animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].image = data.query.pages[pageID].thumbnail.source;
                                 animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].wikiName = data.query.normalized[0].from;
-                                progress += 1;
-                                $("#loadingMessage").html("Finding Cute Animal Pictures - " + Math.round((progress/animals.animalList.length)*100) + "%");
                             } else {
                                 imagesTwo += 1;
                                 animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].image = "no image";
@@ -254,7 +229,7 @@ function getImages() {
                 } else {imagesTwo += 1;}
             }
         }
-    }, 200);
+    }, 1000);
     
     var y = setInterval(function () {
         if (imagesTwo == animals.animalList.length) {
@@ -281,8 +256,6 @@ function getImages() {
                                 imagesThree += 1;
                                 animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].image = data.query.pages[pageID].thumbnail.source;
                                 animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].wikiName = data.query.normalized[0].from;
-                                progress += 1;
-                                $("#loadingMessage").html("Finding Cute Animal Pictures - " + Math.round((progress/animals.animalList.length)*100) + "%");
                             } else {
                                 imagesThree += 1;
                                 animals[animals.animalList[animals.animalListSci.findIndex(sciName)]].image = "no image";
@@ -294,7 +267,7 @@ function getImages() {
                 } else {imagesThree += 1;}
             }
         }
-    }, 200);
+    }, 1000);
     
     var w = setInterval(function () {
         if (imagesThree == animals.animalList.length) {
@@ -341,7 +314,7 @@ function getImages() {
                 } else {imagesFour += 1}
             }
         }
-    }, 200);
+    }, 1000);
     
     var z = setInterval(function () {
         if (imagesFour == animals.animalList.length) {
@@ -349,7 +322,7 @@ function getImages() {
             console.log("FINISHED IMAGES");
             animals.imagesLoaded = true;
         }
-    }, 200);
+    }, 1000);
 };
 
 
@@ -379,7 +352,7 @@ function placeImages(){
         var side;
         
         if (animals[animals.animalList[i]].image.charAt(0) == "h" && animals[animals.animalList[i]].image != undefined){
-            $(".c" + columns + (factor+1)).append("<a class=\"linker\" data-kingdom=\"" + animals[animals.animalList[i]].kingdom + "\" data-class=\"" + animals[animals.animalList[i]].class + "\" data-animal=\"" +animals.animalList[i]+ "\"><h3 class=\"label\">"+animals[animals.animalList[i]].commonName+"</h3><img src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
+            $(".c" + columns + (factor+1)).append("<a class=\"linker\" data-kingdom=\"" + animals[animals.animalList[i]].kingdom + "\" data-class=\"" + animals[animals.animalList[i]].class + "\" data-animal=\"" +animals.animalList[i]+ "\"><img img\" src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
         } else {skippedAnimals += 1;}
     };
     
@@ -391,7 +364,7 @@ function placeImages(){
         var side;
         
         if (animals[animals.animalList[i]].image.charAt(0) == "i" && animals[animals.animalList[i]].image != undefined){
-            $(".c" + columns + (factor+1)).append("<a class=\"linker\" data-kingdom=\"" + animals[animals.animalList[i]].kingdom + "\" data-class=\"" + animals[animals.animalList[i]].class + "\" data-animal=\"" +animals.animalList[i]+ "\"><h3>"+animals[animals.animalList[i]].commonName+"</h3><img src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
+            $(".c" + columns + (factor+1)).append("<a class=\"linker\" data-kingdom=\"" + animals[animals.animalList[i]].kingdom + "\" data-class=\"" + animals[animals.animalList[i]].class + "\" data-animal=\"" +animals.animalList[i]+ "\"><img img\" src=\"" + animals[animals.animalList[i]].image + "\" alt=\"" + animals.animalList[i] + "\"></a>");
         } else {skippedAnimals += 1;}
     };
     
@@ -463,18 +436,6 @@ function openSpeciesPage(animal){
     
     $("#name").html(animals[animal].commonName);
     var description;
-    $("#kingdom").html(animals[animal].kingdom);
-    var description;
-    $("#phylum").html(animals[animal].phylum);
-    var description;
-    $("#class").html(animals[animal].class);
-    var description;
-    $("#order").html(animals[animal].order);
-    var description;
-    $("#family").html(animals[animal].family);
-    var description;
-    $("#species").html(animals[animal].scientificName);
-    var description;
     
     $("#content span").html("Loading Desciption");
     $.ajax({
@@ -488,13 +449,13 @@ function openSpeciesPage(animal){
                 pageID = key;
             }
             if (data.query == undefined){
-                $("#content span").html("No Desciption Available");
+                $("#content span").html("Error loading Desciption");
                 return
             }
             if (data.query.pages[pageID].extract != undefined) {
                 $("#content span").html(data.query.pages[pageID].extract);
             } else {
-                $("#content span").html("No Desciption Available");
+                $("#content span").html("Error loading Desciption");
             }
         },
         error: function() {console.log("wikiExtract error!")}
@@ -585,5 +546,5 @@ $(window).load(function ()
                 $("#backgroundlanding").fadeOut();
             }
         }
-    }, 200);
+    }, 1000);
 });

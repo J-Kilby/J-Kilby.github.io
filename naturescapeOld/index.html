@@ -50,7 +50,7 @@
 <div class="headerwrapper">
 	<!--NAV BAR-->
     <div class="navicons">   
-        <i id="searchicon" class="fa fa-location-arrow fa-x2" aria-hidden="true"></i> <!--change location-->
+        <i id="searchicon" class="fa fa-location-arrow fa-x2" aria-hidden="true"></i> <!--search icon-->
         <div id="homeicon">
             <a href="index.html"><img src="images/homeicon.png"></a>
         </div> 
@@ -82,7 +82,7 @@
 
             <!-- Location information (title) -->
             <div class="location" >
-                <p class="locationaddress">Loading Your Location</p>
+                <p class="locationaddress">University of Canberra, Bruce ACT 2617</p>
             </div>
 
             <select id="filterSelect" name="filterSelect">
@@ -147,42 +147,13 @@
         
         <span><img id="speciesimage" alt="" src=""></span>
         
-        <h2><span>Classification</span></h2>
-        
-        <div id="classificationWrapper"><table id="classification">
-            <tr>
-                <td>kingdom:</td>
-                <td id="kingdom"></td>
-            </tr>
-            <tr>
-                <td>phylum:</td>
-                <td id="phylum"></td>
-            </tr>
-            <tr>
-                <td>class:</td>
-                <td id="class"></td>
-            </tr>
-            <tr>
-                <td>order:</td>
-                <td id="order"></td>
-            </tr>
-            <tr>
-                <td>family:</td>
-                <td id="family"></td>
-            </tr>
-            <tr>
-                <td>species:</td>
-                <td id="species"></td>
-            </tr>
-        </table></div>
-        
-        <h2><span>Description</span></h2>
+        <h2 id="description"><span>Description</span></h2>
         
             <p id="content"><span></span></p>
         
-        <h2 id="locations"><span>Locations</span></h2>
+            <h2 id="locations"><span>Locations</span></h2>
         
-            <span><img id="map" alt="" src=""></span>
+        <span><img id="map" alt="" src=""></span>
         
         <div class="closeBtn closeBtnBottom">Return</div>
        
@@ -192,12 +163,8 @@
 <div id="footer">  
     <p class="footertext" id="creators">Creators: Jack Kilby, Taylor Peet and Madeleine Nazor</p>
         
-   <p class="footertext" id="creativecommons">
-       <a href="https://creativecommons.org/licenses/by/3.0/au/" target="_blank">Created under Atlas of Living Australia &amp; MediaWiki - Creative Commons Attribution 3.0 License</a>
-       <br/>
-       <br/>
-       <a href="https://www.flickr.com/photos/61520356@N07/6887738214/" target="_blank">Background Image by Mark Wassell</a><a href="https://creativecommons.org/licenses/by-nc-nd/2.0/" target="_blank"> CC 2.0</a></p>
-    </div>
+    <p class="footertext" id="creativecommons"><a href="https://creativecommons.org/licenses/by/3.0/au/" target="_blank">Created under Atlas of Living Australia Creative Commons Attribution 3.0 License</a></p>
+</div>
 
 	<!--JAVASCRIPT-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>

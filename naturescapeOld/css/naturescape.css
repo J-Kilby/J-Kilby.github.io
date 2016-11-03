@@ -10,15 +10,11 @@ body {
 
 /****************HEADER****************/
 .headerwrapper {
-    height: 16.9em;
+    height: 16.5em;
     overflow: hidden;
-    background-image: url("main.jpg");
+    background-image:url(https://s14.postimg.org/4vdhl0k3l/main.jpg);
     background-size: cover;
     background-position: center;
-}
-#aboutpage,
-#contactpage {
-    height: 7em;
 }
 
 
@@ -42,11 +38,6 @@ body {
 #homeicon a {
     display: inline-block;
     margin-left: 80px;
-}
-#aboutpage #homeicon a,
-#contactpage #homeicon a {
-    display: inline-block;
-    margin-left: 0;
 }
 #homeicon img {
     width: 80px;
@@ -117,13 +108,11 @@ body {
     height:2em;
     width:100%;
     text-align:center;
-    background-color: rgba(0, 0, 0, 0.66);
     color:white;
     font-family: 'Lato', sans-serif;
-    font-weight: 300;
-    text-transform: uppercase;
-    padding: 0.5em;
-    margin-top: 0.1em
+    font-weight:300;
+    text-transform:uppercase;
+    padding-top:0.5em;
 }
 
 .distance {
@@ -162,6 +151,7 @@ body {
 }
 
 .species {
+    height:auto;
     width:100%;
 }
 
@@ -178,8 +168,6 @@ body {
 
 .species a {
     cursor: pointer;
-    display: block;
-    position: relative;
 }
 
 .backtotop {
@@ -190,28 +178,6 @@ body {
 
 #up-icon {
     color:white;
-}
-
-h3 {
-    box-sizing: border-box;
-    position: absolute;
-    padding: 1em;
-    text-transform: capitalize;
-    transition: 0.4s;
-    text-align: center;
-    z-index: 50;
-    width: 100%;
-    height: 100%;
-}
-
-.label {
-    opacity: 0;
-    li
-}
-
-.label:hover {
-    opacity: 1;
-    background-color: rgba(0, 0, 0, 0.6);
 }
 
 
@@ -238,20 +204,6 @@ h3 {
     margin: 0 auto;
     display: block;
     box-sizing: border-box;
-}
-#classificationWrapper {
-    width: 100%;
-    background-color: #d1d6da;
-}
-#classification {
-    margin: 0 auto;
-    max-width: 520px;
-    display: block;
-    padding: 1em 2em;
-    text-transform: capitalize;
-}
-#classification td {
-    padding: 0.3em 1em 0.3em 0em;
 }
 .specieswrapper > h1 {
 	text-align: center;
@@ -360,7 +312,7 @@ h3 {
     top: 0;
     left: 0;
     background-color: #5c808f;
-    background-image: url("main.jpg");
+    background-image: url(https://s18.postimg.org/6iwa8aw6x/landing.jpg);
     background-size: cover;
     background-position: center;
 }
@@ -511,6 +463,7 @@ a {
 }
 
 
+
 /****************FOOTER****************/
 
 #footer {
@@ -529,22 +482,19 @@ a {
 }
 
 #creators {
-  color: #ffffff;
+  color:white;
   padding-top:3em;
-  padding-bottom: 0.5em;
+  padding-bottom: 0.75em;
 }
 
 #creativecommons {
-  padding-bottom: 2em;
-}
-p#creativecommons a {
 	color:#8ca8b4; /*lighter naturescape blue*/
+	margin-top:-1.5em;
 }
 
 a:visited { 
- /*lighter naturescape blue*/
+  color:#8ca8b4; /*lighter naturescape blue*/
 	text-decoration:none;
-    color:#8ca8b4;
 }
 
 a:hover, a:visited, a:link, a:active
