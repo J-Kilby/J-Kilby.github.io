@@ -140,7 +140,7 @@ document.body.onkeyup = function(e){
         
         seed = chance.word({syllables: 3});
         
-        if (random == true) {
+        if (random == "true") {
             randomSliders();
         }
         
