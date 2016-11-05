@@ -338,10 +338,14 @@ a:hover {color: #fcec33;}
 }
 .aboutCont {
     max-width: 600px;
+
     margin: 0 auto;
+    position: relative;
+    display: block;
 }
 #aboutPage img {
-    max-width: 15em;
+    padding-top: 2em;
+    width: 40%;
     margin: 0 auto;
     display: block;
 }
@@ -349,11 +353,9 @@ a:hover {color: #fcec33;}
     font-size: 4em;
     color: #fff;
 }
-#aboutPage h2 {
-    
-}
 #aboutPage p {
     color: #fff;
+    padding: 0 0.5em 1em 0.5em;
 }
 
 .getStarted {
@@ -366,13 +368,39 @@ a:hover {color: #fcec33;}
     color: #000;
     border-radius: 1em;
     transition: background-color 0.3s;
+    clear: both;
 }
 #aboutPage .getStarted p {
     color: #fcec33;
+    padding-bottom: 0em;
 }
 .getStarted:hover {
     cursor: pointer;
     background-color: rgba(0, 0, 0, 0.41);
+}
+
+.exampleImage {
+    width: 33.33%;
+    padding: 0.5em;
+    float: left;
+    display: block;
+    position: relative;
+}
+#aboutPage .exampleImage img {
+    padding-top: 0;
+    width: 100%;
+}
+.imageGrid {
+    padding-bottom: 2em;
+    float: left;
+}
+
+@media (max-width: 480px) {
+    .exampleImage {
+        width: 50%;
+        padding: 0.5em;
+        float: left;
+    }
 }
     
 

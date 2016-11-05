@@ -1,9 +1,27 @@
+var hash, seed, colScheme = ["fff", "27cdfa", "233539"], random = "false";
+
 if (localStorage.getItem("visitedBefore") == undefined){
-    localStorage.setItem("visitedBefore", true);
+    localStorage.setItem("visitedBefore", "true");
     $("#aboutPage").css("display", "block");
 }
 
-var hash, seed, colScheme = ["fff", "27cdfa", "233539"], random = false;
+if (localStorage.getItem("randomSliders") != undefined) {
+    random = localStorage.getItem("randomSliders");
+    if (localStorage.getItem("randomSliders") == "true"){
+        $("#rHandel").addClass("handelOn");
+    } else {
+        $("#rHandel").removeClass("handelOn");
+    }
+}
+
+if (localStorage.getItem("genBtnOn") != undefined) {
+    if (localStorage.getItem("genBtnOn") == "true"){
+        $("#sHandel").addClass("handelOn");
+    } else {
+        $("#sHandel").removeClass("handelOn");
+        $("#genBtn").fadeOut(0);
+    }
+}
 
 seed = chance.word({syllables: 3});
 
@@ -31,6 +49,7 @@ if (window.location.hash !== "") {
 };
 
 
+//close controlls if small screen
 if ($(window).width() < 520){
     $("#toggleBtn").toggleClass("toggleBtn-open");
     $("#controlPannel").toggleClass("controlPannel-close");
@@ -56,6 +75,33 @@ $("#aboutBtn").click(  function() {
     $("#aboutPage").fadeIn(300)
 })
 
+$(".exampleImage").click(  function() {
+    window.location.reload(false);
+})
+
+//toggle random silders
+$("#rSlider").click( function(){
+    $("#rHandel").toggleClass("handelOn");
+    if (random == "false") {
+        random = "true";
+        localStorage.setItem("randomSliders", "true");
+    } else {
+        random = "false";
+        localStorage.setItem("randomSliders", "false");
+    };
+})
+
+$("#sSlider").click( function(){
+    $("#sHandel").toggleClass("handelOn");
+    if ($("#sHandel").hasClass("handelOn")){
+        $("#genBtn").fadeIn(300);
+        localStorage.setItem("genBtnOn", "true");
+    } else {
+        $("#genBtn").fadeOut(300);
+        localStorage.setItem("genBtnOn", "false");
+    }
+})
+
 
 
 
@@ -71,7 +117,7 @@ $("#genBtn .click").click( function(){
 
     seed = chance.word({syllables: 3});
     
-    if (random == true) {
+    if (random == "true") {
         randomSliders();
     }
     
@@ -138,18 +184,7 @@ $("#colourSelect > div").click( function(){
     genHash();
 })
 
-//toggle random silders
-$("#rSlider").click( function(){
-    $("#rHandel").toggleClass("handelOn");
-    if (random == false) {random = true} else {random = false};
-})
 
-$("#sSlider").click( function(){
-    $("#sHandel").toggleClass("handelOn");
-    if ($("#sHandel").hasClass("handelOn")){
-        $("#genBtn").fadeIn(300);
-    } else {$("#genBtn").fadeOut(300);}
-})
 
 
 
