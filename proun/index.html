@@ -16,6 +16,10 @@
 </head>
 
 <body>
+    <div id="toggleBtn" class="btn toggleBtn-open">
+        <p>&mdash;<br>&mdash;<br>&mdash;</p>
+    </div>
+    
     <div id="controlPannel">
         <a href="https://en.wikipedia.org/wiki/El_Lissitzky#Proun" target="_blank"><img src="proun.png"></a>
         <h1>Proun</h1>
@@ -25,11 +29,11 @@
             <p>Spread</p>
             <input name="spread" id="spread" type="range" min="10" max="50" step="2" value="30">
             <p>Denisty</p>
-            <input name="denisty" id="denisty" type="range" min="1" max="49" step="1" value="25">
+            <input name="denisty" id="denisty" type="range" min="1" max="49" step="1" value="10">
             <p>Fillings</p>
             <input name="fillings" id="fillings" type="range" min="0" max="100" step="10" value="50">
             <p>Thickness</p>
-            <input name="thickness" id="thickness" type="range" min="0.25" max="4.75" step="0.25" value="2.5">
+            <input name="thickness" id="thickness" type="range" min="0.25" max="4.75" step="0.25" value="1">
             
             <br/>
             <br/>
@@ -47,11 +51,17 @@
         
         <div id="random">
             <p>Random Sliders</p>
-            <div id="rSlider"><p>On</p><p>Off</p><div id="rHandel"></div></div>
+            <div id="rSlider" class="slider"><p>On</p><p>Off</p><div id="rHandel" class="handel"></div></div>
+            <p>Show Button</p>
+            <div id="sSlider" class="slider"><p>On</p><p>Off</p><div id="sHandel" class="handel handelOn"></div></div>
         </div>
         
         <div id="colourSelect">
             <p>Colours</p>
+            
+        <!--Background, Fill, Line-->
+            
+        <!--White, Black-->
             <div data-colours="fff,233539,233539">
                 <div class="colBlock  cB1" style="background-color: #fff"></div>
                 <div class="colBlock  cB2" style="background-color: #233539"></div>
@@ -62,41 +72,65 @@
                 <div class="colBlock  cB2" style="background-color: #fff"></div>
                 <div class="colBlock  cB3" style="background-color: #fff"></div>
             </div>
-            <div data-colours="233539,fcec33,fcec33">
-                <div class="colBlock  cB1" style="background-color: #233539"></div>
-                <div class="colBlock  cB2" style="background-color: #fcec33"></div>
-                <div class="colBlock  cB3" style="background-color: #fcec33"></div>
+            <div data-colours="fff,eee,233539">
+                <div class="colBlock  cB1" style="background-color: #fff"></div>
+                <div class="colBlock  cB2" style="background-color: #eee"></div>
+                <div class="colBlock  cB3" style="background-color: #233539"></div>
             </div>
+            
+        <!--White, Col, Black-->
             <div data-colours="fff,fcec33,233539">
                 <div class="colBlock  cB1" style="background-color: #fff"></div>
                 <div class="colBlock  cB2" style="background-color: #fcec33"></div>
                 <div class="colBlock  cB3" style="background-color: #233539"></div>
-            </div>
-            <div data-colours="233539,fcec33,fff">
-                <div class="colBlock  cB1" style="background-color: #233539"></div>
-                <div class="colBlock  cB2" style="background-color: #fcec33"></div>
-                <div class="colBlock  cB3" style="background-color: #fff"></div>
-            </div>
-            <div data-colours="233539,f8f8f8,fcec33">
-                <div class="colBlock  cB1" style="background-color: #233539"></div>
-                <div class="colBlock  cB2" style="background-color: #f8f8f8"></div>
-                <div class="colBlock  cB3" style="background-color: #fcec33"></div>
             </div>
             <div data-colours="fff,27cdfa,233539">
                 <div class="colBlock  cB1" style="background-color: #fff"></div>
                 <div class="colBlock  cB2" style="background-color: #27cdfa"></div>
                 <div class="colBlock  cB3" style="background-color: #233539"></div>
             </div>
-            <div data-colours="fff,233539,27cdfa">
+            <div data-colours="fff,fa2750,233539">
                 <div class="colBlock  cB1" style="background-color: #fff"></div>
-                <div class="colBlock  cB2" style="background-color: #233539"></div>
-                <div class="colBlock  cB3" style="background-color: #27cdfa"></div>
+                <div class="colBlock  cB2" style="background-color: #fa2750"></div>
+                <div class="colBlock  cB3" style="background-color: #233539"></div>
             </div>
-            <div data-colours="233539,f8f8f8,27cdfa">
+                        
+        <!--Black, White Col-->
+            <div data-colours="233539,fff,fcec33">
                 <div class="colBlock  cB1" style="background-color: #233539"></div>
-                <div class="colBlock  cB2" style="background-color: #f8f8f8"></div>
+                <div class="colBlock  cB2" style="background-color: #fff"></div>
+                <div class="colBlock  cB3" style="background-color: #fcec33"></div>
+            </div>
+            <div data-colours="233539,fff,27cdfa">
+                <div class="colBlock  cB1" style="background-color: #233539"></div>
+                <div class="colBlock  cB2" style="background-color: #fff"></div>
                 <div class="colBlock  cB3" style="background-color: #27cdfa"></div>
             </div>
+            <div data-colours="233539,fff,fa2750">
+                <div class="colBlock  cB1" style="background-color: #233539"></div>
+                <div class="colBlock  cB2" style="background-color: #fff"></div>
+                <div class="colBlock  cB3" style="background-color: #fa2750"></div>
+            </div>
+            
+        <!--Black, Col, White-->
+            <div data-colours="233539,fcec33,fff">
+                <div class="colBlock  cB1" style="background-color: #233539"></div>
+                <div class="colBlock  cB2" style="background-color: #fcec33"></div>
+                <div class="colBlock  cB3" style="background-color: #fff"></div>
+            </div>
+            <div data-colours="233539,27cdfa,fff">
+                <div class="colBlock  cB1" style="background-color: #233539"></div>
+                <div class="colBlock  cB2" style="background-color: #27cdfa"></div>
+                <div class="colBlock  cB3" style="background-color: #fff"></div>
+            </div>
+            <div data-colours="233539,fa2750,fff">
+                <div class="colBlock  cB1" style="background-color: #233539"></div>
+                <div class="colBlock  cB2" style="background-color: #fa2750"></div>
+                <div class="colBlock  cB3" style="background-color: #fff"></div>
+            </div>
+            
+            
+        <!--Col, Black-->
             <div data-colours="fcec33,233539,233539">
                 <div class="colBlock  cB1" style="background-color: #fcec33"></div>
                 <div class="colBlock  cB2" style="background-color: #233539"></div>
@@ -107,11 +141,29 @@
                 <div class="colBlock  cB2" style="background-color: #233539"></div>
                 <div class="colBlock  cB3" style="background-color: #233539"></div>
             </div>
+            <div data-colours="fa2750,233539,233539">
+                <div class="colBlock  cB1" style="background-color: #fa2750"></div>
+                <div class="colBlock  cB2" style="background-color: #233539"></div>
+                <div class="colBlock  cB3" style="background-color: #233539"></div>
+            </div>
+            
+        <!--Black, Col-->
+            <div data-colours="233539,fcec33,fcec33">
+                <div class="colBlock  cB1" style="background-color: #233539"></div>
+                <div class="colBlock  cB2" style="background-color: #fcec33"></div>
+                <div class="colBlock  cB3" style="background-color: #fcec33"></div>
+            </div>
             <div data-colours="233539,27cdfa,27cdfa">
                 <div class="colBlock  cB1" style="background-color: #233539"></div>
                 <div class="colBlock  cB2" style="background-color: #27cdfa"></div>
                 <div class="colBlock  cB3" style="background-color: #27cdfa"></div>
             </div>
+            <div data-colours="233539,fa2750,fa2750">
+                <div class="colBlock  cB1" style="background-color: #233539"></div>
+                <div class="colBlock  cB2" style="background-color: #fa2750"></div>
+                <div class="colBlock  cB3" style="background-color: #fa2750"></div>
+            </div>
+            
             <p>Get custom colours by changeing the hex colour codes in the URL!</p>
         </div>
         
@@ -122,12 +174,28 @@
         </div>
     </div>
     
-    <div id="page">
+    <div id="page" class="page-shrink">
         <div id="svgCont"></div>
         <div id="genBtn">
-            <p>Click / Spacebar</p>
-            <p>Generate a new Proun ( New seed )</p>
+            <p id="closeGenBtn">x</p>
+            <p class="click">Click / Spacebar</p>
+            <p class="click">Generate a new Proun ( New seed )</p>
         </div>
+    </div>
+    
+    
+    <div id="aboutBtn" class="btn">
+        <p>?</p>
+    </div>
+    <div id="aboutPage" style="display: none;">
+        <div class="aboutCont">
+            <img src="proun.png">
+            <h1>Proun</h1>
+            <h2>Abstract Inspiration</h2>
+            <div class="getStarted" style="display: non"><p>Get Started &rarr;</p></div>
+            <p>Proun is a random art genorator, desiged to give inspiration to visual artists.</p>
+            </div>
+            <div class="getStarted" style="display: non"><p>Get Started &rarr;</p></div>
     </div>
     
     <script src="proun.js" type="text/javascript"></script>

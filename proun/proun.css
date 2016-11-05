@@ -2,7 +2,7 @@
     background-color: #fff;
 }
 .filltrue {
-    fill: #233539;
+    fill: #27cdfa;
 }
 .fillfalse {
     fill: none;
@@ -63,10 +63,49 @@ body {
     padding: 1em;
     color: #ffffff;
     overflow-y: auto;
+    overflow-x: visible;
     border-right: 4px solid #fcec33;
-    box-shadow: 2px 0 0 #233539;
-    z-index: 100;
+    z-index: 500;
+    transition: margin-left 0.3s;
 }
+.controlPannel-close {
+    margin-left: -17rem;
+}
+
+.btn {
+    position: fixed;
+    height: 2.5rem;
+    width: 2.5rem;
+    top: 1rem;
+    background-color: rgba(0, 0, 0, 0.28);
+    color: #fff;
+    z-index: 300;
+}
+#toggleBtn {
+    left: 0;
+    padding: 0.3rem 2rem 0.3rem 0.8rem;
+    border-radius: 0 0.5em 0.5em 0;
+    line-height: 0.6rem;
+    transition: background-color 0.3s, margin-left 0.3s;
+}
+.btn:hover {
+    background-color: #001920;
+    cursor: pointer;
+}
+.toggleBtn-open {
+    margin-left: 17rem;
+}
+
+#aboutBtn {
+    right: 0;
+    padding: 0.3rem 2rem 0.3rem 0.8rem;
+    border-radius: 0.5em 0 0 0.5em;
+    line-height: 1.9rem;
+    font-size: 1.5rem;
+    transition: background-color 0.3s;
+    z-index: 200;
+}
+
 #controlPannel img {
     width: 68%;
     margin: 0 auto .5em auto;
@@ -123,7 +162,7 @@ a:hover {color: #fcec33;}
 #random p {
     display: inline-block;
 }
-#rSlider {
+.slider {
     display: inline-block;
     width: 5em;
     text-align: center;
@@ -143,15 +182,15 @@ a:hover {color: #fcec33;}
     -ms-user-select: none;
     user-select: none;
 }
-#rSlider:hover {
+.slider:hover {
     cursor: pointer;
     background-color: #000000;
     color: #bbc3c4;
 }
-#rSlider p {
+.slider p {
     width: 50%;
 }
-#rHandel {
+.handel {
     height: 1.3em;
     width: 45%;
     border-radius: 1em;
@@ -161,7 +200,7 @@ a:hover {color: #fcec33;}
     left: 2px;
     transition: 0.2s;
 }
-#rHandel.handelOn {
+.handel.handelOn {
     left: 50%;
     background-color: #fcec33;
 }
@@ -208,11 +247,18 @@ a:hover {color: #fcec33;}
   Page    
 \*----*/
 #page {
-    margin-left: 17rem;
     height: 100vh;
     position: relative;
+    transition: margin-left 0.3s;
+    border-right: 2px solid #233539;
+    border-left: 2px solid #233539;
+    overflow: hidden;
+}
+.page-shrink {
+    margin-left: 17rem;
 }
 #genBtn {
+    position: relative;
     opacity: 0.4;
     transition: opacity 0.2s, bottom 0.2s;
     width: 15em;
@@ -241,6 +287,22 @@ a:hover {color: #fcec33;}
     bottom: 1.1em;
     box-shadow: 0 3px 5px rgba(0, 0, 0, 0.59);
 }
+#closeGenBtn {
+    position: absolute;
+    right: -0.2em;
+    top: -0.2em;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 0.5rem;
+    line-height: 0.9rem;
+    font-size: 0.7rem;
+    text-align: center;
+    background-color: #000;
+    border: 1px solid #fcec33;
+    box-shadow: 0 0 1px #000;
+}
+
+
 #svgCont {
     height: 100vh;
     position: relative;
@@ -257,6 +319,62 @@ a:hover {color: #fcec33;}
 }
 
 
+
+
+
+
+/*----*\
+  About    
+\*----*/
+#aboutPage {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 100%;
+    background-color: rgba(33, 63, 72, 0.97);
+    z-index: 1000;
+    overflow: auto;
+}
+.aboutCont {
+    max-width: 600px;
+    margin: 0 auto;
+}
+#aboutPage img {
+    max-width: 15em;
+    margin: 0 auto;
+    display: block;
+}
+#aboutPage h1 {
+    font-size: 4em;
+    color: #fff;
+}
+#aboutPage h2 {
+    
+}
+#aboutPage p {
+    color: #fff;
+}
+
+.getStarted {
+    display: block;
+    max-width: 12rem;
+    margin: 2em auto;
+    padding: 0.3em;
+    text-align: center;
+    border: 2px solid #fcec33;
+    color: #000;
+    border-radius: 1em;
+    transition: background-color 0.3s;
+}
+#aboutPage .getStarted p {
+    color: #fcec33;
+}
+.getStarted:hover {
+    cursor: pointer;
+    background-color: rgba(0, 0, 0, 0.41);
+}
+    
 
 
 

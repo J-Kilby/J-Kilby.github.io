@@ -1,4 +1,9 @@
-var hash, seed, colScheme = ["fff", "233539", "233539"], random = false;
+if (localStorage.getItem("visitedBefore") == undefined){
+    localStorage.setItem("visitedBefore", true);
+    $("#aboutPage").css("display", "block");
+}
+
+var hash, seed, colScheme = ["fff", "27cdfa", "233539"], random = false;
 
 seed = chance.word({syllables: 3});
 
@@ -26,6 +31,34 @@ if (window.location.hash !== "") {
 };
 
 
+if ($(window).width() < 520){
+    $("#toggleBtn").toggleClass("toggleBtn-open");
+    $("#controlPannel").toggleClass("controlPannel-close");
+    $("#page").toggleClass("page-shrink");
+}
+
+//buttons
+$("#toggleBtn").click(  function() {
+    $("#toggleBtn").toggleClass("toggleBtn-open");
+    $("#controlPannel").toggleClass("controlPannel-close");
+    $("#page").toggleClass("page-shrink");
+});
+
+$("#closeGenBtn").click(  function() {
+    $("#sHandel").removeClass("handelOn");
+    $("#genBtn").fadeOut(300);
+})
+
+$(".getStarted").click(  function() {
+    $("#aboutPage").fadeOut(300);
+})
+$("#aboutBtn").click(  function() {
+    $("#aboutPage").fadeIn(300)
+})
+
+
+
+
 
 
 
@@ -34,19 +67,12 @@ if (window.location.hash !== "") {
 \*--------------------------*/
 
 //'New' button
-$("#genBtn").click( function(){
+$("#genBtn .click").click( function(){
 
     seed = chance.word({syllables: 3});
     
     if (random == true) {
-        $("#spread").val(chance.integer({min: 10,max: 50})),
-        $("#denisty").val(chance.integer({min: 1,max: 49})),
-        $("#fillings").val(chance.integer({min: 0,max: 100})),
-        $("#thickness").val(chance.integer({min: 1,max: 3})),
-        $("#circles").val(chance.integer({min: 0,max: 10})),
-        $("#quads").val(chance.integer({min: 0,max: 10})),
-        $("#arcs").val(chance.integer({min: 0,max: 10})),
-        $("#lines").val(chance.integer({min: 0,max: 10}))
+        randomSliders();
     }
     
     genHash();
@@ -69,15 +95,9 @@ document.body.onkeyup = function(e){
         seed = chance.word({syllables: 3});
         
         if (random == true) {
-            $("#spread").val(chance.integer({min: 10,max: 50})),
-            $("#denisty").val(chance.integer({min: 1,max: 49})),
-            $("#fillings").val(chance.integer({min: 0,max: 100})),
-            $("#thickness").val(chance.integer({min: 1,max: 3})),
-            $("#circles").val(chance.integer({min: 0,max: 10})),
-            $("#quads").val(chance.integer({min: 0,max: 10})),
-            $("#arcs").val(chance.integer({min: 0,max: 10})),
-            $("#lines").val(chance.integer({min: 0,max: 10}))
+            randomSliders();
         }
+        
         genHash();
         draw($("#spread").val(),
              $("#denisty").val(),
@@ -90,6 +110,7 @@ document.body.onkeyup = function(e){
             );
     };
 };
+
 
 //adjust slider value
 $("#sliders > input").bind("input", function() { 
@@ -105,6 +126,7 @@ $("#sliders > input").bind("input", function() {
         );
 });
 
+//change colours on click
 $("#colourSelect > div").click( function(){
     var scheme = this.dataset.colours.split(",");
     document.styleSheets[1].rules[0].style.backgroundColor = "#" + scheme[0];
@@ -116,9 +138,17 @@ $("#colourSelect > div").click( function(){
     genHash();
 })
 
+//toggle random silders
 $("#rSlider").click( function(){
     $("#rHandel").toggleClass("handelOn");
     if (random == false) {random = true} else {random = false};
+})
+
+$("#sSlider").click( function(){
+    $("#sHandel").toggleClass("handelOn");
+    if ($("#sHandel").hasClass("handelOn")){
+        $("#genBtn").fadeIn(300);
+    } else {$("#genBtn").fadeOut(300);}
 })
 
 
@@ -146,6 +176,18 @@ function genHash() {
         colScheme[0]+","+colScheme[1]+","+colScheme[2];
 }
 
+//randomise sliders
+function randomSliders() {
+    $("#spread").val(chance.integer({min: 10,max: 40})),
+    $("#denisty").val(chance.integer({min: 2,max: 20})),
+    $("#fillings").val(chance.integer({min: 0,max: 100})),
+    $("#thickness").val(chance.integer({min: 0,max: 8})/4),
+    $("#circles").val(chance.integer({min: 0,max: 10})),
+    $("#quads").val(chance.integer({min: 0,max: 10})),
+    $("#arcs").val(chance.integer({min: 0,max: 10})),
+    $("#lines").val(chance.integer({min: 0,max: 10}))
+}
+
 
 
 //proun genorator
@@ -161,7 +203,10 @@ function draw(spr, den, fil, thk, cir, qua, arc, lin) {
                   .attr("preserveAspectRatio","xMinYMin meet")
                   .append("svg:g");
     
-    var weights = [cir, qua, lin],
+    
+    
+    //calcualte how many of each shape is needed
+    var weights = [cir, qua, arc, lin],
         sum = 0;
     
     for (i=0; i<weights.length; i++){
@@ -177,7 +222,9 @@ function draw(spr, den, fil, thk, cir, qua, arc, lin) {
             cirGen(graph, spr, den, fil, thk);
         } else if ((step*(i+1))-(step/2) < portion*(parseInt(cir)+parseInt(qua))) {
             quaGen(graph, spr, den, fil, thk);
-        } else if ((step*(i+1))-(step/2) < portion*(parseInt(cir)+parseInt(qua)+parseInt(lin))) {
+        } else if ((step*(i+1))-(step/2) < portion*(parseInt(cir)+parseInt(qua)+parseInt(arc))) {
+            arcGen(graph, spr, den, fil, thk);
+        } else if ((step*(i+1))-(step/2) < portion*(parseInt(cir)+parseInt(qua)+parseInt(arc)+parseInt(lin))) {
             linGen(graph, spr, den, fil, thk);
         } else {
             break;
@@ -213,7 +260,11 @@ function quaGen(graph, spr, den, fil, thk){
 }
 
 function arcGen(graph, spr, den, fil, thk){
-    
+    spr = parseInt(spr)+40/2;
+    graph.append("path")
+         .attr("d", "M" + seedChance.normal({mean: 100, dev: spr})+" "+seedChance.normal({mean: 100, dev: spr})+" Q "+seedChance.normal({mean: 100, dev: spr})+" "+seedChance.normal({mean: 100, dev: spr})+" "+seedChance.normal({mean: 100, dev: spr})+" "+seedChance.normal({mean: 100, dev: spr}))
+         .attr("class", "fillfalse")
+         .attr("stroke-width", thk + "px");
 }
 
 function linGen(graph, spr, den, fil, thk){

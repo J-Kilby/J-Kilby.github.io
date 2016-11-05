@@ -99,7 +99,10 @@ a:hover {background-color: #a2e6ff}
     list-style: none;
     margin-bottom: 4em;
 }
-.projects li {margin: 2em 0;}
+.projects li {
+    margin: 2em 0;
+    min-height: 10rem;
+}
 .projects img {
     width: 10rem;
     padding-right: 0.5em;
