@@ -306,6 +306,7 @@ a:hover {color: #fcec33;}
 #svgCont {
     height: 100vh;
     position: relative;
+    cursor: crosshair;
 }
 #svgCont svg {
     overflow: visible;

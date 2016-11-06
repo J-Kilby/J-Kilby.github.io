@@ -1,4 +1,4 @@
-var hash, seed, colScheme = ["fff", "27cdfa", "233539"], random = "false";
+var hash, seed, shapes, colScheme = ["fff", "27cdfa", "233539"], random = "false";
 
 if (localStorage.getItem("visitedBefore") == undefined){
     localStorage.setItem("visitedBefore", "true");
@@ -65,6 +65,7 @@ $("#toggleBtn").click(  function() {
 
 $("#closeGenBtn").click(  function() {
     $("#sHandel").removeClass("handelOn");
+    localStorage.setItem("genBtnOn", "false");
     $("#genBtn").fadeOut(300);
 })
 
@@ -136,8 +137,7 @@ $("#genBtn .click").click( function(){
 //press 'space'
 document.body.onkeyup = function(e){
     if(e.keyCode == 32){
-        e.preventDefault();
-        
+    
         seed = chance.word({syllables: 3});
         
         if (random == "true") {
@@ -159,7 +159,10 @@ document.body.onkeyup = function(e){
 
 
 //adjust slider value
-$("#sliders > input").bind("input", function() { 
+$("#sliders > input").bind("input", function() {
+    random = "false";
+    localStorage.setItem("randomSliders", "false");
+    $("#rHandel").removeClass("handelOn");
     genHash();
     draw($("#spread").val(),
          $("#denisty").val(),
@@ -196,6 +199,8 @@ $("#colourSelect > div").click( function(){
 | Functions |
 |           |
 \*---------*/
+
+
 
 //change the url hash to the current settings
 function genHash() {
@@ -234,6 +239,7 @@ function draw(spr, den, fil, thk, cir, qua, arc, lin) {
     
     //new canvas
     var graph = d3.select("#svgCont").append("svg:svg")
+                  .attr("id", "svg")
                   .attr("viewBox", "0 0 200 200")
                   .attr("preserveAspectRatio","xMinYMin meet")
                   .append("svg:g");
@@ -265,7 +271,16 @@ function draw(spr, den, fil, thk, cir, qua, arc, lin) {
             break;
         }        
     }
+    
+    d3.select("#svgCont").call(d3.drag()
+        .on("drag", function() {
+            d3.select("g").attr("transform", "translate(" + 
+                (d3.event.x - ($("#svgCont").width() /2))/($("#svg").width() /200) + "," + 
+                (d3.event.y - ($("#svgCont").height()/2))/($("#svg").height()/200) + " )")
+        })
+    );
 }
+
 
 
 /*---------------*\
@@ -276,7 +291,7 @@ function cirGen(graph, spr, den, fil, thk){
          .attr("r", seedChance.normal({mean: 15, dev: 4}) )
          .attr("cx", seedChance.normal({mean: 100, dev: spr}) )
          .attr("cy", seedChance.normal({mean: 100, dev: spr}) )
-         .attr("class", "fill" + seedChance.bool({likelihood: fil}) )
+         .attr("class", "fill" + seedChance.bool({likelihood: fil}) + "  shape" )
          .attr("stroke-width", thk + "px");
 }
 
@@ -289,7 +304,7 @@ function quaGen(graph, spr, den, fil, thk){
          .attr("y", seedChance.normal({mean: 100, dev: spr}) )
          .attr("width", width )
          .attr("height", height )
-         .attr("class", "fill" + seedChance.bool({likelihood: fil}) )
+         .attr("class", "fill" + seedChance.bool({likelihood: fil}) + "  shape" )
          .attr("stroke-width", thk + "px")
          .attr("transform", "translate(" + -height/2 + " ," + -width/2 + " )");
 }
@@ -298,18 +313,17 @@ function arcGen(graph, spr, den, fil, thk){
     spr = parseInt(spr)+40/2;
     graph.append("path")
          .attr("d", "M" + seedChance.normal({mean: 100, dev: spr})+" "+seedChance.normal({mean: 100, dev: spr})+" Q "+seedChance.normal({mean: 100, dev: spr})+" "+seedChance.normal({mean: 100, dev: spr})+" "+seedChance.normal({mean: 100, dev: spr})+" "+seedChance.normal({mean: 100, dev: spr}))
-         .attr("class", "fillfalse")
+         .attr("class", "fillfalse  shape")
          .attr("stroke-width", thk + "px");
 }
 
 function linGen(graph, spr, den, fil, thk){
     graph.append("path")
          .attr("d", "M" + seedChance.normal({mean: 100, dev: spr})+", "+seedChance.normal({mean: 100, dev: spr})+", "+seedChance.normal({mean: 100, dev: spr})+", "+seedChance.normal({mean: 100, dev: spr}))
-         .attr("class", "fillfalse")
+         .attr("class", "fillfalse  shape")
          .attr("stroke-width", thk + "px");
 }
 
-//drag funtion
 
 
 
