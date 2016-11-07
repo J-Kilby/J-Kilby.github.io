@@ -43,6 +43,10 @@ table{border-collapse:collapse;border-spacing:0}
 [hidden~=screen]:not(:active):not(:focus):not(:target){clip:rect(0 0 0 0)!important;position:absolute!important}
 }
 
+html {
+    overflow: hidden !important;
+}
+
 body {
     font-family: 'Muli', sans-serif;
     font-weight: 300;
